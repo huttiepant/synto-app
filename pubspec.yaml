@@ -51,8 +51,6 @@ dependencies:
   loader_overlay: ^4.0.1
   flutter_form_builder: ^9.4.1
   form_builder_validators: ^11.0.0
-  firebase_auth: ^5.3.3
-  firebase_core: any
   google_fonts: ^6.2.1
   toastification: ^2.3.0
   persistent_bottom_nav_bar: ^6.2.1
@@ -98,11 +96,6 @@ flutter:
 
   assets:
     - assets/
-    - assets/svg/
-    - assets/svg/navbar/
-    - assets/emotions/
-    - assets/albums/
-    - assets/achievements/
 
   # assets:
   #   - images/a_dot_burr.jpeg

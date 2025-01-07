@@ -36,12 +36,12 @@ class BrandButton extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        padding: EdgeInsets.symmetric(vertical: 16),
                         child: Text(text,
-                            style: GoogleFonts.notoSans().copyWith(
+                            style: GoogleFonts.poppins().copyWith(
                                 color: textColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400)),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500)),
                       )
                     ])))));
   }

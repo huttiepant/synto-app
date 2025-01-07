@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:reading_app/screens/auth/login_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:reading_app/popups/popup_page.dart';
 import 'package:reading_app/screens/auth/sign_up_page.dart';
 import 'package:reading_app/ui/brand_button.dart';
-import 'package:reading_app/ui/brand_colors.dart';
-import 'package:reading_app/widgets/brand_icon.dart';
-import 'package:svg_clip/svg_clip.dart';
+import 'package:reading_app/ui/brand_input_field.dart';
 import 'package:video_player/video_player.dart';
 
 @RoutePage()
@@ -22,112 +20,137 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.asset('assets/splash.mp4');
-    _controller.setLooping(true);
-    _controller.initialize().then((_) => setState(() {}));
-    _controller.play();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height);
     return Scaffold(
-      backgroundColor: brandBgDark,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            child: Stack(
-              fit: StackFit.loose,
-              children: [
-                SvgClip(
-                  asset: ClipAsset.local(path: 'assets/video_crop.svg'),
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.width * 1.018,
-                    child: AspectRatio(
-                      aspectRatio: 715 / 399,
-                      child: Transform.translate(
-                        offset: Offset(-(MediaQuery.of(context).size.width / 2.18), 0),
-                        child: VideoPlayer(_controller),
-                      ),
-                    ),
-                  ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Sign in to your Account',
+              style: GoogleFonts.inter().copyWith(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: -0.64),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text(
+              'Enter your email and password to log in',
+              style: GoogleFonts.inter().copyWith(
+                  fontSize: 12,
+                  color: Color(0xff6C7278),
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.12),
+            ),
+            SizedBox(
+              height: 32,
+            ),
+            BrandInputField(
+              name: 'email',
+              title: 'Email',
+              hint: 'Email address',
+              expands: false,
+              inputType: TextInputType.emailAddress,
+              selectAllOnFocus: false,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            BrandInputField(
+              name: 'password',
+              title: 'Password',
+              hint: 'Password',
+              expands: false,
+              obscureText: true,
+              inputType: TextInputType.text,
+              selectAllOnFocus: false,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () {},
+                child: Text(
+                  'Forgot Password ?',
+                  style: GoogleFonts.inter().copyWith(
+                      color: Color(0xff4D81E7),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.12),
                 ),
-                Opacity(
-                  opacity: 1,
-                  child: SvgPicture.asset(
-                    width: MediaQuery.of(context).size.width,
-                    'assets/video_crop.svg',
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Wrap(
+              runSpacing: 10,
+              children: [
+                BrandButton(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PopupPage(),
+                            fullscreenDialog: true),
+                      );
+                    },
+                    border: Border.all(color: Colors.white, width: 1),
+                    text: 'Log In',
+                    color: Color(0xff304FFE),
+                    textColor: Colors.white)
+              ],
+            ),
+            Spacer(),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 6,
+              children: [
+                Text(
+                  'Don’t have an account?',
+                  style: GoogleFonts.inter().copyWith(
+                      color: Color(0xff6C7278),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.12),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                    );
+                  },
+                  child: Text(
+                    'Sign Up',
+                    style: GoogleFonts.inter().copyWith(
+                        color: Color(0xff4D81E7),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.12),
                   ),
                 )
               ],
             ),
-          ),
-          SafeArea(
-              child: Container(
-            padding: EdgeInsets.all(60),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Column(
-                  children: [
-                    BrandIcon(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    AspectRatio(
-                      aspectRatio: 2.16,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  'assets/logo-white.png',
-                                ),
-                                fit: BoxFit.cover)),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 100,
-                ),
-                Wrap(
-                  runSpacing: 10,
-                  children: [
-                    BrandButton(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()),
-                        );
-                      },
-                      text: 'Sign Up',
-                      color: brandOrange,
-                      textColor: Colors.white,
-                    ),
-                    BrandButton(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()),
-                          );
-                        },
-                        border: Border.all(color: Colors.white, width: 1),
-                        text: 'Log In',
-                        color: Colors.white.withOpacity(0.1),
-                        textColor: Colors.white)
-                  ],
-                )
-              ],
-            ),
-          )),
-        ],
-      ),
+            SizedBox(
+              height: 16,
+            )
+          ],
+        ),
+      )),
     );
   }
 }

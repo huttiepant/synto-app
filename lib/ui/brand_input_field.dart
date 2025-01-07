@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -91,69 +89,68 @@ class _BrandInputFieldState extends State<BrandInputField> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _focusNode.requestFocus(),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
-            borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.title,
-              style: GoogleFonts.notoSans().copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 10),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            FormBuilderField(
-              name: widget.name,
-              validator: widget.validator,
-              builder: (FormFieldState<dynamic> field) {
-                if (_controller.text.isEmpty) {
-                  _controller.text = field.value ?? '';
-                }
-                return TextField(
-                  onChanged: (value) => field.didChange(value),
-                  textAlign: widget.textAlign,
-                  enabled: widget.enabled,
-                  obscureText: widget.obscureText,
-                  style: GoogleFonts.notoSans().copyWith(
-                      color: Colors.white,
-                      fontSize: 12,
-                      height: 13.62 / 10.0,
-                      fontWeight: FontWeight.w400),
-                  keyboardType: widget.inputType,
-                  controller: _controller,
-                  inputFormatters: widget.inputFormatters,
-                  maxLines: widget.maxLines ?? 1,
-                  maxLength: widget.maxLength,
-                  focusNode: _focusNode,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: false,
-                    isDense: true,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                    hintStyle: GoogleFonts.notoSans().copyWith(
-                        color: Colors.white,
-                        fontSize: 12,
-                        height: 13.62 / 10.0,
-                        fontWeight: FontWeight.w400),
-                    hintText: widget.hint,
-                    fillColor: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.title,
+            style: GoogleFonts.plusJakartaSans().copyWith(
+                color: Color(0xff6C7278),
+                fontWeight: FontWeight.w500,
+                letterSpacing: -0.24,
+                fontSize: 12),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          FormBuilderField(
+            name: widget.name,
+            validator: widget.validator,
+            builder: (FormFieldState<dynamic> field) {
+              if (_controller.text.isEmpty) {
+                _controller.text = field.value ?? '';
+              }
+              return TextField(
+                onChanged: (value) => field.didChange(value),
+                textAlign: widget.textAlign,
+                enabled: widget.enabled,
+                obscureText: widget.obscureText,
+                style: GoogleFonts.inter().copyWith(
+                    color: Color(0xff1A1C1E),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: -0.14),
+                keyboardType: widget.inputType,
+                controller: _controller,
+                inputFormatters: widget.inputFormatters,
+                maxLines: widget.maxLines ?? 1,
+                maxLength: widget.maxLength,
+                focusNode: _focusNode,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Color(0xffEDF1F3))
                   ),
-                );
-              },
-            )
-          ],
-        ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Color(0xffEDF1F3))
+                  ),
+                  filled: true,
+                  isDense: true,
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 14, vertical: 12.5),
+                  hintStyle: GoogleFonts.inter().copyWith(
+                      color: Color(0xff1A1C1E),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: -0.14),
+                  hintText: widget.hint,
+                  fillColor: Colors.white,
+                ),
+              );
+            },
+          )
+        ],
       ),
     );
   }

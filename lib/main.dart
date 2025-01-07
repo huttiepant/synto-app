@@ -1,15 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fquery/fquery.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:reading_app/api/services/auth_service.dart';
 import 'package:reading_app/routes/router.dart';
 import 'package:toastification/toastification.dart';
 
-import 'api/tuned_global_service.dart';
-import 'firebase_options.dart';
 import 'services/storage_service.dart';
 
 GetIt getIt = GetIt.instance;
@@ -26,8 +22,7 @@ void main() async {
   getIt.registerSingleton<StorageService>(StorageService());
   await getIt<StorageService>().init();
   getIt.registerSingleton<AppRouter>(AppRouter());
-  getIt.registerSingleton<TunedGlobalService>(TunedGlobalService());
-  getIt.registerSingleton<AuthService>(AuthService());
+  // getIt.registerSingleton<AuthService>(AuthService());
 
   runApp(QueryClientProvider(
       queryClient: queryClient,
