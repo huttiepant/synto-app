@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reading_app/ui/brand_button.dart';
 
+import '../../api/services/auth_service.dart';
+import '../../ui/brand_colors.dart';
 import '../../ui/brand_input_field.dart';
 
 @RoutePage()
@@ -16,7 +19,34 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormBuilderState>();
-  // final authService = GetIt.instance<AuthService>();
+  final authService = GetIt.instance<AuthService>();
+
+  // Future<void> _handleSignUp() async {
+  //   final form = _formKey.currentState;
+  //   if (form == null) return;
+  //   form.save();
+  //   if (!form.validate()) return;
+  //   final values = _formKey.currentState?.value;
+  //   final email = values?['email'];
+  //   final password = values?['password'];
+  //   context.loaderOverlay.show();
+  //   authService.signUpWithCredentials(email, password).then((_) {
+  //     context.router.replaceNamed('/choice');
+  //   }).onError((String message, _) {
+  //     toastification.show(
+  //       context: context,
+  //       description: Text(message),
+  //       style: ToastificationStyle.flat,
+  //       showProgressBar: false,
+  //       closeOnClick: true,
+  //       closeButtonShowType: CloseButtonShowType.none,
+  //       type: ToastificationType.error,
+  //       autoCloseDuration: const Duration(seconds: 3),
+  //     );
+  //   }).whenComplete(() {
+  //     context.loaderOverlay.hide();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +118,12 @@ class _SignUpPageState extends State<SignUpPage> {
               runSpacing: 10,
               children: [
                 BrandButton(
-                    onTap: () {},
+                    onTap: () {
+                      // _handleSignUp();
+                    },
                     border: Border.all(color: Colors.white, width: 1),
                     text: 'Register',
-                    color: Color(0xff304FFE),
+                    color: brandLightBlue,
                     textColor: Colors.white)
               ],
             ),

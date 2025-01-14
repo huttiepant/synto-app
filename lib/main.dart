@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:reading_app/routes/router.dart';
 import 'package:toastification/toastification.dart';
-
 import 'services/storage_service.dart';
 
 GetIt getIt = GetIt.instance;

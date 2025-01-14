@@ -133,7 +133,7 @@ class _BrandInputFieldState extends State<BrandInputField> {
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Color(0xffEDF1F3))
+                      borderSide: BorderSide(color: Colors.black)
                   ),
                   filled: true,
                   isDense: true,

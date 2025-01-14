@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:reading_app/screens/main/choice_page.dart';
 import 'package:reading_app/ui/brand_button.dart';
+
+import '../ui/brand_colors.dart';
 
 class PopupPage extends StatelessWidget {
   const PopupPage({super.key});
@@ -47,11 +50,15 @@ class PopupPage extends StatelessWidget {
             ),
             BrandButton(
                 onTap: () {
-                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ChoicePage()),
+                  );
                 },
                 border: Border.all(color: Colors.white, width: 1),
                 text: 'Sounds Good',
-                color: Color(0xff304FFE),
+                color: brandLightBlue,
                 textColor: Colors.white)
           ],
         ),
