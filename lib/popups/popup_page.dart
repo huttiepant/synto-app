@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/screens/main/choice_page.dart';
-import 'package:reading_app/ui/brand_button.dart';
+import 'package:synto_app/screens/main/choice_page.dart';
+import 'package:synto_app/ui/brand_button.dart';
 
 import '../ui/brand_colors.dart';
 

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:reading_app/routes/guards/auth_guard.dart';
-import 'package:reading_app/routes/router.gr.dart';
+import 'package:synto_app/routes/guards/auth_guard.dart';
+import 'package:synto_app/routes/router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {

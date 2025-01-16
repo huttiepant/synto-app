@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:get_it/get_it.dart';
-import 'package:reading_app/services/storage_service.dart';
+import 'package:synto_app/services/storage_service.dart';
 
 import '../../api/services/auth_service.dart';
 

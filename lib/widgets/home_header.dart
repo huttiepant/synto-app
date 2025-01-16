@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/ui/brand_dropdown.dart';
+import 'package:synto_app/ui/brand_dropdown.dart';
 
 import '../ui/brand_colors.dart';
 

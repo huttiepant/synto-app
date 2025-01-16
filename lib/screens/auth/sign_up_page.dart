@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/ui/brand_button.dart';
+import 'package:synto_app/ui/brand_button.dart';
 
 import '../../api/services/auth_service.dart';
 import '../../ui/brand_colors.dart';

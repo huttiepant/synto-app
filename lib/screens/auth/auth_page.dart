@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/popups/popup_page.dart';
-import 'package:reading_app/screens/auth/sign_up_page.dart';
-import 'package:reading_app/ui/brand_button.dart';
-import 'package:reading_app/ui/brand_input_field.dart';
+import 'package:synto_app/popups/popup_page.dart';
+import 'package:synto_app/screens/auth/sign_up_page.dart';
+import 'package:synto_app/ui/brand_button.dart';
+import 'package:synto_app/ui/brand_input_field.dart';
 import '../../ui/brand_colors.dart';
 
 @RoutePage()

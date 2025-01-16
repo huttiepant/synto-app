@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/ui/brand_button.dart';
-import 'package:reading_app/ui/brand_input_field.dart';
-import 'package:reading_app/ui/brand_title_bar.dart';
-import 'package:reading_app/widgets/book_tag.dart';
-import 'package:reading_app/widgets/tag.dart';
+import 'package:synto_app/ui/brand_button.dart';
+import 'package:synto_app/ui/brand_input_field.dart';
+import 'package:synto_app/ui/brand_title_bar.dart';
+import 'package:synto_app/widgets/book_tag.dart';
+import 'package:synto_app/widgets/tag.dart';
 
 import '../../ui/brand_colors.dart';
 

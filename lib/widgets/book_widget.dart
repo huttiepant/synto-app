@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/api/models/book.dart';
-import 'package:reading_app/popups/information_popup.dart';
+import 'package:synto_app/api/models/book.dart';
+import 'package:synto_app/popups/information_popup.dart';
 
 import '../ui/brand_button.dart';
 import '../ui/brand_colors.dart';

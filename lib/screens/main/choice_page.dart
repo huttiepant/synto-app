@@ -1,10 +1,10 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/screens/main/ideas_tagger_page.dart';
-import 'package:reading_app/ui/brand_button.dart';
-import 'package:reading_app/ui/brand_title_bar.dart';
-import 'package:reading_app/widgets/book_tag.dart';
+import 'package:synto_app/screens/main/ideas_tagger_page.dart';
+import 'package:synto_app/ui/brand_button.dart';
+import 'package:synto_app/ui/brand_title_bar.dart';
+import 'package:synto_app/widgets/book_tag.dart';
 
 import '../../popups/result_notification_popup.dart';
 import '../../ui/brand_colors.dart';

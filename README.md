@@ -1,4 +1,4 @@
-# reading_app
+# synto_app
 
 A new Flutter project.
 

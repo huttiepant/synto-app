@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:reading_app/api/models/book.dart';
-import 'package:reading_app/widgets/book_widget.dart';
+import 'package:synto_app/api/models/book.dart';
+import 'package:synto_app/widgets/book_widget.dart';
 
 import '../widgets/home_header.dart';
 
