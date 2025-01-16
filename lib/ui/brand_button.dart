@@ -8,6 +8,8 @@ class BrandButton extends StatelessWidget {
     required this.text,
     required this.color,
     required this.textColor,
+    this.textStyle,
+    this.padding,
     this.border,
   });
 
@@ -16,6 +18,8 @@ class BrandButton extends StatelessWidget {
   final String text;
   final Color color;
   final Color textColor;
+  final TextStyle? textStyle;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +40,14 @@ class BrandButton extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        padding: padding ??
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 18),
                         child: Text(text,
-                            style: GoogleFonts.poppins().copyWith(
-                                color: textColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500)),
+                            style: textStyle ??
+                                GoogleFonts.poppins().copyWith(
+                                    color: textColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500)),
                       )
                     ])))));
   }

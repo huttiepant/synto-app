@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reading_app/popups/popup_page.dart';
-import 'package:reading_app/screens/auth/sign_up_page.dart';
-import 'package:reading_app/ui/brand_button.dart';
-import 'package:reading_app/ui/brand_input_field.dart';
-import 'package:video_player/video_player.dart';
+import 'package:synto_app/popups/popup_page.dart';
+import 'package:synto_app/screens/auth/sign_up_page.dart';
+import 'package:synto_app/ui/brand_button.dart';
+import 'package:synto_app/ui/brand_input_field.dart';
+import '../../ui/brand_colors.dart';
 
 @RoutePage()
 class AuthPage extends StatefulWidget {
@@ -16,7 +17,36 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  late VideoPlayerController _controller;
+  final _formKey = GlobalKey<FormBuilderState>();
+
+  Future<void> _handleLoginTap() async {
+    // final form = _formKey.currentState;
+    // if (form == null) return;
+    // form.save();
+    // if (!form.validate()) return;
+    // final values = _formKey.currentState?.value;
+    // final email = values?['email'];
+    // final password = values?['password'];
+    // context.loaderOverlay.show();
+    // GetIt.instance<AuthService>()
+    //     .loginWithCredentials(email, password)
+    //     .then((_) {
+    //   context.router.replaceNamed('/choice');
+    // }).onError((String message, _) {
+    //   toastification.show(
+    //     context: context,
+    //     description: Text(message),
+    //     style: ToastificationStyle.flat,
+    //     showProgressBar: false,
+    //     closeOnClick: true,
+    //     closeButtonShowType: CloseButtonShowType.none,
+    //     type: ToastificationType.error,
+    //     autoCloseDuration: const Duration(seconds: 3),
+    //   );
+    // }).whenComplete(() {
+    //   context.loaderOverlay.hide();
+    // });
+  }
 
   @override
   void initState() {
@@ -81,7 +111,7 @@ class _AuthPageState extends State<AuthPage> {
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () {},
+                onTap: _handleLoginTap,
                 child: Text(
                   'Forgot Password ?',
                   style: GoogleFonts.inter().copyWith(
@@ -109,7 +139,7 @@ class _AuthPageState extends State<AuthPage> {
                     },
                     border: Border.all(color: Colors.white, width: 1),
                     text: 'Log In',
-                    color: Color(0xff304FFE),
+                    color: brandLightBlue,
                     textColor: Colors.white)
               ],
             ),
