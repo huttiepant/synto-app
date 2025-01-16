@@ -5,7 +5,10 @@ import 'package:get_it/get_it.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:synto_app/routes/router.dart';
 import 'package:toastification/toastification.dart';
+import 'api/services/auth_service.dart';
 import 'services/storage_service.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 GetIt getIt = GetIt.instance;
 final queryClient = QueryClient(
@@ -14,14 +17,14 @@ final queryClient = QueryClient(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   getIt.registerSingleton<StorageService>(StorageService());
   await getIt<StorageService>().init();
   getIt.registerSingleton<AppRouter>(AppRouter());
-  // getIt.registerSingleton<AuthService>(AuthService());
+  getIt.registerSingleton<AuthService>(AuthService());
 
   runApp(QueryClientProvider(
       queryClient: queryClient,

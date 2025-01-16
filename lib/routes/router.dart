@@ -12,10 +12,10 @@ class AppRouter extends RootStackRouter {
           page: HomeRoute.page,
         ),
         AutoRoute(
-            path: '/choice', page: ChoiceRoute.page, guards: [AuthGuard()]),
-        AutoRoute(
           path: '/auth',
           page: AuthRoute.page,
         ),
+        AutoRoute(
+            path: '/choice', page: ChoiceRoute.page, guards: [AuthGuard()]),
       ];
 }

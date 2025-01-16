@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "731752537384",
+    "project_id": "synto-75017",
+    "storage_bucket": "synto-75017.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731752537384:android:d13943ae9e66b849fc041d",
+        "android_client_info": {
+          "package_name": "com.synto.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0TTByEFSUQGT_WWlT6noG9z6A5WRqrG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

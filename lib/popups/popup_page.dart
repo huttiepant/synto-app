@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:synto_app/screens/main/choice_page.dart';
 import 'package:synto_app/ui/brand_button.dart';
 
 import '../ui/brand_colors.dart';
@@ -50,11 +50,7 @@ class PopupPage extends StatelessWidget {
             ),
             BrandButton(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ChoicePage()),
-                  );
+                  context.router.pushNamed('/choice');
                 },
                 border: Border.all(color: Colors.white, width: 1),
                 text: 'Sounds Good',
