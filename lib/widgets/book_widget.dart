@@ -2,14 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:synto_app/api/models/book.dart';
 import 'package:synto_app/popups/information_popup.dart';
+import 'package:synto_app/services/books_service.dart';
 
 import '../ui/brand_button.dart';
 import '../ui/brand_colors.dart';
 
 class BookWidget extends StatelessWidget {
-  const BookWidget({super.key, required this.book});
+  BookWidget({super.key, required this.book});
+
+  final BooksService _booksService = BooksService();
 
   final Book book;
 
@@ -19,7 +21,8 @@ class BookWidget extends StatelessWidget {
       useSafeArea: false,
       builder: (BuildContext context) {
         return InformationPopup(
-          book: book,
+          title: book.name,
+          info: book.info,
         );
       },
     );
@@ -44,7 +47,7 @@ class BookWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: AssetImage(book.image),
+                      image: AssetImage('assets/books/${book.id}.png'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -74,13 +77,16 @@ class BookWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Meditations',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins().copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xff171A1F)),
+                Expanded(
+                  child: Text(
+                    book.name,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins().copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff171A1F)),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -96,7 +102,7 @@ class BookWidget extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'Marcus Aurelius',
+              book.author,
               textAlign: TextAlign.left,
               style: GoogleFonts.inter().copyWith(
                   fontSize: 14,
@@ -105,27 +111,28 @@ class BookWidget extends StatelessWidget {
             ),
             SizedBox(height: 13),
             Text(
-              'Meditations is for anyone who wants to live with purpose and inner calm, even when life feels chaotic. It’s often read by people looking to build resilience and find practical wisdom they can apply every day. If you’re exploring questions about leading a meaningful life or dealing with challenges, this book offers timeless advice from one of history’s greatest thinkers.',
+              book.description,
               textAlign: TextAlign.left,
               style: GoogleFonts.inter().copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff9095A1)),
             ),
-            SizedBox(height: 19),
-            Text(
-              '#virtue #self-discipline #mortality #duty #resilience',
-              style: GoogleFonts.inter().copyWith(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff9095A1)),
-            ),
+            // SizedBox(height: 19),
+            // Text(
+            //   '',
+            //   style: GoogleFonts.inter().copyWith(
+            //       fontSize: 14,
+            //       fontWeight: FontWeight.w400,
+            //       color: Color(0xff9095A1)),
+            // ),
             SizedBox(height: 14),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BrandButton(
                     onTap: () {
+                      _booksService.selectBook(book.id);
                       context.router.pushNamed('/choice');
                     },
                     text: 'Choose Book',

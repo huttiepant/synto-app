@@ -1,14 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fquery/fquery.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:synto_app/routes/router.dart';
 import 'package:toastification/toastification.dart';
+
 import 'api/services/auth_service.dart';
-import 'services/storage_service.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'services/storage_service.dart';
 
 GetIt getIt = GetIt.instance;
 final queryClient = QueryClient(
@@ -44,6 +46,13 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    var baseTheme = ThemeData(
+        scaffoldBackgroundColor: Colors.black38,
+        useMaterial3: true,
+        pageTransitionsTheme: PageTransitionsTheme(builders: {
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        }));
     return GestureDetector(
       onTap: () {
         final currentFocus = FocusScope.of(context);
@@ -55,8 +64,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routeInformationParser: _appRouter.defaultRouteParser(),
         routerDelegate: _appRouter.delegate(),
-        theme: ThemeData(
-            scaffoldBackgroundColor: Colors.black38, useMaterial3: true),
+        theme: baseTheme.copyWith(
+            textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme)),
       ),
     );
   }

@@ -1,37 +1,35 @@
-import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BrandDropdown extends StatefulWidget {
-  const BrandDropdown({super.key});
+class DropDownOption<T> {
+  final String title;
+  final T value;
 
-  @override
-  State<BrandDropdown> createState() => _BrandDropdownState();
+  DropDownOption({required this.title, required this.value});
 }
 
-class _BrandDropdownState extends State<BrandDropdown> {
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
-  ];
-  String? selectedValue;
+class BrandDropdown<T> extends StatelessWidget {
+  const BrandDropdown(
+      {super.key,
+      required this.title,
+      required this.options,
+      required this.onSelect});
+
+  final String title;
+  final List<DropDownOption<T>> options;
+  final Function(T) onSelect;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButton2<String>(
+      child: DropdownButton2<T>(
         isExpanded: true,
         hint: Row(
           children: [
             Expanded(
               child: Text(
-                'Pick a Book',
+                title,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.poppins().copyWith(
                     fontSize: 14,
@@ -41,11 +39,11 @@ class _BrandDropdownState extends State<BrandDropdown> {
             ),
           ],
         ),
-        items: items
-            .map((String item) => DropdownMenuItem<String>(
-                  value: item,
+        items: options
+            .map((DropDownOption option) => DropdownMenuItem<T>(
+                  value: option.value,
                   child: Text(
-                    item,
+                    option.title,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.poppins().copyWith(
                         fontSize: 14,
@@ -54,11 +52,10 @@ class _BrandDropdownState extends State<BrandDropdown> {
                   ),
                 ))
             .toList(),
-        value: selectedValue,
-        onChanged: (String? value) {
-          setState(() {
-            selectedValue = value;
-          });
+        onChanged: (T? value) {
+          if (value != null) {
+            onSelect(value);
+          }
         },
         buttonStyleData: ButtonStyleData(
           width: 160,
@@ -89,7 +86,7 @@ class _BrandDropdownState extends State<BrandDropdown> {
             thumbVisibility: WidgetStateProperty.all<bool>(true),
           ),
         ),
-        menuItemStyleData:  MenuItemStyleData(
+        menuItemStyleData: MenuItemStyleData(
           height: 44,
           overlayColor: WidgetStatePropertyAll(Color(0xffEAF2FF)),
           selectedMenuItemBuilder: (ctx, child) {

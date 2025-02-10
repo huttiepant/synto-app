@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -63,6 +64,10 @@ class _AuthPageState extends State<AuthPage> {
       body: SafeArea(
           child: FormBuilder(
         key: _formKey,
+        initialValue: {
+          'email': 'hovsep@doublecoconut.com',
+          'password': 'AAssdd1234!',
+        },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
           child: Column(
@@ -96,6 +101,10 @@ class _AuthPageState extends State<AuthPage> {
                 hint: 'Email address',
                 expands: false,
                 inputType: TextInputType.emailAddress,
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.email()
+                ]),
                 selectAllOnFocus: false,
               ),
               SizedBox(
@@ -107,6 +116,7 @@ class _AuthPageState extends State<AuthPage> {
                 hint: 'Password',
                 expands: false,
                 obscureText: true,
+                validator: FormBuilderValidators.required(),
                 inputType: TextInputType.text,
                 selectAllOnFocus: false,
               ),

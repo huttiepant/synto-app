@@ -40,7 +40,9 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              BrandTitleBar(title: 'Meditations'),
+              BrandTitleBar(title: 'Meditations', onBack: () {
+
+              },),
               Text(
                 '(Marcus Aurelius)',
                 style: GoogleFonts.poppins().copyWith(
