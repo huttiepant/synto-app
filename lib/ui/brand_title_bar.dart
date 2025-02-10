@@ -1,12 +1,8 @@
-import 'dart:math';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../api/services/auth_service.dart';
 
 class BrandTitleBar extends StatefulWidget {
   const BrandTitleBar({super.key, required this.title, required this.onBack});

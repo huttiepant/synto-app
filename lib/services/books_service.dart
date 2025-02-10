@@ -1,8 +1,8 @@
 import 'dart:convert';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Book {
   final String name;
@@ -117,15 +117,15 @@ class UserProgress {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
+  String toJson() {
+    return jsonEncode({
       'indices':
           currentQuestionIndices.map((k, v) => MapEntry(k.toString(), v)),
       'answers': answeredQuestions.map((k, v) => MapEntry(
             k.toString(),
             v.map((ki, vi) => MapEntry(ki.toString(), vi)),
           )),
-    };
+    });
   }
 }
 
@@ -161,18 +161,31 @@ class BooksService {
   }
 
   Future<void> _loadProgress() async {
-    return null;
-    final prefs = await SharedPreferences.getInstance();
-    final progressJson = prefs.getString(_progressKey);
-    if (progressJson != null) {
-      _progress = UserProgress.fromJson(json.decode(progressJson));
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    final userRef =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
+    final progressCollection = await userRef.get();
+    final data = progressCollection.data();
+    final progress = data?['progress'];
+    if (progress != null) {
+      _progress = UserProgress.fromJson(json.decode(progress));
     }
   }
 
   Future<void> _saveProgress() async {
-    final prefs = await SharedPreferences.getInstance();
-    print(json.encode(_progress.toJson()));
-    await prefs.setString(_progressKey, json.encode(_progress.toJson()));
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    final userRef =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
+    final progress = _progress.toJson();
+    final progressCollection = await userRef.get();
+    final data = progressCollection.data();
+    if (data != null) {
+      userRef.update({'progress': progress});
+    } else {
+      userRef.set({'progress': progress});
+    }
   }
 
   // Public methods
@@ -219,8 +232,6 @@ class BooksService {
     if (question == null) {
       return null;
     }
-    print('question.id');
-    print(question.id);
     return question.answers
         ?.firstWhereOrNull((Answer answer) => answer.correct);
   }
