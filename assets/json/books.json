@@ -5,7 +5,7 @@
     "author": "John Locke",
     "info": "Read this when you’re questioning how people think or why we disagree on even basic truths. It’s perfect for those at a crossroads—starting something new, grappling with big ideas, or just trying to make sense of how we know what we know. Locke will teach you to think sharper and see deeper.",
     "description": "John Locke’s An Essay Concerning Human Understanding is a bold exploration of the human mind. Locke argues that all knowledge comes from experience, challenging the idea of innate truths. From how we form ideas to the limits of our understanding, this work lays the foundation of modern philosophy and continues to inspire anyone curious about how we think.",
-    "questions": [
+    "preReading": [
       {
         "id": 1,
         "type": "multiChoice",
@@ -214,6 +214,66 @@
         "info": "Why this question matters:\n\nResearch shows that asking questions before reading a book primes your mind for active engagement and sparks curiosity. By imagining yourself sitting across from Locke, you’re stepping into a conversation with one of history’s greatest thinkers. These questions will guide you as you read, helping you focus on the ideas that matter most to you—whether about the nature of knowledge, the limits of understanding, or the role of experience in shaping who we are.\n\nWe’ll save these questions and revisit them as you progress, helping you stay connected to the insights you’re seeking.",
         "tips": "Stuck on what to ask John? Here are some notes to unstick you:\n\nHere are some prompts to inspire your thinking:\n• Knowledge: What have you always wondered about how humans learn or where our ideas come from?\n• Reason and Belief: How do we know if something is true? What separates knowledge from opinion?\n• Locke’s World: What might have motivated Locke to write this? How might his world of political upheaval, religious conflict, and scientific discovery resonate with challenges today?\n\nDon’t worry about getting it perfect—just follow your curiosity. The questions you ask now will help you uncover insights that can shape the way you think.",
         "dialog": "Great, let's see if we can help you answer these questions as you read the book!\n\nLet's move on to the final step.\n\nWe're now onto the final step of your pre-reading challenge, which is selecting The Big Ideas you expect to find in the book. We've pre-selected some for you, but you can add others that you think you'll find. Over time, we'll link these to other books you're reading with the same Big Ideas.\n\nThe Big Ideas we've used come from Mortimer Adler's book *A Syntopicon: An Index to the Great Ideas*. These were created as the 102 most important ideas to discuss around humanity and serve as a good starting place when reading a classic like this."
+      }
+    ],
+    "whileReading": [
+      {
+        "id": 1,
+        "type": "multiChoice",
+        "question": "John Locke wrote this book in the late 17th century. What was the state of scientific discovery at the time?",
+        "answers": [
+          {
+            "id": 1,
+            "answer": "Science was dominated by mystical and alchemical ideas",
+            "dialogue": "That's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          },
+          {
+            "id": 2,
+            "correct": true,
+            "answer": "It was an era of groundbreaking discoveries, like Newton’s laws of motion",
+            "dialogue": " \n \t\nCorrect!\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          },
+          {
+            "id": 3,
+            "answer": "Science was largely stagnant, awaiting its Enlightenment revival",
+            "dialogue": "That's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          },
+          {
+            "id": 4,
+            "answer": "Scientific knowledge was considered heretical and suppressed by the Church",
+            "dialogue": " \n \t\nThat's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          }
+        ]
+      }
+    ],
+    "postReading": [
+      {
+        "id": 1,
+        "type": "multiChoice",
+        "question": "John Locke wrote this book in the late 17th century. What was the state of scientific discovery at the time?",
+        "answers": [
+          {
+            "id": 1,
+            "answer": "Science was dominated by mystical and alchemical ideas",
+            "dialogue": "That's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          },
+          {
+            "id": 2,
+            "correct": true,
+            "answer": "It was an era of groundbreaking discoveries, like Newton’s laws of motion",
+            "dialogue": " \n \t\nCorrect!\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          },
+          {
+            "id": 3,
+            "answer": "Science was largely stagnant, awaiting its Enlightenment revival",
+            "dialogue": "That's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          },
+          {
+            "id": 4,
+            "answer": "Scientific knowledge was considered heretical and suppressed by the Church",
+            "dialogue": " \n \t\nThat's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+          }
+        ]
       }
     ]
   }

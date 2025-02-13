@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:synto_app/api/models/answer.dart';
+import 'package:synto_app/api/models/book.dart';
+import 'package:synto_app/api/models/pre_reading_question.dart';
 import 'package:synto_app/popups/information_popup.dart';
 import 'package:synto_app/popups/open_ended_result_notification_popup.dart';
 import 'package:synto_app/popups/result_notification_popup.dart';
@@ -11,7 +14,18 @@ import 'package:synto_app/widgets/book_tag.dart';
 
 import '../../ui/brand_colors.dart';
 
-const List<String> readingLevel = ['Pre-Read', 'Reading', 'Post Read'];
+class ReadingLevel {
+  final String displayName;
+  final ReadingStep value;
+
+  ReadingLevel({required this.displayName, required this.value});
+}
+
+List<ReadingLevel> readingLevels = [
+  ReadingLevel(displayName: 'Pre-Read', value: ReadingStep.preReading),
+  ReadingLevel(displayName: 'Reading', value: ReadingStep.whileReading),
+  ReadingLevel(displayName: 'Post Read', value: ReadingStep.postReading),
+];
 
 @RoutePage()
 class ChoicePage extends StatefulWidget {
@@ -28,7 +42,8 @@ class _ChoicePageState extends State<ChoicePage> {
   final _answerFieldFocusNode = FocusNode();
 
   Book? _book;
-  Question? _currentQuestion;
+  ReadingStep? _step;
+  PreReadingQuestion? _currentQuestion;
 
   @override
   void initState() {
@@ -53,6 +68,7 @@ class _ChoicePageState extends State<ChoicePage> {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _currentQuestion = _service.getCurrentQuestion();
+    _step = _service.getCurrentBookStep(_service.selectedBookId!);
     setState(() {});
   }
 
@@ -142,12 +158,12 @@ class _ChoicePageState extends State<ChoicePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ...readingLevel.map((level) => BookTag(
+                    ...readingLevels.map((level) => BookTag(
                           onTap: () {
                             setState(() {});
                           },
-                          title: level,
-                          selected: level == 'Pre-Read',
+                          title: level.displayName,
+                          selected: level.value == _step,
                         )),
                   ],
                 ),

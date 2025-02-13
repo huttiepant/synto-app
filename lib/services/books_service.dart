@@ -1,132 +1,19 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:collection/collection.dart';
+import 'package:synto_app/api/models/answer.dart';
+import 'package:synto_app/api/models/book.dart';
+import 'package:synto_app/api/models/pre_reading_question.dart';
+import 'package:synto_app/api/models/question_progress.dart';
+import 'package:synto_app/api/models/reading_progress.dart';
+import 'package:synto_app/api/models/user_progress.dart';
 
-class Book {
-  final String name;
-  final String author;
-  final String description;
-  final String info;
-  final int id;
-  final List<Question> questions;
-
-  Book({
-    required this.name,
-    required this.author,
-    required this.description,
-    required this.info,
-    required this.id,
-    required this.questions,
-  });
-
-  factory Book.fromJson(Map<String, dynamic> json) {
-    return Book(
-      name: json['name'],
-      author: json['author'],
-      description: json['description'],
-      info: json['info'],
-      id: json['id'],
-      questions: List<Question>.from(
-        json['questions'].map((x) => Question.fromJson(x)),
-      ),
-    );
-  }
-}
-
-class Question {
-  final int id;
-  final String type;
-  final String question;
-  final List<Answer>? answers;
-  final String? info;
-  final String? tips;
-  final String? dialog;
-
-  Question({
-    required this.id,
-    required this.type,
-    required this.question,
-    required this.answers,
-    this.info,
-    this.tips,
-    this.dialog,
-  });
-
-  factory Question.fromJson(Map<String, dynamic> json) {
-    return Question(
-      id: json['id'],
-      type: json['type'],
-      question: json['question'],
-      answers: (json['answers'] as List<dynamic>?)
-          ?.map((e) => Answer.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      info: json['info'],
-      tips: json['tips'],
-      dialog: json['dialog'],
-    );
-  }
-}
-
-class Answer {
-  final int id;
-  final String answer;
-  final String dialogue;
-  final bool correct;
-
-  Answer(
-      {required this.id,
-      required this.answer,
-      required this.dialogue,
-      required this.correct});
-
-  factory Answer.fromJson(Map<String, dynamic> json) {
-    return Answer(
-      id: json['id'],
-      answer: json['answer'],
-      dialogue: json['dialogue'],
-      correct: json['correct'] ?? false,
-    );
-  }
-}
-
-class UserProgress {
-  final Map<int, int> currentQuestionIndices; // BookID -> current index
-  final Map<int, Map<int, dynamic>>
-      answeredQuestions; // BookID -> QuestionID -> Answer
-
-  UserProgress({
-    required this.currentQuestionIndices,
-    required this.answeredQuestions,
-  });
-
-  factory UserProgress.fromJson(Map<String, dynamic> json) {
-    return UserProgress(
-      currentQuestionIndices: (json['indices'] as Map<String, dynamic>).map(
-        (k, v) => MapEntry(int.parse(k), v as dynamic),
-      ),
-      answeredQuestions: (json['answers'] as Map<String, dynamic>).map(
-        (k, v) => MapEntry(
-          int.parse(k),
-          (v as Map<String, dynamic>).map(
-            (ki, vi) => MapEntry(int.parse(ki), vi as dynamic),
-          ),
-        ),
-      ),
-    );
-  }
-
-  String toJson() {
-    return jsonEncode({
-      'indices':
-          currentQuestionIndices.map((k, v) => MapEntry(k.toString(), v)),
-      'answers': answeredQuestions.map((k, v) => MapEntry(
-            k.toString(),
-            v.map((ki, vi) => MapEntry(ki.toString(), vi)),
-          )),
-    });
-  }
+enum ReadingStep {
+  preReading,
+  whileReading,
+  postReading,
 }
 
 class BooksService {
@@ -139,19 +26,25 @@ class BooksService {
   int? selectedBookId;
 
   List<Book> _books = [];
-  UserProgress _progress = UserProgress(
-    currentQuestionIndices: {},
-    answeredQuestions: {},
-  );
-  final String _progressKey = 'user_progress';
+  UserProgress _progress = UserProgress(progress: {});
 
   Future<void> initialize() async {
     await _loadBooks();
     await _loadProgress();
   }
 
-  selectBook(int bookId) {
+  void selectBook(int bookId) {
     selectedBookId = bookId;
+    if (_progress.progress[bookId] == null) {
+      _progress.progress[bookId] = QuestionProgress(
+          preReading:
+              ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+          whileReading:
+              ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+          postReading:
+              ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+          readingStep: ReadingStep.preReading);
+    }
   }
 
   Future<void> _loadBooks() async {
@@ -169,7 +62,7 @@ class BooksService {
     final data = progressCollection.data();
     final progress = data?['progress'];
     if (progress != null) {
-      _progress = UserProgress.fromJson(json.decode(progress));
+      _progress = UserProgress.fromJson(jsonDecode(progress));
     }
   }
 
@@ -178,7 +71,7 @@ class BooksService {
     if (user == null) return;
     final userRef =
         FirebaseFirestore.instance.collection('users').doc(user.uid);
-    final progress = _progress.toJson();
+    final progress = jsonEncode(_progress);
     final progressCollection = await userRef.get();
     final data = progressCollection.data();
     if (data != null) {
@@ -193,17 +86,26 @@ class BooksService {
 
   Book? getBook(int bookId) => _books.firstWhere((book) => book.id == bookId);
 
-  Question? getCurrentQuestion() {
+  getCurrentBookStep(int bookId) =>
+      _progress.progress[bookId]?.currentStep ?? ReadingStep.preReading;
+
+  PreReadingQuestion? getCurrentQuestion() {
     if (selectedBookId == null) {
       return null;
     }
     final book = getBook(selectedBookId!);
+    final currentBookProgress = _progress.progress[selectedBookId];
+    final ReadingStep currentStep = currentBookProgress!.currentStep;
     if (book == null) return null;
 
-    final currentIndex = _progress.currentQuestionIndices[selectedBookId] ?? 0;
-    if (currentIndex >= book.questions.length) return null;
+    final currentIndex = currentBookProgress
+            .getCurrentReadingProgress()
+            .currentQuestionIndices;
+    if (currentIndex >= book.getCurrentStepQuestions(currentStep).length) {
+      resetBookProgress(selectedBookId!);
+    }
 
-    return book.questions[currentIndex];
+    return book.getCurrentStepQuestions(currentStep)[currentIndex];
   }
 
   int getQuestionsCount() {
@@ -212,8 +114,10 @@ class BooksService {
     }
     final book = getBook(selectedBookId!);
     if (book == null) return 0;
-
-    return book.questions.length;
+    final ReadingStep currentStep =
+        _progress.progress[selectedBookId]?.currentStep ??
+            ReadingStep.preReading;
+    return book.getCurrentStepQuestions(currentStep).length;
   }
 
   int getCurrentQuestionIndex() {
@@ -222,34 +126,52 @@ class BooksService {
     }
     final book = getBook(selectedBookId!);
     if (book == null) return 0;
+    final currentBookProgress = _progress.progress[selectedBookId];
 
-    final currentIndex = _progress.currentQuestionIndices[selectedBookId] ?? 0;
+    final currentIndex = currentBookProgress
+            ?.getCurrentReadingProgress()
+            .currentQuestionIndices ??
+        0;
     return currentIndex;
   }
 
   Answer? getCorrectAnswer() {
-    final Question? question = getCurrentQuestion();
+    final PreReadingQuestion? question = getCurrentQuestion();
     if (question == null) {
       return null;
     }
     return question.answers
-        ?.firstWhereOrNull((Answer answer) => answer.correct);
+        ?.firstWhereOrNull((Answer answer) => answer.correct == true);
   }
 
   Future<void> answerQuestion(int questionId, dynamic answer) async {
-    _progress.answeredQuestions[selectedBookId!] ??= {};
-    _progress.answeredQuestions[selectedBookId]![questionId] = answer;
-
-    // Move to next question
-    final currentIndex = _progress.currentQuestionIndices[selectedBookId] ?? 0;
-    _progress.currentQuestionIndices[selectedBookId!] = currentIndex + 1;
+    if (selectedBookId == null) return;
+    final questionProgress =
+        _progress.progress[selectedBookId]!.getCurrentReadingProgress();
+    questionProgress.answeredQuestions[questionId] = answer;
+    final currentBook = getBook(selectedBookId!);
+    final index = questionProgress.currentQuestionIndices + 1;
+    final currentStep = _progress.progress[selectedBookId]!.currentStep;
+    if (index == currentBook!.getCurrentStepQuestions(currentStep).length) {
+      _progress.progress[selectedBookId]!.setNextStep();
+      questionProgress.currentQuestionIndices = 0;
+    } else {
+      questionProgress.currentQuestionIndices =
+          questionProgress.currentQuestionIndices + 1;
+    }
 
     await _saveProgress();
   }
 
   Future<void> resetBookProgress(int bookId) async {
-    _progress.answeredQuestions.remove(bookId);
-    _progress.currentQuestionIndices.remove(bookId);
+    _progress.progress[bookId] = QuestionProgress(
+        preReading:
+            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+        whileReading:
+            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+        postReading:
+            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+        readingStep: ReadingStep.preReading);
     await _saveProgress();
   }
 }
