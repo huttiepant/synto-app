@@ -1,8 +1,8 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:synto_app/api/services/auth_service.dart';
-import 'package:synto_app/screens/auth/auth_page.dart';
 import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:synto_app/ui/brand_colors.dart';
@@ -85,11 +85,7 @@ class _HomePageState extends State<HomePage> {
                     child: BrandButton(
                         onTap: () {
                           GetIt.instance<AuthService>().logout().then((_) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AuthPage()),
-                            );
+                            context.router.replaceNamed('/auth');
                           });
                         },
                         text: 'Sign Out',

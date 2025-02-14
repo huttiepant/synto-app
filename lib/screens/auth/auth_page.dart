@@ -6,7 +6,6 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:synto_app/screens/auth/sign_up_page.dart';
-import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:synto_app/ui/brand_input_field.dart';
 import 'package:toastification/toastification.dart';
@@ -26,7 +25,6 @@ class _AuthPageState extends State<AuthPage> {
 
   Future<void> _handleLoginTap() async {
     final form = _formKey.currentState;
-    final BooksService booksService = BooksService();
 
     if (form == null) return;
     form.save();
@@ -38,10 +36,7 @@ class _AuthPageState extends State<AuthPage> {
     GetIt.instance<AuthService>()
         .loginWithCredentials(email, password)
         .then((_) {
-      final bookId = booksService.selectedBookId;
-      if (bookId == null) return;
-      final ReadingStep step = booksService.getCurrentBookStep(bookId);
-      context.router.replaceNamed('/$step');
+      context.router.replaceNamed('/');
     }).onError((String message, _) {
       toastification.show(
         context: context,
@@ -70,10 +65,10 @@ class _AuthPageState extends State<AuthPage> {
       body: SafeArea(
           child: FormBuilder(
         key: _formKey,
-        initialValue: {
-          'email': 'hovsep@doublecoconut.com',
-          'password': 'AAssdd1234!',
-        },
+        // initialValue: {
+        //   'email': 'hovsep@doublecoconut.com',
+        //   'password': 'AAssdd1234!',
+        // },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
           child: Column(

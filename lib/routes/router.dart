@@ -9,6 +9,7 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           path: '/',
+          fullMatch: true,
           initial: true,
           page: HomeRoute.page,
         ),

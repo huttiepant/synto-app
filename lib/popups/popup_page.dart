@@ -1,15 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
 
 import '../ui/brand_colors.dart';
 
 class PopupPage extends StatelessWidget {
-  const PopupPage({super.key, this.step});
-
-  final ReadingStep? step;
+  const PopupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +50,7 @@ class PopupPage extends StatelessWidget {
             ),
             BrandButton(
                 onTap: () {
-                  if (step != null) {
-                    context.router.replaceNamed('/$step');
-                  } else {
-                    context.router.replaceNamed('/');
-                  }
+                  context.router.pushNamed('/');
                 },
                 border: Border.all(color: Colors.white, width: 1),
                 text: 'Sounds Good',

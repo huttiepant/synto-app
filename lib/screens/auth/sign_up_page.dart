@@ -5,7 +5,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:toastification/toastification.dart';
 
@@ -25,7 +24,6 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormBuilderState>();
   final authService = GetIt.instance<AuthService>();
-  final BooksService _booksService = BooksService();
 
   Future<void> _handleSignUp() async {
     final form = _formKey.currentState;
@@ -37,14 +35,11 @@ class _SignUpPageState extends State<SignUpPage> {
     final name = values?['name'];
     final password = values?['password'];
     context.loaderOverlay.show();
-    final bookId = _booksService.selectedBookId;
-    if (bookId == null) return;
-    final step = _booksService.getCurrentBookStep(bookId);
     authService.signUpWithCredentials(email, password, name).then((_) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PopupPage(step: step),
+          builder: (context) => PopupPage(),
           fullscreenDialog: true,
         ),
       );
