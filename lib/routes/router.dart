@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:synto_app/routes/guards/auth_guard.dart';
 import 'package:synto_app/routes/router.gr.dart';
+import 'package:synto_app/services/books_service.dart';
 
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {
@@ -16,6 +17,16 @@ class AppRouter extends RootStackRouter {
           page: AuthRoute.page,
         ),
         AutoRoute(
-            path: '/choice', page: ChoiceRoute.page, guards: [AuthGuard()]),
+            path: '/${ReadingStep.preReading}',
+            page: PreReadingRoute.page,
+            guards: [AuthGuard()]),
+        AutoRoute(
+            path: '/${ReadingStep.whileReading}',
+            page: WhileReadingRoute.page,
+            guards: [AuthGuard()]),
+        AutoRoute(
+            path: '/${ReadingStep.postReading}',
+            page: PostReadingRoute.page,
+            guards: [AuthGuard()]),
       ];
 }

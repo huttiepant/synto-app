@@ -1,6 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:synto_app/api/services/auth_service.dart';
+import 'package:synto_app/screens/auth/auth_page.dart';
 import 'package:synto_app/services/books_service.dart';
+import 'package:synto_app/ui/brand_button.dart';
+import 'package:synto_app/ui/brand_colors.dart';
 import 'package:synto_app/widgets/book_widget.dart';
 
 import '../widgets/home_header.dart';
@@ -72,9 +77,27 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  HomeHeader(books:books),
+                  HomeHeader(books: books),
                   SizedBox(height: 16),
                   ...books.map((book) => BookWidget(book: book)),
+                  Container(
+                    margin: EdgeInsets.all(40),
+                    child: BrandButton(
+                        onTap: () {
+                          GetIt.instance<AuthService>().logout().then((_) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AuthPage()),
+                            );
+                          });
+                        },
+                        text: 'Sign Out',
+                        color: brandLightBlue,
+                        textColor: Colors.white,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 18)),
+                  ),
                 ],
               ),
             );

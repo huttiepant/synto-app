@@ -5,9 +5,14 @@ import 'package:synto_app/ui/brand_button.dart';
 import '../ui/brand_colors.dart';
 
 class OpenEndedResultNotificationPopup extends StatelessWidget {
-  const OpenEndedResultNotificationPopup({super.key, required this.dialog});
+  const OpenEndedResultNotificationPopup({
+    super.key,
+    required this.dialog,
+    required this.onTap,
+  });
 
   final String dialog;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +20,12 @@ class OpenEndedResultNotificationPopup extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -36,24 +41,21 @@ class OpenEndedResultNotificationPopup extends StatelessWidget {
                       dialog,
                     ),
                     SizedBox(height: 32),
-
                   ],
                 ),
               ),
             ),
             BrandButton(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
+              onTap: onTap,
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
               border: Border.all(color: Colors.white, width: 1),
               text: 'Next Question',
               color: brandLightBlue,
               textColor: Colors.white,
             )
-                    ],
-                  ),
-          )),
+          ],
+        ),
+      )),
     );
   }
 }

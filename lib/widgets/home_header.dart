@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synto_app/api/models/book.dart';
+import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_dropdown.dart';
 
 import '../ui/brand_colors.dart';
@@ -13,6 +14,8 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BooksService booksService = BooksService();
+
     return Container(
       color: brandLightBlue,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -60,7 +63,9 @@ class HomeHeader extends StatelessWidget {
                 child: BrandDropdown<Book>(
                   title: 'Pick a Book',
                   onSelect: (book) {
-                    context.router.pushNamed('/choice');
+                    booksService.selectBook(book.id);
+                    final step = booksService.getCurrentBookStep(book.id);
+                    context.router.pushNamed('/$step');
                   },
                   options: books
                       .map((Book book) =>

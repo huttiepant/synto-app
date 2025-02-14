@@ -89,7 +89,13 @@ class BooksService {
   getCurrentBookStep(int bookId) =>
       _progress.progress[bookId]?.currentStep ?? ReadingStep.preReading;
 
-  PreReadingQuestion? getCurrentQuestion() {
+  void goToPreviousQuestion() {
+    _progress.progress[selectedBookId]
+        ?.getCurrentReadingProgress()
+        .currentQuestionIndices -= 1;
+  }
+
+  dynamic getCurrentQuestion() {
     if (selectedBookId == null) {
       return null;
     }
@@ -98,14 +104,13 @@ class BooksService {
     final ReadingStep currentStep = currentBookProgress!.currentStep;
     if (book == null) return null;
 
-    final currentIndex = currentBookProgress
-            .getCurrentReadingProgress()
-            .currentQuestionIndices;
-    if (currentIndex >= book.getCurrentStepQuestions(currentStep).length) {
-      resetBookProgress(selectedBookId!);
+    final currentIndex =
+        currentBookProgress.getCurrentReadingProgress().currentQuestionIndices;
+    final questions = book.getCurrentStepQuestions(currentStep);
+    if (questions.length > currentIndex) {
+      return book.getCurrentStepQuestions(currentStep)[currentIndex];
     }
-
-    return book.getCurrentStepQuestions(currentStep)[currentIndex];
+    return null;
   }
 
   int getQuestionsCount() {
@@ -137,11 +142,20 @@ class BooksService {
 
   Answer? getCorrectAnswer() {
     final PreReadingQuestion? question = getCurrentQuestion();
-    if (question == null) {
+    if (question == null || question.answers == null) {
       return null;
     }
     return question.answers
         ?.firstWhereOrNull((Answer answer) => answer.correct == true);
+  }
+
+  String? getAnswerFromProgressByQuestionId(int? questionId) {
+    if (selectedBookId == null || questionId == null) return null;
+    final answers = _progress.progress[selectedBookId]
+        ?.getCurrentReadingProgress()
+        .answeredQuestions;
+    if (answers == null || answers[questionId] == null) return null;
+    return answers[questionId];
   }
 
   Future<void> answerQuestion(int questionId, dynamic answer) async {
@@ -149,17 +163,20 @@ class BooksService {
     final questionProgress =
         _progress.progress[selectedBookId]!.getCurrentReadingProgress();
     questionProgress.answeredQuestions[questionId] = answer;
-    final currentBook = getBook(selectedBookId!);
-    final index = questionProgress.currentQuestionIndices + 1;
-    final currentStep = _progress.progress[selectedBookId]!.currentStep;
-    if (index == currentBook!.getCurrentStepQuestions(currentStep).length) {
-      _progress.progress[selectedBookId]!.setNextStep();
-      questionProgress.currentQuestionIndices = 0;
-    } else {
-      questionProgress.currentQuestionIndices =
-          questionProgress.currentQuestionIndices + 1;
-    }
+    questionProgress.currentQuestionIndices =
+        questionProgress.currentQuestionIndices + 1;
 
+    await _saveProgress();
+  }
+
+  Future<void> nextStep() async {
+    final prevQuestionProgress =
+        _progress.progress[selectedBookId]!.getCurrentReadingProgress();
+    prevQuestionProgress.currentQuestionIndices = 0;
+    _progress.progress[selectedBookId]!.setNextStep();
+    final currentQuestionProgress =
+        _progress.progress[selectedBookId]!.getCurrentReadingProgress();
+    currentQuestionProgress.currentQuestionIndices = 0;
     await _saveProgress();
   }
 

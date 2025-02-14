@@ -42,12 +42,13 @@ class QuestionProgress {
   void setNextStep() {
     switch (currentStep) {
       case ReadingStep.preReading:
-        currentStep(ReadingStep.whileReading);
+        readingStep = ReadingStep.whileReading;
         break;
       case ReadingStep.whileReading:
-        currentStep(ReadingStep.postReading);
+        readingStep = ReadingStep.postReading;
         break;
       case ReadingStep.postReading:
+        readingStep = ReadingStep.preReading;
         break;
     }
   }

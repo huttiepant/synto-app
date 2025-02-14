@@ -11,6 +11,15 @@ class AuthService {
     }
   }
 
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return;
+    } on FirebaseAuthException catch (e) {
+      return Future.error(e.message ?? e.code);
+    }
+  }
+
   Future<void> signUpWithCredentials(
       String email, String password, String name) async {
     try {

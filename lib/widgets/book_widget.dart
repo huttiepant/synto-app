@@ -134,7 +134,8 @@ class BookWidget extends StatelessWidget {
                 BrandButton(
                     onTap: () {
                       _booksService.selectBook(book.id);
-                      context.router.pushNamed('/choice');
+                      final step = _booksService.getCurrentBookStep(book.id);
+                      context.router.pushNamed('/$step');
                     },
                     text: 'Choose Book',
                     color: brandLightBlue,

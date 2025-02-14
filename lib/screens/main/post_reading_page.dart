@@ -1,41 +1,27 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:synto_app/api/models/answer.dart';
 import 'package:synto_app/api/models/book.dart';
-import 'package:synto_app/api/models/pre_reading_question.dart';
+import 'package:synto_app/api/models/post_reading_question.dart';
 import 'package:synto_app/popups/information_popup.dart';
 import 'package:synto_app/popups/open_ended_result_notification_popup.dart';
-import 'package:synto_app/popups/result_notification_popup.dart';
+import 'package:synto_app/screens/home_page.dart';
 import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:synto_app/ui/brand_title_bar.dart';
-import 'package:synto_app/widgets/book_tag.dart';
+import 'package:synto_app/widgets/reading_step_widget.dart';
 
 import '../../ui/brand_colors.dart';
 
-class ReadingLevel {
-  final String displayName;
-  final ReadingStep value;
-
-  ReadingLevel({required this.displayName, required this.value});
-}
-
-List<ReadingLevel> readingLevels = [
-  ReadingLevel(displayName: 'Pre-Read', value: ReadingStep.preReading),
-  ReadingLevel(displayName: 'Reading', value: ReadingStep.whileReading),
-  ReadingLevel(displayName: 'Post Read', value: ReadingStep.postReading),
-];
-
 @RoutePage()
-class ChoicePage extends StatefulWidget {
-  const ChoicePage({super.key});
+class PostReadingPage extends StatefulWidget {
+  const PostReadingPage({super.key});
 
   @override
-  State<ChoicePage> createState() => _ChoicePageState();
+  State<PostReadingPage> createState() => _PostReadingPageState();
 }
 
-class _ChoicePageState extends State<ChoicePage> {
+class _PostReadingPageState extends State<PostReadingPage> {
   final BooksService _service = BooksService();
 
   final _answerFieldController = TextEditingController();
@@ -43,7 +29,7 @@ class _ChoicePageState extends State<ChoicePage> {
 
   Book? _book;
   ReadingStep? _step;
-  PreReadingQuestion? _currentQuestion;
+  PostReadingQuestion? _currentQuestion;
 
   @override
   void initState() {
@@ -80,53 +66,36 @@ class _ChoicePageState extends State<ChoicePage> {
           body: Center(child: CircularProgressIndicator()));
     }
 
-    handleAnswer(Answer answer) async {
-      final correctAnswer = _service.getCorrectAnswer();
-      await _service.answerQuestion(
-        _currentQuestion!.id,
-        answer.id,
-      );
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              ResultNotificationPopup(answer: answer, correct: correctAnswer),
-          fullscreenDialog: true,
-        ),
-      );
-      await Future.delayed(Duration(milliseconds: 250));
-      final nextQuestion = _service.getCurrentQuestion();
-      if (nextQuestion == null) {
-        // _showCompletionScreen();
-      } else {
-        setState(() => _currentQuestion = nextQuestion);
-      }
-    }
-
     handleOpenEndedAnswer({bool skip = false}) async {
       final answer = _answerFieldController.text;
       await _service.answerQuestion(
         _currentQuestion!.id,
         skip ? '' : answer,
       );
+      _answerFieldController.text = '';
+      _answerFieldFocusNode.unfocus();
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => OpenEndedResultNotificationPopup(
             dialog: _currentQuestion?.dialog ?? '',
+            onTap: () async {
+              final nextQuestion = _service.getCurrentQuestion();
+              if (nextQuestion == null) {
+                _service.nextStep();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
+              } else {
+                Navigator.of(context).pop();
+                setState(() => _currentQuestion = nextQuestion);
+              }
+            },
           ),
           fullscreenDialog: true,
         ),
       );
-      _answerFieldController.text = '';
-      _answerFieldFocusNode.unfocus();
-      await Future.delayed(Duration(milliseconds: 250));
-      final nextQuestion = _service.getCurrentQuestion();
-      if (nextQuestion == null) {
-        // _showCompletionScreen();
-      } else {
-        setState(() => _currentQuestion = nextQuestion);
-      }
     }
 
     final questionsCount = _service.getQuestionsCount();
@@ -142,7 +111,7 @@ class _ChoicePageState extends State<ChoicePage> {
                 BrandTitleBar(
                   title: _book!.name,
                   onBack: () {
-                    context.router.back();
+                    context.router.pushNamed('/');
                   },
                 ),
                 Text(
@@ -155,17 +124,8 @@ class _ChoicePageState extends State<ChoicePage> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ...readingLevels.map((level) => BookTag(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          title: level.displayName,
-                          selected: level.value == _step,
-                        )),
-                  ],
+                ReadingStepWidget(
+                  step: _step!,
                 ),
                 SizedBox(height: 26),
               ],
@@ -180,27 +140,32 @@ class _ChoicePageState extends State<ChoicePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              SizedBox(
-                                  width: 40,
-                                  child: FittedBox(
-                                      child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.info_outline,
-                                            size: 24,
-                                          )))),
-                              SizedBox(
-                                  width: 40,
-                                  child: FittedBox(
-                                      child: IconButton(
-                                          onPressed: () {
-                                            showInformationDialog(context, '',
-                                                _currentQuestion?.tips ?? '');
-                                          },
-                                          icon: Icon(
-                                            Icons.question_mark,
-                                            size: 24,
-                                          ))))
+                              if (_currentQuestion?.info != null)
+                                SizedBox(
+                                    width: 40,
+                                    child: FittedBox(
+                                        child: IconButton(
+                                            onPressed: () {
+                                              showInformationDialog(context, '',
+                                                  _currentQuestion?.info ?? '');
+                                            },
+                                            icon: Icon(
+                                              Icons.info_outline,
+                                              size: 24,
+                                            )))),
+                              if (_currentQuestion?.tips != null)
+                                SizedBox(
+                                    width: 40,
+                                    child: FittedBox(
+                                        child: IconButton(
+                                            onPressed: () {
+                                              showInformationDialog(context, '',
+                                                  _currentQuestion?.tips ?? '');
+                                            },
+                                            icon: Icon(
+                                              Icons.question_mark,
+                                              size: 24,
+                                            )))),
                             ],
                           ),
                         Container(
@@ -217,60 +182,21 @@ class _ChoicePageState extends State<ChoicePage> {
                         Divider(
                           color: Color(0xffE8E8E8).withOpacity(0.7),
                         ),
-                        SizedBox(
-                          height: 13,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: _currentQuestion?.answers
-                                  ?.map((answer) => GestureDetector(
-                                        onTap: () => handleAnswer(answer),
-                                        child: Container(
-                                          constraints:
-                                              BoxConstraints(minHeight: 60),
-                                          margin: EdgeInsets.only(bottom: 13),
-                                          padding: EdgeInsets.all(7),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: brandLightBlue),
-                                          child: Center(
-                                            child: Text(
-                                              answer.answer,
-                                              textAlign: TextAlign.center,
-                                              style: GoogleFonts.poppins()
-                                                  .copyWith(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ))
-                                  .toList() ??
-                              [],
-                        ),
                         SizedBox(height: 19),
+                        if (_currentQuestion?.type == 'openEnded')
+                          Text(
+                            'Freely enter your own idea:',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins().copyWith(
+                              color: brandLightBlue,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        SizedBox(height: 8),
                         if (_currentQuestion?.type == 'openEnded')
                           Column(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  // ownIdea = !ownIdea;
-                                  setState(() {});
-                                },
-                                child: Text(
-                                  'Freely enter your own idea:',
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.poppins().copyWith(
-                                    color: brandLightBlue,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 8),
                               TextField(
                                 controller: _answerFieldController,
                                 focusNode: _answerFieldFocusNode,
