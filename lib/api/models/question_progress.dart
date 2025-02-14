@@ -11,6 +11,7 @@ class QuestionProgress {
   final ReadingProgress postReading;
   ReadingStep readingStep = ReadingStep.preReading;
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   get currentStep {
     return readingStep;
   }

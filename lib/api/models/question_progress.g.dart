@@ -22,7 +22,7 @@ Map<String, dynamic> _$QuestionProgressToJson(QuestionProgress instance) =>
       'preReading': instance.preReading,
       'whileReading': instance.whileReading,
       'postReading': instance.postReading,
-      'currentStep': _$ReadingStepEnumMap[instance.currentStep]!,
+      'readingStep': _$ReadingStepEnumMap[instance.readingStep]!,
     };
 
 const _$ReadingStepEnumMap = {
