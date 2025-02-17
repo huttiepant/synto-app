@@ -66,11 +66,9 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SafeArea(
           child: FormBuilder(
         key: _formKey,
-        child: Container(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
                 'Sign up',
@@ -146,7 +144,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       textColor: Colors.white)
                 ],
               ),
-              Spacer(),
+              SizedBox(
+                height: 24,
+              ),
               Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 6,

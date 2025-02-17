@@ -1,5 +1,5 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:synto_app/api/services/auth_service.dart';
@@ -80,20 +80,21 @@ class _HomePageState extends State<HomePage> {
                   HomeHeader(books: books),
                   SizedBox(height: 16),
                   ...books.map((book) => BookWidget(book: book)),
-                  Container(
-                    margin: EdgeInsets.all(40),
-                    child: BrandButton(
-                        onTap: () {
-                          GetIt.instance<AuthService>().logout().then((_) {
-                            context.router.replaceNamed('/auth');
-                          });
-                        },
-                        text: 'Sign Out',
-                        color: brandLightBlue,
-                        textColor: Colors.white,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 18)),
-                  ),
+                  if (FirebaseAuth.instance.currentUser != null)
+                    Container(
+                      margin: EdgeInsets.all(40),
+                      child: BrandButton(
+                          onTap: () {
+                            GetIt.instance<AuthService>().logout().then((_) {
+                              context.router.replaceNamed('/auth');
+                            });
+                          },
+                          text: 'Sign Out',
+                          color: brandLightBlue,
+                          textColor: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 18)),
+                    ),
                 ],
               ),
             );

@@ -114,14 +114,16 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
     void goToPreviousQuestion() {
       _service.goToPreviousQuestion();
       final prevQuestion = _service.getCurrentQuestion();
-      setState(() => _currentQuestion = prevQuestion);
+      _currentQuestion = prevQuestion;
       fetchAndSetSelectedAnswer();
+      setState(() => {});
     }
 
     final questionsCount = _service.getQuestionsCount();
     final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(

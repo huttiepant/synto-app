@@ -69,11 +69,9 @@ class _AuthPageState extends State<AuthPage> {
         //   'email': 'hovsep@doublecoconut.com',
         //   'password': 'AAssdd1234!',
         // },
-        child: Container(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
                 'Sign in to your Account',
@@ -154,7 +152,9 @@ class _AuthPageState extends State<AuthPage> {
                       textColor: Colors.white)
                 ],
               ),
-              Spacer(),
+              SizedBox(
+                height: 24,
+              ),
               Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 6,

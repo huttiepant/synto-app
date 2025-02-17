@@ -55,15 +55,18 @@ class InformationPopup extends StatelessWidget {
                 ),
               ),
             ),
-            BrandButton(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
-              border: Border.all(color: Colors.white, width: 1),
-              text: 'Ok',
-              color: brandLightBlue,
-              textColor: Colors.white,
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              child: BrandButton(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                border: Border.all(color: Colors.white, width: 1),
+                text: 'Ok',
+                color: brandLightBlue,
+                textColor: Colors.white,
+              ),
             )
           ],
         ),

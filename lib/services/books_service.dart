@@ -155,7 +155,8 @@ class BooksService {
         ?.getCurrentReadingProgress()
         .answeredQuestions;
     if (answers == null || answers[questionId] == null) return null;
-    return answers[questionId];
+    final answer = answers[questionId];
+    return answer is int ? answer.toString() : answer;
   }
 
   Future<void> answerQuestion(int questionId, dynamic answer) async {

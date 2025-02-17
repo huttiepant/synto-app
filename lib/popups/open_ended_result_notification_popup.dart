@@ -45,13 +45,16 @@ class OpenEndedResultNotificationPopup extends StatelessWidget {
                 ),
               ),
             ),
-            BrandButton(
-              onTap: onTap,
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
-              border: Border.all(color: Colors.white, width: 1),
-              text: 'Next Question',
-              color: brandLightBlue,
-              textColor: Colors.white,
+            Container(
+              padding: EdgeInsets.only(bottom: 20),
+              child: BrandButton(
+                onTap: onTap,
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                border: Border.all(color: Colors.white, width: 1),
+                text: 'Next Question',
+                color: brandLightBlue,
+                textColor: Colors.white,
+              ),
             )
           ],
         ),

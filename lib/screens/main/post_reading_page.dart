@@ -50,11 +50,22 @@ class _PostReadingPageState extends State<PostReadingPage> {
     );
   }
 
+  void fetchAndSetSelectedAnswer() {
+    final String? answer =
+        _service.getAnswerFromProgressByQuestionId(_currentQuestion?.id);
+    if (answer == null) return;
+
+    if (_currentQuestion?.type == 'openEnded') {
+      _answerFieldController.text = answer;
+    }
+  }
+
   Future<void> _initialize() async {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _currentQuestion = _service.getCurrentQuestion();
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
+    fetchAndSetSelectedAnswer();
     setState(() {});
   }
 
@@ -89,7 +100,9 @@ class _PostReadingPageState extends State<PostReadingPage> {
                 );
               } else {
                 Navigator.of(context).pop();
-                setState(() => _currentQuestion = nextQuestion);
+                _currentQuestion = nextQuestion;
+                fetchAndSetSelectedAnswer();
+                setState(() => {});
               }
             },
           ),
@@ -102,6 +115,7 @@ class _PostReadingPageState extends State<PostReadingPage> {
     final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(

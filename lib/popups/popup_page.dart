@@ -48,14 +48,17 @@ class PopupPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   "Expert readers: \n\n1. Remember more of what they read\n2. Apply more of what they read in everyday life.\n3. Know how to think independently and critically.\n\nAnd these benefits don’t just go for when they’re reading!"),
             ),
-            BrandButton(
-                onTap: () {
-                  context.router.pushNamed('/');
-                },
-                border: Border.all(color: Colors.white, width: 1),
-                text: 'Sounds Good',
-                color: brandLightBlue,
-                textColor: Colors.white)
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              child: BrandButton(
+                  onTap: () {
+                    context.router.pushNamed('/');
+                  },
+                  border: Border.all(color: Colors.white, width: 1),
+                  text: 'Sounds Good',
+                  color: brandLightBlue,
+                  textColor: Colors.white),
+            )
           ],
         ),
       )),

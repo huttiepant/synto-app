@@ -32,6 +32,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
   Book? _book;
   ReadingStep? _step;
   PreReadingQuestion? _currentQuestion;
+  String? selectedAnswerId;
 
   @override
   void initState() {
@@ -52,11 +53,24 @@ class _PreReadingPageState extends State<PreReadingPage> {
     );
   }
 
+  void fetchAndSetSelectedAnswer() {
+    final String? answer =
+        _service.getAnswerFromProgressByQuestionId(_currentQuestion?.id);
+    if (answer == null) return;
+
+    if (_currentQuestion?.type == 'openEnded') {
+      _answerFieldController.text = answer;
+    } else {
+      selectedAnswerId = answer;
+    }
+  }
+
   Future<void> _initialize() async {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _currentQuestion = _service.getCurrentQuestion();
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
+    fetchAndSetSelectedAnswer();
     setState(() {});
   }
 
@@ -90,7 +104,9 @@ class _PreReadingPageState extends State<PreReadingPage> {
           MaterialPageRoute(builder: (context) => const WhileReadingPage()),
         );
       } else {
-        setState(() => _currentQuestion = nextQuestion);
+        _currentQuestion = nextQuestion;
+        fetchAndSetSelectedAnswer();
+        setState(() => {});
       }
     }
 
@@ -118,7 +134,9 @@ class _PreReadingPageState extends State<PreReadingPage> {
                 );
               } else {
                 Navigator.of(context).pop();
-                setState(() => _currentQuestion = nextQuestion);
+                _currentQuestion = nextQuestion;
+                fetchAndSetSelectedAnswer();
+                setState(() => {});
               }
             },
           ),
@@ -131,6 +149,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
     final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -227,7 +246,10 @@ class _PreReadingPageState extends State<PreReadingPage> {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(12),
-                                              color: brandLightBlue),
+                                              color: answer.id.toString() ==
+                                                      selectedAnswerId
+                                                  ? brandDarkBlue
+                                                  : brandLightBlue),
                                           child: Center(
                                             child: Text(
                                               answer.answer,
