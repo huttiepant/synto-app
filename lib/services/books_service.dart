@@ -37,8 +37,8 @@ class BooksService {
     selectedBookId = bookId;
     if (_progress.progress[bookId] == null) {
       _progress.progress[bookId] = QuestionProgress(
-          preReading:
-              ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+          preReading: ReadingProgress(
+              currentQuestionIndices: 0, answeredQuestions: {}, tags: []),
           whileReading:
               ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
           postReading:
@@ -88,6 +88,15 @@ class BooksService {
 
   getCurrentBookStep(int bookId) =>
       _progress.progress[bookId]?.currentStep ?? ReadingStep.preReading;
+
+  List<String>? getTags() {
+    if (selectedBookId == null) return null;
+    final currentBookProgress = _progress.progress[selectedBookId];
+    final currentReadingProgress =
+        currentBookProgress?.getCurrentReadingProgress();
+    final tags = currentReadingProgress?.getTags();
+    return tags;
+  }
 
   void goToPreviousQuestion() {
     _progress.progress[selectedBookId]
@@ -170,6 +179,15 @@ class BooksService {
     await _saveProgress();
   }
 
+  Future<void> saveTags(List<String> tags) async {
+    if (selectedBookId == null) return;
+    final questionProgress =
+        _progress.progress[selectedBookId]?.getCurrentReadingProgress();
+    questionProgress!.tags = tags;
+
+    await _saveProgress();
+  }
+
   Future<void> nextStep() async {
     final prevQuestionProgress =
         _progress.progress[selectedBookId]!.getCurrentReadingProgress();
@@ -183,8 +201,8 @@ class BooksService {
 
   Future<void> resetBookProgress(int bookId) async {
     _progress.progress[bookId] = QuestionProgress(
-        preReading:
-            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+        preReading: ReadingProgress(
+            currentQuestionIndices: 0, answeredQuestions: {}, tags: []),
         whileReading:
             ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
         postReading:

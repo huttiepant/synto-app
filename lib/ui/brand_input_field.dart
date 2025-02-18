@@ -20,6 +20,7 @@ class BrandInputField extends StatefulWidget {
     this.textAlign = TextAlign.left,
     this.maxLength,
     this.maxLines,
+    this.onSubmit,
   });
 
   final String hint;
@@ -36,6 +37,7 @@ class BrandInputField extends StatefulWidget {
   final bool enabled;
   final TextAlign textAlign;
   final dynamic validator;
+  final void Function(String value)? onSubmit;
 
   @override
   State<BrandInputField> createState() => _BrandInputFieldState();
@@ -92,14 +94,15 @@ class _BrandInputFieldState extends State<BrandInputField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.title,
-            style: GoogleFonts.plusJakartaSans().copyWith(
-                color: Color(0xff6C7278),
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.24,
-                fontSize: 12),
-          ),
+          if (widget.title.isNotEmpty)
+            Text(
+              widget.title,
+              style: GoogleFonts.plusJakartaSans().copyWith(
+                  color: Color(0xff6C7278),
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.24,
+                  fontSize: 12),
+            ),
           SizedBox(
             height: 5,
           ),
@@ -112,14 +115,22 @@ class _BrandInputFieldState extends State<BrandInputField> {
               }
               return TextField(
                 onChanged: (value) => field.didChange(value),
+                onSubmitted: (value) {
+                  if (widget.onSubmit == null) return;
+                  widget.onSubmit!(value);
+                  _controller.text = '';
+                  field.reset();
+                  _focusNode.requestFocus();
+                },
                 textAlign: widget.textAlign,
                 enabled: widget.enabled,
                 obscureText: widget.obscureText,
                 style: GoogleFonts.inter().copyWith(
-                    color: Color(0xff1A1C1E),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -0.14),
+                  color: Color(0xff1A1C1E),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.14,
+                ),
                 keyboardType: widget.inputType,
                 controller: _controller,
                 inputFormatters: widget.inputFormatters,
@@ -129,12 +140,10 @@ class _BrandInputFieldState extends State<BrandInputField> {
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Color(0xffEDF1F3))
-                  ),
+                      borderSide: BorderSide(color: Color(0xffEDF1F3))),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.black)
-                  ),
+                      borderSide: BorderSide(color: Colors.black)),
                   filled: true,
                   isDense: true,
                   contentPadding:

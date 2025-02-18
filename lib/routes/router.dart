@@ -18,6 +18,10 @@ class AppRouter extends RootStackRouter {
           page: AuthRoute.page,
         ),
         AutoRoute(
+            path: '/ideas',
+            page: IdeasTaggerRoute.page,
+            guards: [AuthGuard()]),
+        AutoRoute(
             path: '/${ReadingStep.preReading}',
             page: PreReadingRoute.page,
             guards: [AuthGuard()]),

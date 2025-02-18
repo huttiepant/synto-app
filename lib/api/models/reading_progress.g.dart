@@ -13,6 +13,7 @@ ReadingProgress _$ReadingProgressFromJson(Map<String, dynamic> json) =>
           (json['answeredQuestions'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(int.parse(k), e),
       ),
+      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$ReadingProgressToJson(ReadingProgress instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$ReadingProgressToJson(ReadingProgress instance) =>
       'currentQuestionIndices': instance.currentQuestionIndices,
       'answeredQuestions':
           instance.answeredQuestions.map((k, e) => MapEntry(k.toString(), e)),
+      'tags': instance.tags,
     };

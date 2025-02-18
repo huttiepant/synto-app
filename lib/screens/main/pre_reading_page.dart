@@ -7,6 +7,7 @@ import 'package:synto_app/api/models/pre_reading_question.dart';
 import 'package:synto_app/popups/information_popup.dart';
 import 'package:synto_app/popups/open_ended_result_notification_popup.dart';
 import 'package:synto_app/popups/result_notification_popup.dart';
+import 'package:synto_app/screens/main/ideas_tagger_page.dart';
 import 'package:synto_app/screens/main/while_reading_page.dart';
 import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
@@ -69,6 +70,9 @@ class _PreReadingPageState extends State<PreReadingPage> {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _currentQuestion = _service.getCurrentQuestion();
+    if(_currentQuestion == null){
+      context.router.replaceNamed('/ideas');
+    }
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
     fetchAndSetSelectedAnswer();
     setState(() {});
@@ -123,14 +127,14 @@ class _PreReadingPageState extends State<PreReadingPage> {
         MaterialPageRoute(
           builder: (context) => OpenEndedResultNotificationPopup(
             dialog: _currentQuestion?.dialog ?? '',
-            onTap: () async {
+            onTap: () {
               final nextQuestion = _service.getCurrentQuestion();
               if (nextQuestion == null) {
-                await _service.nextStep();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const WhileReadingPage()),
+                      builder: (context) => const IdeasTaggerPage(),
+                      fullscreenDialog: true),
                 );
               } else {
                 Navigator.of(context).pop();
@@ -314,12 +318,6 @@ class _PreReadingPageState extends State<PreReadingPage> {
                                     width: 142,
                                     child: BrandButton(
                                       onTap: () async {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //         const IdeasTaggerPage(),
-                                        //         fullscreenDialog: true));
                                         await handleOpenEndedAnswer(skip: true);
                                       },
                                       text: 'Skip',
