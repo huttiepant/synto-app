@@ -23,13 +23,17 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  Map<String, String>? errors;
 
   Future<void> _handleLoginTap() async {
     final form = _formKey.currentState;
-
     if (form == null) return;
     form.save();
-    if (!form.validate()) return;
+    if (!form.validate()) {
+      errors = _formKey.currentState?.errors;
+      setState(() {});
+      return;
+    }
     final values = _formKey.currentState?.value;
     final email = values?['email'];
     final password = values?['password'];
@@ -65,6 +69,12 @@ class _AuthPageState extends State<AuthPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: FormBuilder(
+        onChanged: () {
+          if (errors != null) {
+            errors = null;
+            setState(() {});
+          }
+        },
         key: _formKey,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
@@ -102,6 +112,7 @@ class _AuthPageState extends State<AuthPage> {
                   FormBuilderValidators.required(),
                   FormBuilderValidators.email()
                 ]),
+                errorText: errors?['email'],
                 selectAllOnFocus: false,
               ),
               SizedBox(
@@ -116,6 +127,7 @@ class _AuthPageState extends State<AuthPage> {
                 validator: FormBuilderValidators.required(),
                 inputType: TextInputType.text,
                 selectAllOnFocus: false,
+                errorText: errors?['password'],
               ),
               SizedBox(
                 height: 16,

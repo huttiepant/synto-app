@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BrandInputField extends StatefulWidget {
+class BrandInputField extends StatefulHookWidget {
   const BrandInputField({
     super.key,
     this.hint = '',
@@ -15,22 +16,22 @@ class BrandInputField extends StatefulWidget {
     required this.selectAllOnFocus,
     this.validator,
     this.obscureText = false,
-    this.error = false,
     this.enabled = true,
     this.textAlign = TextAlign.left,
     this.maxLength,
     this.maxLines,
     this.onSubmit,
+    this.errorText,
   });
 
   final String hint;
   final String name;
   final String title;
+  final String? errorText;
   final bool expands;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType inputType;
   final bool selectAllOnFocus;
-  final bool error;
   final int? maxLength;
   final int? maxLines;
   final bool obscureText;
@@ -45,7 +46,6 @@ class BrandInputField extends StatefulWidget {
 
 class _BrandInputFieldState extends State<BrandInputField> {
   final FocusNode _focusNode = FocusNode();
-
   late TextEditingController _controller;
   bool isFocused = false;
 
@@ -98,7 +98,8 @@ class _BrandInputFieldState extends State<BrandInputField> {
             Text(
               widget.title,
               style: GoogleFonts.plusJakartaSans().copyWith(
-                  color: Color(0xff6C7278),
+                  color:
+                      widget.errorText != null ? Colors.red : Color(0xff6C7278),
                   fontWeight: FontWeight.w500,
                   letterSpacing: -0.24,
                   fontSize: 12),
@@ -114,7 +115,7 @@ class _BrandInputFieldState extends State<BrandInputField> {
                 _controller.text = field.value ?? '';
               }
               return TextField(
-                onChanged: (value) => field.didChange(value),
+                onChanged: field.didChange,
                 onSubmitted: (value) {
                   if (widget.onSubmit == null) return;
                   widget.onSubmit!(value);
@@ -140,10 +141,17 @@ class _BrandInputFieldState extends State<BrandInputField> {
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Color(0xffEDF1F3))),
+                      borderSide: BorderSide(
+                          color: widget.errorText != null
+                              ? Colors.red
+                              : Color(0xffEDF1F3))),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.black)),
+                      borderSide: BorderSide(
+                        color: widget.errorText != null
+                            ? Colors.red
+                            : Colors.black,
+                      )),
                   filled: true,
                   isDense: true,
                   contentPadding:
@@ -158,7 +166,18 @@ class _BrandInputFieldState extends State<BrandInputField> {
                 ),
               );
             },
-          )
+          ),
+          SizedBox(
+            height: 4,
+          ),
+          Text(
+            widget.errorText ?? '',
+            style: GoogleFonts.inter().copyWith(
+              fontSize: 12,
+              color: Colors.red,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ],
       ),
     );

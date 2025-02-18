@@ -166,7 +166,6 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
                       curve: Curves.ease);
                 },
               ),
-              SizedBox(height: 10),
               BrandButton(
                 onTap: () async {
                   await _service.saveTags(selectedTags);

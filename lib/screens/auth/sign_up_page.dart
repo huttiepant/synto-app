@@ -25,12 +25,17 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormBuilderState>();
   final authService = GetIt.instance<AuthService>();
+  Map<String, String>? errors;
 
   Future<void> _handleSignUp() async {
     final form = _formKey.currentState;
     if (form == null) return;
     form.save();
-    if (!form.validate()) return;
+    if (!form.validate()) {
+      errors = _formKey.currentState?.errors;
+      setState(() {});
+      return;
+    }
     final values = _formKey.currentState?.value;
     final email = values?['email'];
     final name = values?['name'];
@@ -66,6 +71,12 @@ class _SignUpPageState extends State<SignUpPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: FormBuilder(
+        onChanged: () {
+          if (errors != null) {
+            errors = null;
+            setState(() {});
+          }
+        },
         key: _formKey,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
@@ -101,6 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 validator: FormBuilderValidators.required(),
                 inputType: TextInputType.text,
                 selectAllOnFocus: false,
+                errorText: errors?['name'],
               ),
               SizedBox(
                 height: 16,
@@ -116,6 +128,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   FormBuilderValidators.email()
                 ]),
                 selectAllOnFocus: false,
+                errorText: errors?['email'],
               ),
               SizedBox(
                 height: 16,
@@ -126,9 +139,34 @@ class _SignUpPageState extends State<SignUpPage> {
                 hint: 'Password',
                 expands: false,
                 obscureText: true,
-                validator: FormBuilderValidators.required(),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.password(),
+                ]),
                 inputType: TextInputType.text,
                 selectAllOnFocus: false,
+                errorText: errors?['password'],
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text.rich(TextSpan(
+                      text: "Password must include the following:",
+                      style: TextStyle(
+                        color: Color(0xff6C7278),
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                            text: '\n  • At least one uppercase character'),
+                        TextSpan(
+                            text: '\n  • At least one lowercase character'),
+                        TextSpan(
+                            text: '\n  • At least one special character (!@#)'),
+                        TextSpan(text: '\n  • At least one number'),
+                      ])),
+                ),
               ),
               SizedBox(
                 height: 24,

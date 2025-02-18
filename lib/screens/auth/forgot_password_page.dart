@@ -24,6 +24,7 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  Map<String, String>? errors;
 
   void showInformationDialog(
       BuildContext context, String name, String info, VoidCallback onTap) {
@@ -41,7 +42,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
     if (form == null) return;
     form.save();
-    if (!form.validate()) return;
+    if (!form.validate()) {
+      errors = _formKey.currentState?.errors;
+      setState(() {});
+      return;
+    }
     final values = _formKey.currentState?.value;
     final email = values?['email'];
     context.loaderOverlay.show();
@@ -78,6 +83,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: FormBuilder(
+        onChanged: () {
+          if (errors != null) {
+            errors = null;
+            setState(() {});
+          }
+        },
         key: _formKey,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
@@ -115,6 +126,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   FormBuilderValidators.required(),
                   FormBuilderValidators.email()
                 ]),
+                errorText: errors?['email'],
                 selectAllOnFocus: false,
               ),
               SizedBox(
