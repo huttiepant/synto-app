@@ -91,7 +91,7 @@ class BooksService {
   getCurrentBookStep(int bookId) =>
       _progress.progress[bookId]?.currentStep ?? ReadingStep.preReading;
 
-  getBookReadStatus(int bookId) => _progress.progress[bookId]?.read;
+  bool getBookReadStatus(int bookId) => _progress.progress[bookId]?.read ?? false;
 
   List<String>? getTags() {
     if (selectedBookId == null) return null;
