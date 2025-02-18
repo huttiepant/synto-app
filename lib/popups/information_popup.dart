@@ -5,10 +5,16 @@ import 'package:synto_app/ui/brand_button.dart';
 import '../ui/brand_colors.dart';
 
 class InformationPopup extends StatelessWidget {
-  const InformationPopup({super.key, required this.title, required this.info});
+  const InformationPopup({
+    super.key,
+    required this.title,
+    required this.info,
+    this.onTap,
+  });
 
   final String title;
   final String info;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +65,10 @@ class InformationPopup extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               child: BrandButton(
                 onTap: () {
+                  if (onTap != null) {
+                    onTap!();
+                    return;
+                  }
                   Navigator.of(context).pop();
                 },
                 padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),

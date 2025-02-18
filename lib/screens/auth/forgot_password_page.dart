@@ -5,7 +5,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:synto_app/screens/auth/forgot_password_page.dart';
+import 'package:synto_app/popups/information_popup.dart';
+import 'package:synto_app/screens/auth/auth_page.dart';
 import 'package:synto_app/screens/auth/sign_up_page.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:synto_app/ui/brand_input_field.dart';
@@ -14,17 +15,28 @@ import '../../api/services/auth_service.dart';
 import '../../ui/brand_colors.dart';
 
 @RoutePage()
-class AuthPage extends StatefulWidget {
-  const AuthPage({super.key});
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
-  State<AuthPage> createState() => _AuthPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
-  Future<void> _handleLoginTap() async {
+  void showInformationDialog(
+      BuildContext context, String name, String info, VoidCallback onTap) {
+    showDialog<void>(
+      context: context,
+      useSafeArea: false,
+      builder: (BuildContext context) {
+        return InformationPopup(title: name, info: info, onTap: onTap);
+      },
+    );
+  }
+
+  Future<void> _handleForgotPasswordTap() async {
     final form = _formKey.currentState;
 
     if (form == null) return;
@@ -32,12 +44,13 @@ class _AuthPageState extends State<AuthPage> {
     if (!form.validate()) return;
     final values = _formKey.currentState?.value;
     final email = values?['email'];
-    final password = values?['password'];
     context.loaderOverlay.show();
-    GetIt.instance<AuthService>()
-        .loginWithCredentials(email, password)
-        .then((_) {
-      context.router.replaceNamed('/');
+    GetIt.instance<AuthService>().sendPasswordResetEmail(email).then((_) {
+      showInformationDialog(
+          context,
+          'Reset Email Sent',
+          'We\'ve sent you an email with instructions to reset your password. Please check your inbox and follow the link to create a new password.',
+          () => context.router.pushNamed('/auth'));
     }).onError((String message, _) {
       toastification.show(
         context: context,
@@ -72,7 +85,7 @@ class _AuthPageState extends State<AuthPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Sign in to your Account',
+                'Retrieve password',
                 style: GoogleFonts.inter().copyWith(
                     fontSize: 32,
                     fontWeight: FontWeight.w700,
@@ -82,7 +95,7 @@ class _AuthPageState extends State<AuthPage> {
                 height: 12,
               ),
               Text(
-                'Enter your email and password to log in',
+                'Enter email to retrieve password',
                 style: GoogleFonts.inter().copyWith(
                     fontSize: 12,
                     color: Color(0xff6C7278),
@@ -107,37 +120,40 @@ class _AuthPageState extends State<AuthPage> {
               SizedBox(
                 height: 16,
               ),
-              BrandInputField(
-                name: 'password',
-                title: 'Password',
-                hint: 'Password',
-                expands: false,
-                obscureText: true,
-                validator: FormBuilderValidators.required(),
-                inputType: TextInputType.text,
-                selectAllOnFocus: false,
-              ),
-              SizedBox(
-                height: 16,
-              ),
               Align(
                 alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordPage()),
-                    );
-                  },
-                  child: Text(
-                    'Forgot Password ?',
-                    style: GoogleFonts.inter().copyWith(
-                        color: Color(0xff4D81E7),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.12),
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Already have an account?',
+                      style: GoogleFonts.inter().copyWith(
+                          color: Color(0xff6C7278),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.12),
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AuthPage()),
+                        );
+                      },
+                      child: Text(
+                        'Login',
+                        style: GoogleFonts.inter().copyWith(
+                            color: Color(0xff4D81E7),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.12),
+                      ),
+                    )
+                  ],
                 ),
               ),
               SizedBox(
@@ -148,10 +164,10 @@ class _AuthPageState extends State<AuthPage> {
                 children: [
                   BrandButton(
                       onTap: () {
-                        _handleLoginTap();
+                        _handleForgotPasswordTap();
                       },
                       border: Border.all(color: Colors.white, width: 1),
-                      text: 'Log In',
+                      text: 'Retrieve Password',
                       color: brandLightBlue,
                       textColor: Colors.white)
                 ],

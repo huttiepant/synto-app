@@ -5,6 +5,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:synto_app/screens/auth/auth_page.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:toastification/toastification.dart';
 
@@ -69,6 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Sign up',
@@ -147,9 +149,8 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 height: 24,
               ),
-              Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 6,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Already have an account?',
@@ -159,9 +160,16 @@ class _SignUpPageState extends State<SignUpPage> {
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.12),
                   ),
+                  SizedBox(
+                    width: 6,
+                  ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AuthPage()),
+                      );
                     },
                     child: Text(
                       'Login',
