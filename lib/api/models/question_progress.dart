@@ -10,6 +10,7 @@ class QuestionProgress {
   final ReadingProgress whileReading;
   final ReadingProgress postReading;
   ReadingStep readingStep = ReadingStep.preReading;
+  bool read = false;
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   get currentStep {
@@ -25,6 +26,7 @@ class QuestionProgress {
     required this.whileReading,
     required this.postReading,
     required this.readingStep,
+    this.read = false,
   });
 
   ReadingProgress getCurrentReadingProgress() {
@@ -48,6 +50,7 @@ class QuestionProgress {
         readingStep = ReadingStep.postReading;
         break;
       case ReadingStep.postReading:
+        read = true;
         readingStep = ReadingStep.preReading;
         break;
     }

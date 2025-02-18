@@ -15,6 +15,7 @@ QuestionProgress _$QuestionProgressFromJson(Map<String, dynamic> json) =>
       postReading:
           ReadingProgress.fromJson(json['postReading'] as Map<String, dynamic>),
       readingStep: $enumDecode(_$ReadingStepEnumMap, json['readingStep']),
+      read: json['read'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$QuestionProgressToJson(QuestionProgress instance) =>
@@ -23,6 +24,7 @@ Map<String, dynamic> _$QuestionProgressToJson(QuestionProgress instance) =>
       'whileReading': instance.whileReading,
       'postReading': instance.postReading,
       'readingStep': _$ReadingStepEnumMap[instance.readingStep]!,
+      'read': instance.read,
     };
 
 const _$ReadingStepEnumMap = {

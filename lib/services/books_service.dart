@@ -37,13 +37,15 @@ class BooksService {
     selectedBookId = bookId;
     if (_progress.progress[bookId] == null) {
       _progress.progress[bookId] = QuestionProgress(
-          preReading: ReadingProgress(
-              currentQuestionIndices: 0, answeredQuestions: {}, tags: []),
-          whileReading:
-              ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
-          postReading:
-              ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
-          readingStep: ReadingStep.preReading);
+        preReading: ReadingProgress(
+            currentQuestionIndices: 0, answeredQuestions: {}, tags: []),
+        whileReading:
+            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+        postReading:
+            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+        readingStep: ReadingStep.preReading,
+        read: false,
+      );
     }
   }
 
@@ -88,6 +90,8 @@ class BooksService {
 
   getCurrentBookStep(int bookId) =>
       _progress.progress[bookId]?.currentStep ?? ReadingStep.preReading;
+
+  getBookReadStatus(int bookId) => _progress.progress[bookId]?.read;
 
   List<String>? getTags() {
     if (selectedBookId == null) return null;
@@ -201,13 +205,15 @@ class BooksService {
 
   Future<void> resetBookProgress(int bookId) async {
     _progress.progress[bookId] = QuestionProgress(
-        preReading: ReadingProgress(
-            currentQuestionIndices: 0, answeredQuestions: {}, tags: []),
-        whileReading:
-            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
-        postReading:
-            ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
-        readingStep: ReadingStep.preReading);
+      preReading: ReadingProgress(
+          currentQuestionIndices: 0, answeredQuestions: {}, tags: []),
+      whileReading:
+          ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+      postReading:
+          ReadingProgress(currentQuestionIndices: 0, answeredQuestions: {}),
+      readingStep: ReadingStep.preReading,
+      read: false,
+    );
     await _saveProgress();
   }
 }

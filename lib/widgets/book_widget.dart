@@ -13,8 +13,8 @@ class BookWidget extends StatelessWidget {
   BookWidget({super.key, required this.book});
 
   final BooksService _booksService = BooksService();
-
   final Book book;
+
 
   void showInformationDialog(BuildContext context) {
     showDialog<void>(
@@ -53,6 +53,7 @@ class BookWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                if(_booksService.getBookReadStatus(book.id))
                 Positioned(
                   right: 0,
                   left: 0,
