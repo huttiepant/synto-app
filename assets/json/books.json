@@ -3,7 +3,8 @@
     "name": "An Essay Concerning Human Understanding by John Locke",
     "id": 1,
     "author": "John Locke",
-    "info": "Read this when you’re questioning how people think or why we disagree on even basic truths. It’s perfect for those at a crossroads—starting something new, grappling with big ideas, or just trying to make sense of how we know what we know. Locke will teach you to think sharper and see deeper.",
+    "info": "<h2>When to read this</h2> <span>Read this when you’re questioning how people think or why we disagree on even basic truths. It’s perfect for those at a crossroads—starting something new, grappling with big ideas, or just trying to make sense of how we know what we know. Locke will teach you to think sharper and see deeper.</span>",
+    "themes": "<h2>Current themes</h2> <span>In a world where everyone thinks everything is misinformation and there is endless online noise, Locke’s focus on reason and evidence is more relevant than ever. This book equips you to untangle misinformation, question assumptions, and navigate the complexities of modern life with clarity and confidence.</span>",
     "description": "John Locke’s An Essay Concerning Human Understanding is a bold exploration of the human mind. Locke argues that all knowledge comes from experience, challenging the idea of innate truths. From how we form ideas to the limits of our understanding, this work lays the foundation of modern philosophy and continues to inspire anyone curious about how we think.",
     "preReading": [
       {
@@ -14,23 +15,23 @@
           {
             "id": 1,
             "answer": "Science was dominated by mystical and alchemical ideas",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'</span> <br/> <br/> <span>Locke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge.</span>"
           },
           {
             "id": 2,
             "correct": true,
             "answer": "It was an era of groundbreaking discoveries, like Newton’s laws of motion",
-            "dialogue": " \n \t\nCorrect!\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+            "dialogue": "<h1>Correct!</h1> <br/> <br/> <span>Locke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge.</span>"
           },
           {
             "id": 3,
             "answer": "Science was largely stagnant, awaiting its Enlightenment revival",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'</span> <br/> <br/> <span>Locke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge.</span>"
           },
           {
             "id": 4,
             "answer": "Scientific knowledge was considered heretical and suppressed by the Church",
-            "dialogue": " \n \t\nThat's not correct :( \n\nThe correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'\n\nLocke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span> The correct answer is 'It was an era of groundbreaking discoveries, like Newton’s laws of motion.'</span> <br/> <br/> <span> Locke lived during the Scientific Revolution, an age where experiments and observation challenged centuries of dogma. Figures like Isaac Newton and Robert Boyle were Locke’s contemporaries and friends, and their focus on evidence and reason deeply influenced his philosophy. Locke’s work mirrors this spirit, applying a scientific mindset to understanding human knowledge.</span>"
           }
         ]
       },
@@ -42,23 +43,23 @@
           {
             "id": 1,
             "answer": "That all knowledge comes from experience",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'That some truths are innate and known at birth.'\n\nIn Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself."
+            "dialogue": "<h1> That’s not right</h1> <br/> <br/> <span> The correct answer is 'That some truths are innate and known at birth.'</span> <br/> <br/> <span> In Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself.</span>"
           },
           {
             "id": 2,
             "correct": true,
             "answer": "That some truths are innate and known at birth",
-            "dialogue": "Correct!\n\nIn Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself."
+            "dialogue": "<h1>Correct!</h1> <br/> <br/> <span> In Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself.</span>"
           },
           {
             "id": 3,
             "answer": "That divine revelation was the only path to understanding",
-            "dialogue": " \n \t\nThat's not correct :( \n\nThe correct answer is 'That some truths are innate and known at birth.'\n\nIn Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'That some truths are innate and known at birth.'</span> <br/> <br/> <span> In Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself.</span>"
           },
           {
             "id": 4,
             "answer": "That knowledge was impossible to obtain",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'That some truths are innate and known at birth.'\n\nIn Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'That some truths are innate and known at birth.' </span> <br/> <br/> <span>In Locke’s era, many philosophers believed that humans were born with fundamental truths already embedded in their minds. Locke lived at a time of intellectual transition, where traditional ideas were being challenged by a growing emphasis on evidence and reason. His work reflects this transformative period, as he sought to redefine how we think about thinking itself.</span>"
           }
         ]
       },
@@ -70,23 +71,23 @@
           {
             "id": 1,
             "answer": "A stable democracy with equal rights for all citizens",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'A turbulent period of revolution, exile, and shifting power structures.'\n\nLocke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'A turbulent period of revolution, exile, and shifting power structures.'</span> <br/> <br/> <span>Locke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work.</span>"
           },
           {
             "id": 2,
             "answer": "An absolute monarchy with total control over intellectual life",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'A turbulent period of revolution, exile, and shifting power structures.'\n\nLocke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'A turbulent period of revolution, exile, and shifting power structures.'</span> <br/> <br/> <span>Locke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work.</span>"
           },
           {
             "id": 3,
             "correct": true,
             "answer": "A turbulent period of revolution, exile, and shifting power structures",
-            "dialogue": "Correct!\n\nLocke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work."
+            "dialogue": "<h1>Correct!</h1> <br/> <span>Locke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work.</span>"
           },
           {
             "id": 4,
             "answer": "A time of peace and prosperity with little political upheaval",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'A turbulent period of revolution, exile, and shifting power structures.'\n\nLocke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'A turbulent period of revolution, exile, and shifting power structures.'</span> <br/> <br/> <span>Locke lived through the English Civil War, the Restoration, and the Glorious Revolution—times of intense political change. These upheavals forced him into exile at times and deeply influenced his thinking about liberty, reason, and governance. Understanding this context is key to grasping the intellectual environment that shaped his work.</span>"
           }
         ]
       },
@@ -98,23 +99,23 @@
           {
             "id": 1,
             "answer": "Religion was a private matter with little influence on public life",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'Religion was a divisive force, tied to political power and conflict.'\n\nLocke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'Religion was a divisive force, tied to political power and conflict.' </span> <br/> <br/> <span> Locke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress.</span>"
           },
           {
             "id": 2,
             "answer": "Religious tolerance was widespread, and people were free to practice any faith",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'Religion was a divisive force, tied to political power and conflict.'\n\nLocke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'Religion was a divisive force, tied to political power and conflict.' </span> <br/> <br/> <span> Locke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress.</span>"
           },
           {
             "id": 3,
             "correct": true,
             "answer": "Religion was a divisive force, tied to political power and conflict",
-            "dialogue": "Correct!\n\nLocke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress."
+            "dialogue": "<h1>Correct!</h1> <br/> <br/> <span>Locke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress.</span>"
           },
           {
             "id": 4,
             "answer": "Religion was in decline, as science and reason replaced faith",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'Religion was a divisive force, tied to political power and conflict.'\n\nLocke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress."
+            "dialogue": "<h1>That’s not right</h1> <br/> <br/> <span>The correct answer is 'Religion was a divisive force, tied to political power and conflict.' </span> <br/> <br/> <span> Locke lived in a deeply religious and politically charged society where faith and governance were tightly intertwined. The Church of England was dominant, but conflicts with Catholics and dissenting Protestants were frequent. These tensions informed Locke’s views on tolerance and reason, which he believed were essential for societal progress.</span>"
           }
         ]
       },
@@ -126,41 +127,41 @@
           {
             "id": 1,
             "answer": "It gave him time to reflect on philosophical questions",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'All of the above.'\n\nLocke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny."
+            "dialogue": "<h1> That’s not right </h1> <br/> <br/> <span> The correct answer is 'All of the above.' </span> <br/> <br/> <span> Locke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny. </span>"
           },
           {
             "id": 2,
             "answer": "It exposed him to diverse cultures and ideas",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'All of the above.'\n\nLocke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny."
+            "dialogue": "<h1> That’s not right </h1> <br/> <br/> <span> The correct answer is 'All of the above.' </span> <br/> <br/> <span> Locke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny. </span>"
           },
           {
             "id": 3,
             "answer": "It fueled his distrust of authoritarianism and blind belief",
-            "dialogue": "That's not correct :( \n\nThe correct answer is 'All of the above.'\n\nLocke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny."
+            "dialogue": "<h1> That’s not right </h1> <br/> <br/> <span> The correct answer is 'All of the above.' </span> <br/> <br/> <span> Locke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny. </span>"
           },
           {
             "id": 4,
             "correct": true,
             "answer": "All of the above",
-            "dialogue": "Correct!\n\nLocke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny."
+            "dialogue": "<h1> Correct! </h1> <br/> <br/> <span> Locke’s exile was not just a personal struggle—it was formative for his ideas. Living in a time of political upheaval, he saw how unchecked power and rigid dogma stifled progress and oppressed individuals. His focus on reason and evidence wasn’t just abstract philosophy—it was a response to the world around him, shaped by firsthand experience of the dangers of tyranny. </span>"
           }
         ]
       },
       {
         "id": 6,
         "type": "openEnded",
-        "question": "Imagine yourself as John Locke, living in 17th-century England. You might be walking through the bustling streets of London or the quiet countryside of Somerset where you grew up. This morning, you're on the way to the local coffeehouse - a place you frequently visited to get your daily news and engage in debates. It was always a lively affair at this time - there was political upheaval, religious tensions and the excitement of scientific discovery. The coffeehouse was a place for serious discussion.\n\nDescribe a conversation you overhear while sitting down for your morning brew.",
-        "info": "Need inspiration?\nWatch this video to put you in the frame of mind of a 17th Century English person.\nhttps://www.youtube.com/watch?v=2wBIs5HIvBU",
-        "tips": "Stuck? Here's why this question matters\nDual coding theory posits that we process information through two interconnected systems: verbal (words and language) and non-verbal (images and visuals).\n\nExpert readers leverage both systems to enhance comprehension and memory by creating richer, more robust mental representations of the text.\n\nLocke lived during the “Age of Coffeehouses,” where these hubs buzzed with debates, news, and ideas. Scholars, merchants, and politicians gathered there to discuss the latest events and discoveries. For Locke, deeply engaged in intellectual and political debates, coffeehouses offered the perfect space to stay informed and exchange ideas with leading minds like Robert Boyle and Isaac Newton.\n\nWhat might you hear, smell, or feel in that setting?",
-        "dialog": "This is what Sophia had to say:\n\nAs I settle into my usual seat at the coffeehouse, the room hums with animated voices. At the next table, a merchant passionately argues with a young scholar about the morality of monopolies. “It’s the natural way of things,” the merchant insists. “The strongest, the most capable, rise to the top.” The scholar counters, “But what of fairness? If one company controls the trade of goods, doesn’t it rob others of opportunity and harm the public good?”\n\nNearby, a gentleman interrupts to shift the conversation: “You’re missing the larger point. The problem is not trade—it’s the crown’s interference in it. If the government grants monopolies to its favorites, what freedom is left for the rest of us?”\n\nThe debate swirls, pulling in the weight of Locke’s time: the balance of power, the role of government, and the ethics of wealth. Sitting there, I feel the heat of their arguments, each perspective demanding reason, evidence, and reflection. It’s not just a debate—it’s a microcosm of a world struggling to define itself."
+        "question": "<b>Step into John’s world </b> <br/> <br/> Imagine yourself as John Locke, living in 17th-century England. You might be walking through the bustling streets of London or the quiet countryside of Somerset where you grew up. This morning, you're on the way to the local coffeehouse - a place you frequently visited to get your daily news and engage in debates. It was always a lively affair at this time - there was political upheaval, religious tensions and the excitement of scientific discovery. The coffeehouse was a place for serious discussion. <br/> <br/> Describe a conversation you overhear while sitting down for your morning brew.",
+        "info": "<h2>Need inspiration?</h2> <span>Watch this video to put you in the frame of mind of a 17th Century English person.</span> <br/> <br/> <a href=\"https://www.youtube.com/watch?v=2wBIs5HIvBU\"> What was life like in 17th Century London</a>",
+        "tips": "<h2><b>Stuck? Here's why this question matters</b></h2> Dual coding theory posits that we process information through two interconnected systems: verbal (words and language) and non-verbal (images and visuals). <br/> <br/>  Expert readers leverage both systems to enhance comprehension and memory by creating richer, more robust mental representations of the text. <br/> <br/> Locke lived during the “Age of Coffeehouses,” where these hubs buzzed with debates, news, and ideas. Scholars, merchants, and politicians gathered there to discuss the latest events and discoveries. For Locke, deeply engaged in intellectual and political debates, coffeehouses offered the perfect space to stay informed and exchange ideas with leading minds like Robert Boyle and Isaac Newton. <br/> <br/>  What might you hear, smell, or feel in that setting?",
+        "dialog": "<h1>Sophia Says</h1>Great work by you, here's what I thought: <br/> <br/> As I settle into my usual seat at the coffeehouse, the room hums with animated voices. At the next table, a merchant passionately argues with a young scholar about the morality of monopolies. “It’s the natural way of things,” the merchant insists. “The strongest, the most capable, rise to the top.” The scholar counters, “But what of fairness? If one company controls the trade of goods, doesn’t it rob others of opportunity and harm the public good?” <br/> <br/> Nearby, a gentleman interrupts to shift the conversation: “You’re missing the larger point. The problem is not trade—it’s the crown’s interference in it. If the government grants monopolies to its favorites, what freedom is left for the rest of us?” <br/> <br/>  The debate swirls, pulling in the weight of Locke’s time: the balance of power, the role of government, and the ethics of wealth. Sitting there, I feel the heat of their arguments, each perspective demanding reason, evidence, and reflection. It’s not just a debate—it’s a microcosm of a world struggling to define itself."
       },
       {
         "id": 7,
         "type": "openEnded",
-        "question": "Imagine living in 17th-century England, a time of political turmoil, religious conflict, groundbreaking scientific discoveries, and expanding global trade. How would these themes shape your worldview, your questions about authority, knowledge, and progress, and the way you think about your place in this rapidly changing world?",
-        "info": "Need inspiration?\nHere's a video that may give you some more insights\nhttps://www.youtube.com/watch?v=2UfjqOXG4Ok",
-        "tips": "Stuck? Here's a little information that may unstick you\nIf you want to understand this time in more depth to help you answer, here is a little more detail.\n\nPolitical Upheaval:\nThe UK was marked by a turbulent political landscape. Locke lived through the English Civil War, the execution of Charles I, the Cromwellian Commonwealth, the Restoration of the monarchy, and the Glorious Revolution. These events forced questions about the nature of authority, governance, and individual rights—ideas central to Locke’s work.\n\nReligious Conflict:\nThe Protestant Reformation and its aftermath continued to create deep divisions. England swung between Protestantism and Catholicism, with religious persecution and debates about tolerance dominating public life. Locke’s own writings on religious tolerance were heavily influenced by these tensions.\n\nScientific Revolution:\nFigures like Newton and Boyle were redefining the natural world, emphasizing observation and experimentation over inherited dogma. Locke’s close ties to these thinkers fueled his empirical approach to knowledge and his rejection of innate ideas.\n\nGlobal Trade and Colonization:\nThe rise of global trade brought wealth, but also new ethical and philosophical challenges, as England became increasingly involved in colonization and the transatlantic slave trade. These realities pushed Locke to grapple with questions of property, labor, and human rights.\n\nPhilosophical Shifts:\nThe broader intellectual movement of the Enlightenment was gaining steam, challenging traditional authority and emphasizing reason, individualism, and progress. Locke’s work was a cornerstone of this shift.",
-        "dialog": "Sophia, our resident Active Reading philosopher thought about this at length too:\n\nLiving in 17th-century England, I’d feel the weight of upheaval everywhere—political instability would make me question authority and governance, while religious conflicts might push me to think about tolerance and truth. The scientific revolution would fill me with excitement and curiosity, showing me the power of reason to uncover new truths. And amidst global trade and colonization, I’d be forced to confront questions about justice, property, and humanity in an expanding, complex world."
+        "question": "<b>Step into John’s world </b> <br/> <br/> Imagine living in 17th-century England, a time of political turmoil, religious conflict, groundbreaking scientific discoveries, and expanding global trade. How would these themes shape your worldview, your questions about authority, knowledge, and progress, and the way you think about your place in this rapidly changing world?",
+        "info": "<h2>Need inspiration?</h2>\nHere's a video that may give you some more insights\n\n<a href=\"https://www.youtube.com/watch?v=2UfjqOXG4Ok\">The 17th Century</a>",
+        "tips": "<h2>Stuck? Here's a little information that may unstick you</h2>\nIf you want to understand this time in more depth to help you answer, here is a little more detail. \n\n<h3>Political Upheaval:</h3>\nThe UK was marked by a turbulent political landscape. Locke lived through the English Civil War, the execution of Charles I, the Cromwellian Commonwealth, the Restoration of the monarchy, and the Glorious Revolution. These events forced questions about the nature of authority, governance, and individual rights—ideas central to Locke’s work.\n\n<h3>Religious Conflict:</h3>\nThe Protestant Reformation and its aftermath continued to create deep divisions. England swung between Protestantism and Catholicism, with religious persecution and debates about tolerance dominating public life. Locke’s own writings on religious tolerance were heavily influenced by these tensions.\n\n<h3>Scientific Revolution:</h3>\nFigures like Newton and Boyle were redefining the natural world, emphasizing observation and experimentation over inherited dogma. Locke’s close ties to these thinkers fueled his empirical approach to knowledge and his rejection of innate ideas.\n\n<h3>Global Trade and Colonization:</h3>\nThe rise of global trade brought wealth, but also new ethical and philosophical challenges, as England became increasingly involved in colonization and the transatlantic slave trade. These realities pushed Locke to grapple with questions of property, labor, and human rights.\n\n<h3>Philosophical Shifts:</h3>\nThe broader intellectual movement of the Enlightenment was gaining steam, challenging traditional authority and emphasizing reason, individualism, and progress. Locke’s work was a cornerstone of this shift.",
+        "dialog": "<h1>Sophia Says</h1>\nLovely work! Even just the act of thinking these through is beneficial for your reading. Here's what I thought:\n\nLiving in 17th-century England, I’d feel the weight of upheaval everywhere—political instability would make me question authority and governance, while religious conflicts might push me to think about tolerance and truth. The scientific revolution would fill me with excitement and curiosity, showing me the power of reason to uncover new truths. And amidst global trade and colonization, I’d be forced to confront questions about justice, property, and humanity in an expanding, complex world.\n\n<h2>Next up, let's turn to you</h2>\nUnderstanding your own motivation for reading this book is proven to improve your interaction with it. Why this book? Why now? Let’s dive in and explore!"
       },
       {
         "id": 8,
@@ -171,49 +172,49 @@
             "id": 1,
             "correct": true,
             "answer": "Reading it quickly for an overview of its key ideas",
-            "dialogue": "Excellent! A clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
+            "dialogue": "<h1>Excellent!</h1>\nA clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
           },
           {
             "id": 2,
             "correct": true,
             "answer": "Taking notes and reflecting deeply on each section",
-            "dialogue": "Excellent! A clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
+            "dialogue": "<h1>Excellent!</h1>\nA clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
           },
           {
             "id": 3,
             "correct": true,
             "answer": "Reading it multiple times to uncover new layers of meaning",
-            "dialogue": "Excellent! A clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
+            "dialogue": "<h1>Excellent!</h1>\nA clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
           },
           {
             "id": 4,
             "correct": true,
             "answer": "Integrating its ideas into daily life as you go",
-            "dialogue": "Excellent! A clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
+            "dialogue": "<h1>Excellent!</h1>\nA clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
           },
           {
             "id": 5,
             "correct": true,
             "answer": "Other (text input shows)",
-            "dialogue": "Excellent! A clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
+            "dialogue": "<h1>Excellent!</h1>\nA clear plan makes your reading more intentional, and intentional readers uncover insights others might miss."
           }
         ]
       },
       {
         "id": 9,
         "type": "openEnded",
-        "question": "Reading a book like this is a big commitment, great work. Why are you choosing to read this?",
-        "info": "Need inspiration?\n\nWhy this book, and why now?\n• Is it practical? Maybe it connects to your work, a personal project, or something you’re wrestling with.\n• Is it personal? Are you hoping to grow, gain clarity, or tackle a challenge—whether it’s in your own life or in the wider world? Is it to assess the current landscape (e.g., political, social, environmental) or something private (e.g., personal growth, dealing with tragedy)?\n• Or maybe someone you trust recommended it. Why do you think they thought it was right for you?\n\nWhatever the reason, your choice says something important about where you are and what you’re seeking.",
-        "tips": "Stuck? Here's why this question matters:\n\nThis isn’t about guessing what the book will say—it’s about figuring out what you want from it. Why are you giving your time to this book right now? Clarifying that is how Active Readers unlock deeper connections and make the most of their reading journey. Stating this before you read it will help you digest more of the book.",
-        "dialog": "Great! Keep this reason in mind as you read—it’s your guide to connecting John’s lessons to your own life. You can always log back on here and check what you wrote as well."
+        "question": "<h2> Stepping into your own mind </h2> Diving into a book like this is a commitment—and a worthy one. Give yourself a pat on the back. Taking a moment to clarify your reasons for reading will help you get the most out of it.\n\nWhat made you choose this book, and what are you hoping to discover? Write a short paragraph or two about the burning question or challenge that led you here.",
+        "info": "<h1>Need inspiration?</h1>\nWhy this book, and why now?\n        •        Is it practical? Maybe it connects to your work, a personal project, or something you’re wrestling with.\n        •        Is it personal? Are you hoping to grow, gain clarity, or tackle a challenge—whether it’s in your own life or in the wider world? Is it to assess the current landscape (e.g. political, social, environmental) or something private (e.g. personal growth, dealing with tragedy)?\n        •        Or maybe someone you trust recommended it. Why do you think they thought it was right for you?\n\nWhatever the reason, your choice says something important about where you are and what you’re seeking.",
+        "tips": "<h1>Stuck? Here's why this question matters</h1>\nThis isn’t about guessing what the book will say—it’s about figuring out what you want from it. Why are you giving your time to this book right now? \n\nClarifying that is how Active Readers unlock deeper connections and make the most of their reading journey. Stating this before you read it will help you digest more of the book.\"",
+        "dialog": "<h1>Great!</h1>\nKeep this reason in mind as you read—it’ll help you connect John’s ideas to your own life. And if you ever need a reminder, you can always come back and revisit what you wrote.\n\n<h2>Next up:</h2>\nWe're going to ask you to list the burning questions that led you to choose this question.\""
       },
       {
         "id": 10,
         "type": "openEnded",
-        "question": "Imagine you’re now sitting across the table from John, and you have 10 minutes with him before his horse comes. You have a rare opportunity to ask him three questions you want answered by his book. Write these below.",
-        "info": "Why this question matters:\n\nResearch shows that asking questions before reading a book primes your mind for active engagement and sparks curiosity. By imagining yourself sitting across from Locke, you’re stepping into a conversation with one of history’s greatest thinkers. These questions will guide you as you read, helping you focus on the ideas that matter most to you—whether about the nature of knowledge, the limits of understanding, or the role of experience in shaping who we are.\n\nWe’ll save these questions and revisit them as you progress, helping you stay connected to the insights you’re seeking.",
-        "tips": "Stuck on what to ask John? Here are some notes to unstick you:\n\nHere are some prompts to inspire your thinking:\n• Knowledge: What have you always wondered about how humans learn or where our ideas come from?\n• Reason and Belief: How do we know if something is true? What separates knowledge from opinion?\n• Locke’s World: What might have motivated Locke to write this? How might his world of political upheaval, religious conflict, and scientific discovery resonate with challenges today?\n\nDon’t worry about getting it perfect—just follow your curiosity. The questions you ask now will help you uncover insights that can shape the way you think.",
-        "dialog": "Great, let's see if we can help you answer these questions as you read the book!\n\nLet's move on to the final step.\n\nWe're now onto the final step of your pre-reading challenge, which is selecting The Big Ideas you expect to find in the book. We've pre-selected some for you, but you can add others that you think you'll find. Over time, we'll link these to other books you're reading with the same Big Ideas.\n\nThe Big Ideas we've used come from Mortimer Adler's book *A Syntopicon: An Index to the Great Ideas*. These were created as the 102 most important ideas to discuss around humanity and serve as a good starting place when reading a classic like this."
+        "question": "<h2> Stepping into your own mind </h2> \nImagine you’re now sitting across the table from John, and you have 10 minutes with him before his horse comes. You have a rare opportunity to ask him three questions you want answered by his book. Write these below.",
+        "info": "<h2>Why this question matters</h2>\nResearch shows that asking questions before reading a book primes your mind for active engagement and sparks curiosity. By imagining yourself sitting across from Locke, you’re stepping into a conversation with one of history’s greatest thinkers. These questions will guide you as you read, helping you focus on the ideas that matter most to you—whether about the nature of knowledge, the limits of understanding, or the role of experience in shaping who we are.\n\nWe’ll save these questions and revisit them as you progress, helping you stay connected to the insights you’re seeking.\"",
+        "tips": "<h2>Stuck on what to ask John? Here are some notes to unstick you</h2>\nHere are some prompts to inspire your thinking:\n        •        Knowledge: What have you always wondered about how humans learn or where our ideas come from?\n        •        Reason and Belief: How do we know if something is true? What separates knowledge from opinion?\n        •        Locke’s World: What might have motivated Locke to write this? How might his world of political upheaval, religious conflict, and scientific discovery resonate with challenges today?\n\nDon’t worry about getting it perfect—just follow your curiosity. The questions you ask now will help you uncover insights that can shape the way you think.\"",
+        "dialog": "<h1>Tremendous, nice work!</h1>\nLet's see if we can help you answer these questions as you read the book!\n\n<h2>We'll now move onto the final step</h2>\nThe final step is selecting The Big Ideas you expect to find in the book. We've pre-selected some for you, but you can add others that you think you'll find. Over time, we'll link these to other books you're reading with the same Big Ideas.\n\nThe Big Ideas we've used come from Mortimer Adler's book A Syntopicon: An Index to the Great Ideas. These were created as the 102 most important ideas to discuss around humanity and serve as a good starting place when reading a classic like this.\""
       }
     ],
     "whileReading": [

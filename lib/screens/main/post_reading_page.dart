@@ -196,17 +196,6 @@ class _PostReadingPageState extends State<PostReadingPage> {
                         Divider(
                           color: Color(0xffE8E8E8).withOpacity(0.7),
                         ),
-                        SizedBox(height: 19),
-                        if (_currentQuestion?.type == 'openEnded')
-                          Text(
-                            'Freely enter your own idea:',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins().copyWith(
-                              color: brandLightBlue,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
                         SizedBox(height: 8),
                         if (_currentQuestion?.type == 'openEnded')
                           Column(

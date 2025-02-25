@@ -21,4 +21,5 @@ Book _$BookFromJson(Map<String, dynamic> json) => Book(
       postReading: (json['postReading'] as List<dynamic>)
           .map((e) => PostReadingQuestion.fromJson(e as Map<String, dynamic>))
           .toList(),
+      themes: json['themes'] as String?,
     );

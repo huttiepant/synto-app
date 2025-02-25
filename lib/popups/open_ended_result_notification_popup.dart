@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:synto_app/ui/brand_button.dart';
 
 import '../ui/brand_colors.dart';
@@ -34,11 +34,17 @@ class OpenEndedResultNotificationPopup extends StatelessWidget {
                     SizedBox(
                       height: 60,
                     ),
-                    Text(
-                      style: GoogleFonts.poppins()
-                          .copyWith(fontSize: 15, color: Color(0xff5A5A5A)),
-                      textAlign: TextAlign.center,
-                      dialog,
+                    Html(
+                      data: dialog,
+                      style: {
+                        "*": Style(
+                          textAlign: TextAlign.center,
+                          color: Color(0xff5A5A5A),
+                        ),
+                        "span": Style(
+                          fontSize: FontSize(15),
+                        ),
+                      },
                     ),
                     SizedBox(height: 32),
                   ],

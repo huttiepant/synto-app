@@ -24,6 +24,7 @@ class BookWidget extends StatelessWidget {
         return InformationPopup(
           title: book.name,
           info: book.info,
+          themes: book.themes,
         );
       },
     );

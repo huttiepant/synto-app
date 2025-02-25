@@ -17,4 +17,5 @@ samples, guidance on mobile development, and a full API reference.
 
 
 **flutter build apk --split-per-abi**
+**flutter build web --wasm --release**
 **flutter pub run build_runner build --delete-conflicting-outputs**

@@ -12,6 +12,7 @@ class Book {
   final String author;
   final String description;
   final String info;
+  final String? themes;
   final int id;
   final List<PreReadingQuestion> preReading;
   final List<WhileReadingQuestion> whileReading;
@@ -26,6 +27,7 @@ class Book {
     required this.preReading,
     required this.whileReading,
     required this.postReading,
+    this.themes,
   });
 
   List<dynamic> getCurrentStepQuestions(ReadingStep step) {

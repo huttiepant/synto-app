@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:synto_app/api/models/answer.dart';
 import 'package:synto_app/ui/brand_button.dart';
 
 import '../ui/brand_colors.dart';
 
 class ResultNotificationPopup extends StatelessWidget {
-  const ResultNotificationPopup({super.key, required this.answer, this.correct});
+  const ResultNotificationPopup(
+      {super.key, required this.answer, this.correct});
 
   final Answer answer;
   final Answer? correct;
@@ -18,43 +19,49 @@ class ResultNotificationPopup extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
             SizedBox(
               height: 60,
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (isCorrect) Column(
-                  children: [
-                    Container(
-                      width: 90,
-                      height: 90,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/success.png',
-                            ),
-                            fit: BoxFit.contain,
-                          )),
+                if (isCorrect)
+                  Column(
+                    children: [
+                      Container(
+                        width: 90,
+                        height: 90,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage(
+                            'assets/success.png',
+                          ),
+                          fit: BoxFit.contain,
+                        )),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                    ],
+                  ),
+                Html(
+                  data: answer.dialogue,
+                  style: {
+                    "*": Style(
+                      textAlign: TextAlign.center,
+                      color: Color(0xff5A5A5A),
                     ),
-                    SizedBox(
-                      height: 40,
+                    "span": Style(
+                      fontSize: FontSize(15),
                     ),
-                  ],
-                ),
-                Text(
-                  style: GoogleFonts.poppins()
-                      .copyWith(fontSize: 15, color: Color(0xff5A5A5A)),
-                  textAlign: TextAlign.center,
-                  answer.dialogue,
+                  },
                 ),
                 SizedBox(height: 32),
-
               ],
             ),
             Spacer(),
@@ -71,9 +78,9 @@ class ResultNotificationPopup extends StatelessWidget {
                 textColor: Colors.white,
               ),
             )
-                    ],
-                  ),
-          )),
+          ],
+        ),
+      )),
     );
   }
 }

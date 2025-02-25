@@ -63,6 +63,8 @@ class HomeHeader extends StatelessWidget {
                 child: BrandDropdown<Book>(
                   title: 'Pick a Book',
                   onSelect: (book) {
+                    // booksService.resetBookProgress(book.id);
+                    // return
                     booksService.selectBook(book.id);
                     final step = booksService.getCurrentBookStep(book.id);
                     context.router.pushNamed('/$step');

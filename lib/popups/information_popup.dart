@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synto_app/ui/brand_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../ui/brand_colors.dart';
 
@@ -9,11 +11,13 @@ class InformationPopup extends StatelessWidget {
     super.key,
     required this.title,
     required this.info,
+    this.themes,
     this.onTap,
   });
 
   final String title;
   final String info;
+  final String? themes;
   final VoidCallback? onTap;
 
   @override
@@ -37,6 +41,7 @@ class InformationPopup extends StatelessWidget {
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
+                        if(title.isNotEmpty)
                         Text(
                           title,
                           textAlign: TextAlign.center,
@@ -48,11 +53,43 @@ class InformationPopup extends StatelessWidget {
                         SizedBox(
                           height: 16,
                         ),
-                        Text(
-                          style: GoogleFonts.poppins()
-                              .copyWith(fontSize: 15, color: Color(0xff5A5A5A)),
-                          textAlign: TextAlign.center,
-                          info,
+                        Html(
+                          data: info,
+                          onAnchorTap: (url, a, e) async {
+                            if (url == null) {
+                              return;
+                            }
+                            await launchUrl(Uri.parse(url));
+                          },
+                          style: {
+                            "*": Style(
+                              textAlign: TextAlign.center,
+                              color: Color(0xff5A5A5A),
+                            ),
+                            "span": Style(
+                              fontSize: FontSize(15),
+                            ),
+                          },
+                        ),
+                        if(themes != null)
+                        Html(
+                          data: themes,
+                          style: {
+                            "h2": Style(
+                              textAlign: TextAlign.center,
+                              color: Color(0xff5A5A5A),
+                              fontStyle: GoogleFonts.poppins().fontStyle,
+                              fontFamily: GoogleFonts.poppins().fontFamily,
+                            ),
+                            "span": Style(
+                              color: Color(0xff5A5A5A),
+                              alignment: Alignment.center,
+                              textAlign: TextAlign.center,
+                              fontSize: FontSize(15),
+                              fontStyle: GoogleFonts.poppins().fontStyle,
+                              fontFamily: GoogleFonts.poppins().fontFamily,
+                            ),
+                          },
                         ),
                         SizedBox(height: 32),
                       ],

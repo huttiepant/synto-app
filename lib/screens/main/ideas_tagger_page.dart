@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synto_app/api/models/book.dart';
+import 'package:synto_app/popups/information_popup.dart';
 import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:synto_app/ui/brand_input_field.dart';
@@ -21,13 +22,19 @@ class IdeasTaggerPage extends StatefulWidget {
 
 class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
   bool ownIdea = false;
-  final List<String> selectedTags = [];
   final List<String> tags = [
-    'Aristocracy',
-    'Science',
-    'Politics',
-    'Prudence',
-    'Time',
+    'Knowledge',
+    'Mind',
+    'Experience',
+    'Language',
+    'Truth'
+  ];
+  final List<String> selectedTags = [
+    'Knowledge',
+    'Mind',
+    'Experience',
+    'Language',
+    'Truth'
   ];
   final BooksService _service = BooksService();
   final BooksService booksService = BooksService();
@@ -39,6 +46,40 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
   void initState() {
     super.initState();
     _initialize();
+  }
+
+  void showInformationDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      useSafeArea: false,
+      builder: (BuildContext context) {
+        return InformationPopup(
+          title: '',
+          info: """
+<h1>Great work!</h1>
+You’re now ready to dive into An Essay Concerning Human Understanding with some enhanced Active Reading skills.
+
+<h2>Next steps</h2>
+Now you're primed to go and read the book! While you’re reading, the app provides a home base with:
+        •        Tips to help you sharpen your Active Reading skills as you go;
+        •        Key points from the book that you might miss, broken down by every 10% of the book—just divide the total page count of your version by 10 to track your progress;
+        •        A community to discuss the book and share insights with other readers;
+        •        A text box to capture your thoughts from each reading session, stored securely in your account for easy access anytime.
+
+Feel free to check it out now and revisit every time you complete another 10%.
+
+Once you finish the book, we’ll guide you through activities to help you apply what you’ve learned to the real world!
+""",
+          onTap: () async {
+            await _service.saveTags(selectedTags);
+            await _service.nextStep();
+            final step =
+                booksService.getCurrentBookStep(booksService.selectedBookId!);
+            context.router.pushNamed('/$step');
+          },
+        );
+      },
+    );
   }
 
   void onTagSelect(tag) {
@@ -167,12 +208,8 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
                 },
               ),
               BrandButton(
-                onTap: () async {
-                  await _service.saveTags(selectedTags);
-                  await _service.nextStep();
-                  final step = booksService
-                      .getCurrentBookStep(booksService.selectedBookId!);
-                  context.router.pushNamed('/$step');
+                onTap: () {
+                  showInformationDialog(context);
                 },
                 text: 'Start Reading',
                 color: brandLightBlue,

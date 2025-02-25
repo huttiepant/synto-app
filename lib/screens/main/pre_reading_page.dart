@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synto_app/api/models/answer.dart';
 import 'package:synto_app/api/models/book.dart';
@@ -56,7 +57,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
 
   void fetchAndSetSelectedAnswer() {
     final String? answer =
-        _service.getAnswerFromProgressByQuestionId(_currentQuestion?.id);
+    _service.getAnswerFromProgressByQuestionId(_currentQuestion?.id);
     if (answer == null) return;
 
     if (_currentQuestion?.type == 'openEnded') {
@@ -70,7 +71,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _currentQuestion = _service.getCurrentQuestion();
-    if(_currentQuestion == null){
+    if (_currentQuestion == null) {
       context.router.replaceNamed('/ideas');
     }
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
@@ -125,25 +126,26 @@ class _PreReadingPageState extends State<PreReadingPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OpenEndedResultNotificationPopup(
-            dialog: _currentQuestion?.dialog ?? '',
-            onTap: () {
-              final nextQuestion = _service.getCurrentQuestion();
-              if (nextQuestion == null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const IdeasTaggerPage(),
-                      fullscreenDialog: true),
-                );
-              } else {
-                Navigator.of(context).pop();
-                _currentQuestion = nextQuestion;
-                fetchAndSetSelectedAnswer();
-                setState(() => {});
-              }
-            },
-          ),
+          builder: (context) =>
+              OpenEndedResultNotificationPopup(
+                dialog: _currentQuestion?.dialog ?? '',
+                onTap: () {
+                  final nextQuestion = _service.getCurrentQuestion();
+                  if (nextQuestion == null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const IdeasTaggerPage(),
+                          fullscreenDialog: true),
+                    );
+                  } else {
+                    Navigator.of(context).pop();
+                    _currentQuestion = nextQuestion;
+                    fetchAndSetSelectedAnswer();
+                    setState(() => {});
+                  }
+                },
+              ),
           fullscreenDialog: true,
         ),
       );
@@ -223,12 +225,18 @@ class _PreReadingPageState extends State<PreReadingPage> {
                         Container(
                           constraints: BoxConstraints(minHeight: 68),
                           child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              _currentQuestion!.question,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(),
-                            ),
+                              alignment: Alignment.topLeft,
+                              child: Html(
+                                data: _currentQuestion?.question ?? '',
+                                style: {
+                                  "*": Style(
+                                    color: Color(0xff5A5A5A),
+                                  ),
+                                  "span": Style(
+                                    fontSize: FontSize(15),
+                                  ),
+                                },
+                              ),
                           ),
                         ),
                         Divider(
@@ -240,57 +248,42 @@ class _PreReadingPageState extends State<PreReadingPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: _currentQuestion?.answers
-                                  ?.map((answer) => GestureDetector(
-                                        onTap: () => handleAnswer(answer),
-                                        child: Container(
-                                          constraints:
-                                              BoxConstraints(minHeight: 60),
-                                          margin: EdgeInsets.only(bottom: 13),
-                                          padding: EdgeInsets.all(7),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: answer.id.toString() ==
-                                                      selectedAnswerId
-                                                  ? brandDarkBlue
-                                                  : brandLightBlue),
-                                          child: Center(
-                                            child: Text(
-                                              answer.answer,
-                                              textAlign: TextAlign.center,
-                                              style: GoogleFonts.poppins()
-                                                  .copyWith(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ))
-                                  .toList() ??
+                              ?.map((answer) =>
+                              GestureDetector(
+                                onTap: () => handleAnswer(answer),
+                                child: Container(
+                                  constraints:
+                                  BoxConstraints(minHeight: 60),
+                                  margin: EdgeInsets.only(bottom: 13),
+                                  padding: EdgeInsets.all(7),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(12),
+                                      color: answer.id.toString() ==
+                                          selectedAnswerId
+                                          ? brandDarkBlue
+                                          : brandLightBlue),
+                                  child: Center(
+                                    child: Text(
+                                      answer.answer,
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.poppins()
+                                          .copyWith(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ))
+                              .toList() ??
                               [],
                         ),
                         SizedBox(height: 19),
                         if (_currentQuestion?.type == 'openEnded')
                           Column(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  // ownIdea = !ownIdea;
-                                  setState(() {});
-                                },
-                                child: Text(
-                                  'Freely enter your own idea:',
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.poppins().copyWith(
-                                    color: brandLightBlue,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 8),
                               TextField(
                                 controller: _answerFieldController,
                                 focusNode: _answerFieldFocusNode,
@@ -312,7 +305,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(
                                     width: 142,
@@ -377,7 +370,8 @@ class ProgressWidget extends StatelessWidget {
       children: [
         ...List.generate(
             count,
-            (index) => AnimatedContainer(
+                (index) =>
+                AnimatedContainer(
                   width: 10,
                   height: 10,
                   decoration: BoxDecoration(
