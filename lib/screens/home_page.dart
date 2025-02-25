@@ -59,6 +59,7 @@ class _HomePageState extends State<HomePage> {
                       child: BrandButton(
                           onTap: () {
                             GetIt.instance<AuthService>().logout().then((_) {
+                              _booksService.resetUserLocalProgress();
                               context.router.replaceNamed('/auth');
                             });
                           },

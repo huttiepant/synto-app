@@ -64,7 +64,7 @@ class HomeHeader extends StatelessWidget {
                   title: 'Pick a Book',
                   onSelect: (book) {
                     // booksService.resetBookProgress(book.id);
-                    // return
+                    // return;
                     booksService.selectBook(book.id);
                     final step = booksService.getCurrentBookStep(book.id);
                     context.router.pushNamed('/$step');

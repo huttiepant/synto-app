@@ -24,7 +24,7 @@ class _BookTagState extends State<BookTag> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 7, horizontal: 21),
+        padding: EdgeInsets.symmetric(vertical: 7, horizontal: 18),
         decoration: BoxDecoration(
           color: widget.selected ? Color(0xff304FFE) : Color(0xffBDC1CA),
           border: Border.all(

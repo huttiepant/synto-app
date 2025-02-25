@@ -65,6 +65,8 @@ class BooksService {
     final progress = data?['progress'];
     if (progress != null) {
       _progress = UserProgress.fromJson(jsonDecode(progress));
+    } else {
+      resetUserLocalProgress();
     }
   }
 
@@ -91,7 +93,8 @@ class BooksService {
   getCurrentBookStep(int bookId) =>
       _progress.progress[bookId]?.currentStep ?? ReadingStep.preReading;
 
-  bool getBookReadStatus(int bookId) => _progress.progress[bookId]?.read ?? false;
+  bool getBookReadStatus(int bookId) =>
+      _progress.progress[bookId]?.read ?? false;
 
   List<String>? getTags() {
     if (selectedBookId == null) return null;
@@ -215,5 +218,9 @@ class BooksService {
       read: false,
     );
     await _saveProgress();
+  }
+
+  Future<void> resetUserLocalProgress() async {
+    _progress = UserProgress(progress: {});
   }
 }
