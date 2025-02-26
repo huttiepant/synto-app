@@ -62,6 +62,15 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _currentQuestion = _service.getCurrentQuestion();
+    if(_currentQuestion == null){
+      await _service.nextStep();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const PostReadingPage()),
+      );
+      return;
+    }
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
     fetchAndSetSelectedAnswer();
     setState(() {});
@@ -91,7 +100,7 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
           MaterialPageRoute(
             builder: (context) => OpenEndedResultNotificationPopup(
               dialog:
-                  'Congratulations! You’ve finished one of the most important books that has been written for humankind.\n We now have a set of challenges that have been designed to help you deepen your understanding of the book and apply the lessons in the book to life as it is today.',
+                  'Congratulations! \n\n You’ve finished one of the most important books that has been written for humankind.\n We now have a set of challenges that have been designed to help you deepen your understanding of the book and apply the lessons in the book to life as it is today.',
               onTap: () async {
                 await _service.nextStep();
                 Navigator.push(

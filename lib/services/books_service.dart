@@ -220,7 +220,7 @@ class BooksService {
     await _saveProgress();
   }
 
-  Future<void> resetUserLocalProgress() async {
+  void resetUserLocalProgress() {
     _progress = UserProgress(progress: {});
   }
 }

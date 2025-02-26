@@ -15,51 +15,53 @@ class PopupPage extends StatelessWidget {
       body: SafeArea(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: 213,
-              height: 248,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        'assets/popover-person.png',
-                      ),
-                      fit: BoxFit.contain)),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Great call! This is your first step to becoming an expert reader.',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins().copyWith(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff2A2A2A)),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 16, bottom: 32),
-              child: Text(
-                  style: GoogleFonts.poppins()
-                      .copyWith(fontSize: 15, color: Color(0xff5A5A5A)),
-                  textAlign: TextAlign.center,
-                  "Expert readers: \n\n1. Remember more of what they read\n2. Apply more of what they read in everyday life.\n3. Know how to think independently and critically.\n\nAnd these benefits don’t just go for when they’re reading!"),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              child: BrandButton(
-                  onTap: () {
-                    context.router.pushNamed('/');
-                  },
-                  border: Border.all(color: Colors.white, width: 1),
-                  text: 'Sounds Good',
-                  color: brandLightBlue,
-                  textColor: Colors.white),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: 213,
+                height: 248,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          'assets/popover-person.png',
+                        ),
+                        fit: BoxFit.contain)),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Great call! This is your first step to becoming an expert reader.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins().copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff2A2A2A)),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 16, bottom: 32),
+                child: Text(
+                    style: GoogleFonts.poppins()
+                        .copyWith(fontSize: 15, color: Color(0xff5A5A5A)),
+                    textAlign: TextAlign.center,
+                    "Expert readers: \n\n1. Remember more of what they read\n2. Apply more of what they read in everyday life.\n3. Know how to think independently and critically.\n\nAnd these benefits don’t just go for when they’re reading!"),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: BrandButton(
+                    onTap: () {
+                      context.router.pushNamed('/');
+                    },
+                    border: Border.all(color: Colors.white, width: 1),
+                    text: 'Sounds Good',
+                    color: brandLightBlue,
+                    textColor: Colors.white),
+              )
+            ],
+          ),
         ),
       )),
     );

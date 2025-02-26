@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synto_app/api/models/book.dart';
 import 'package:synto_app/api/models/post_reading_question.dart';
@@ -186,10 +187,16 @@ class _PostReadingPageState extends State<PostReadingPage> {
                           constraints: BoxConstraints(minHeight: 68),
                           child: Align(
                             alignment: Alignment.topLeft,
-                            child: Text(
-                              _currentQuestion!.question,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(),
+                            child: Html(
+                              data: _currentQuestion!.question ?? '',
+                              style: {
+                                "*": Style(
+                                  color: Color(0xff5A5A5A),
+                                ),
+                                "span": Style(
+                                  fontSize: FontSize(15),
+                                ),
+                              },
                             ),
                           ),
                         ),

@@ -56,19 +56,21 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
         return InformationPopup(
           title: '',
           info: """
-<h1>Great work!</h1>
-You’re now ready to dive into An Essay Concerning Human Understanding with some enhanced Active Reading skills.
+   <h1>Great work!</h1>
+    <p>You’re now ready to dive into <em>An Essay Concerning Human Understanding</em> with some enhanced Active Reading skills.</p>
 
-<h2>Next steps</h2>
-Now you're primed to go and read the book! While you’re reading, the app provides a home base with:
-        •        Tips to help you sharpen your Active Reading skills as you go;
-        •        Key points from the book that you might miss, broken down by every 10% of the book—just divide the total page count of your version by 10 to track your progress;
-        •        A community to discuss the book and share insights with other readers;
-        •        A text box to capture your thoughts from each reading session, stored securely in your account for easy access anytime.
+    <h2>Next steps</h2>
+    <p>Now you're primed to go and read the book! While you’re reading, the app provides a home base with:</p>
+    <ul>
+        <li>Tips to help you sharpen your Active Reading skills as you go;</li>
+        <li>Key points from the book that you might miss, broken down by every 10% of the book—just divide the total page count of your version by 10 to track your progress;</li>
+        <li>A community to discuss the book and share insights with other readers;</li>
+        <li>A text box to capture your thoughts from each reading session, stored securely in your account for easy access anytime.</li>
+    </ul>
 
-Feel free to check it out now and revisit every time you complete another 10%.
+    <p>Feel free to check it out now and revisit every time you complete another 10%.</p>
 
-Once you finish the book, we’ll guide you through activities to help you apply what you’ve learned to the real world!
+    <p>Once you finish the book, we’ll guide you through activities to help you apply what you’ve learned to the real world!</p>
 """,
           onTap: () async {
             await _service.saveTags(selectedTags);
@@ -97,8 +99,14 @@ Once you finish the book, we’ll guide you through activities to help you apply
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
     final savedTags = _service.getTags();
     if (savedTags != null) {
-      tags.addAll(savedTags);
-      selectedTags.addAll(savedTags);
+      for (var tag in savedTags) {
+        if(!tags.contains(tag)){
+          tags.add(tag);
+        }
+        if(!selectedTags.contains(tag)){
+          selectedTags.add(tag);
+        }
+      }
     }
     setState(() {});
   }

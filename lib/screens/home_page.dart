@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.all(40),
                       child: BrandButton(
                           onTap: () {
+                            _booksService.resetUserLocalProgress();
                             GetIt.instance<AuthService>().logout().then((_) {
-                              _booksService.resetUserLocalProgress();
                               context.router.replaceNamed('/auth');
                             });
                           },
