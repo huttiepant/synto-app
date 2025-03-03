@@ -32,6 +32,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
 
   final _answerFieldController = TextEditingController();
   final _answerFieldFocusNode = FocusNode();
+  final scrollController = ScrollController();
 
   Book? _book;
   ReadingStep? _step;
@@ -164,7 +165,6 @@ class _PreReadingPageState extends State<PreReadingPage> {
     final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -195,6 +195,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
             ),
             Expanded(
               child: SingleChildScrollView(
+                controller: scrollController,
                 child: Padding(
                     padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
                     child: Column(
@@ -311,6 +312,14 @@ class _PreReadingPageState extends State<PreReadingPage> {
                           Column(
                             children: [
                               TextField(
+                                onTap: () async {
+                                  await Future.delayed(
+                                      Duration(milliseconds: 500));
+                                  scrollController.animateTo(
+                                      scrollController.position.maxScrollExtent,
+                                      duration: Duration(milliseconds: 150),
+                                      curve: Curves.ease);
+                                },
                                 controller: _answerFieldController,
                                 focusNode: _answerFieldFocusNode,
                                 decoration: InputDecoration(
