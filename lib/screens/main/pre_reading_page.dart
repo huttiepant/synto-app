@@ -317,7 +317,7 @@ class _PreReadingPageState extends State<PreReadingPage> {
                                       Duration(milliseconds: 500));
                                   scrollController.animateTo(
                                       scrollController.position.maxScrollExtent,
-                                      duration: Duration(milliseconds: 150),
+                                      duration: Duration(milliseconds: 250),
                                       curve: Curves.ease);
                                 },
                                 controller: _answerFieldController,

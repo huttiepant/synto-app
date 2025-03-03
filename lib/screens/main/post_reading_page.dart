@@ -249,7 +249,7 @@ class _PostReadingPageState extends State<PostReadingPage> {
                                       Duration(milliseconds: 500));
                                   scrollController.animateTo(
                                       scrollController.position.maxScrollExtent,
-                                      duration: Duration(milliseconds: 150),
+                                      duration: Duration(milliseconds: 250),
                                       curve: Curves.ease);
                                 },
                                 decoration: InputDecoration(
