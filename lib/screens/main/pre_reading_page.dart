@@ -314,10 +314,10 @@ class _PreReadingPageState extends State<PreReadingPage> {
                               TextField(
                                 onTap: () async {
                                   await Future.delayed(
-                                      Duration(milliseconds: 500));
+                                      Duration(milliseconds: 400));
                                   scrollController.animateTo(
                                       scrollController.position.maxScrollExtent,
-                                      duration: Duration(milliseconds: 250),
+                                      duration: Duration(milliseconds: 150),
                                       curve: Curves.ease);
                                 },
                                 controller: _answerFieldController,

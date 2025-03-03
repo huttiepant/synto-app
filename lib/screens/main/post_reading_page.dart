@@ -246,10 +246,10 @@ class _PostReadingPageState extends State<PostReadingPage> {
                                 focusNode: _answerFieldFocusNode,
                                 onTap: () async {
                                   await Future.delayed(
-                                      Duration(milliseconds: 500));
+                                      Duration(milliseconds: 400));
                                   scrollController.animateTo(
                                       scrollController.position.maxScrollExtent,
-                                      duration: Duration(milliseconds: 250),
+                                      duration: Duration(milliseconds: 150),
                                       curve: Curves.ease);
                                 },
                                 decoration: InputDecoration(
