@@ -18,7 +18,7 @@ class _BrandTitleBarState extends State<BrandTitleBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
