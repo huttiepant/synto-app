@@ -25,8 +25,8 @@ class ProgressWidget extends StatelessWidget {
                     onTap(index);
                   },
                   child: AnimatedContainer(
-                    width: 10,
-                    height: 10,
+                    width: 16,
+                    height: 16,
                     decoration: BoxDecoration(
                       color: index == currentIndex
                           ? Colors.black
