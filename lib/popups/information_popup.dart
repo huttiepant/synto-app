@@ -75,16 +75,16 @@ class InformationPopup extends StatelessWidget {
                         Html(
                           data: themes,
                           style: {
-                            "h2": Style(
+                            "*": Style(
                               textAlign: TextAlign.center,
+                            ),
+                            "h2": Style(
                               color: Color(0xff5A5A5A),
                               fontStyle: GoogleFonts.poppins().fontStyle,
                               fontFamily: GoogleFonts.poppins().fontFamily,
                             ),
                             "span": Style(
                               color: Color(0xff5A5A5A),
-                              alignment: Alignment.center,
-                              textAlign: TextAlign.center,
                               fontSize: FontSize(15),
                               fontStyle: GoogleFonts.poppins().fontStyle,
                               fontFamily: GoogleFonts.poppins().fontFamily,

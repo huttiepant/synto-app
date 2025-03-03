@@ -9,9 +9,11 @@ class OpenEndedResultNotificationPopup extends StatelessWidget {
     super.key,
     required this.dialog,
     required this.onTap,
+    this.actionText,
   });
 
   final String dialog;
+  final String? actionText;
   final VoidCallback onTap;
 
   @override
@@ -57,7 +59,7 @@ class OpenEndedResultNotificationPopup extends StatelessWidget {
                 onTap: onTap,
                 padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                 border: Border.all(color: Colors.white, width: 1),
-                text: 'Next Question',
+                text: actionText ?? 'Next Question',
                 color: brandLightBlue,
                 textColor: Colors.white,
               ),

@@ -111,6 +111,12 @@ class BooksService {
         .currentQuestionIndices -= 1;
   }
 
+  void goToQuestionByIndex(int index) {
+    _progress.progress[selectedBookId]
+        ?.getCurrentReadingProgress()
+        .currentQuestionIndices = index;
+  }
+
   dynamic getCurrentQuestion() {
     if (selectedBookId == null) {
       return null;

@@ -62,12 +62,11 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _currentQuestion = _service.getCurrentQuestion();
-    if(_currentQuestion == null){
+    if (_currentQuestion == null) {
       await _service.nextStep();
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => const PostReadingPage()),
+        MaterialPageRoute(builder: (context) => const PostReadingPage()),
       );
       return;
     }
@@ -132,7 +131,7 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
     final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -249,30 +248,31 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            SizedBox(
-                                width: 40,
-                                child: FittedBox(
-                                    child: IconButton(
-                                        onPressed: () {
-                                          showInformationDialog(context, '',
-                                              _currentQuestion?.info ?? '');
-                                        },
-                                        icon: Icon(
-                                          Icons.info_outline,
-                                          size: 24,
-                                        )))),
-                            SizedBox(
-                                width: 40,
-                                child: FittedBox(
-                                    child: IconButton(
-                                        onPressed: () {
-                                          showInformationDialog(context, '',
-                                              _currentQuestion?.tips ?? '');
-                                        },
-                                        icon: Icon(
-                                          Icons.question_mark,
-                                          size: 24,
-                                        ))))
+                            Container(
+                              margin: EdgeInsets.only(right: 4),
+                              child: GestureDetector(
+                                onTap: () {
+                                  showInformationDialog(context, '',
+                                      _currentQuestion?.info ?? '');
+                                },
+                                child: SvgPicture.asset(
+                                  'assets/svgs/info-icon.svg',
+                                  height: 24,
+                                  width: 24,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                showInformationDialog(
+                                    context, '', _currentQuestion?.tips ?? '');
+                              },
+                              child: SvgPicture.asset(
+                                'assets/svgs/tip-icon.svg',
+                                height: 24,
+                                width: 24,
+                              ),
+                            ),
                           ],
                         ),
                         Text(

@@ -10,6 +10,7 @@ class PostReadingQuestion {
   final String? info;
   final String? tips;
   final String? dialog;
+  final String? heading;
 
   PostReadingQuestion({
     required this.id,
@@ -18,6 +19,7 @@ class PostReadingQuestion {
     this.info,
     this.tips,
     this.dialog,
+    this.heading,
   });
 
   factory PostReadingQuestion.fromJson(Map<String, dynamic> json) =>

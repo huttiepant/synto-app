@@ -96,7 +96,7 @@ class BookWidget extends StatelessWidget {
                     showInformationDialog(context);
                   },
                   child: SvgPicture.asset(
-                    'assets/svgs/info.svg',
+                    'assets/svgs/info-icon.svg',
                     height: 24,
                     width: 24,
                   ),

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synto_app/api/models/book.dart';
 import 'package:synto_app/api/models/post_reading_question.dart';
@@ -10,6 +11,7 @@ import 'package:synto_app/screens/home_page.dart';
 import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_button.dart';
 import 'package:synto_app/ui/brand_title_bar.dart';
+import 'package:synto_app/widgets/progress_widget.dart';
 import 'package:synto_app/widgets/reading_step_widget.dart';
 
 import '../../ui/brand_colors.dart';
@@ -61,6 +63,14 @@ class _PostReadingPageState extends State<PostReadingPage> {
     }
   }
 
+  void goToQuestionByIndex(int index) {
+    _service.goToQuestionByIndex(index);
+    final selectedQuestion = _service.getCurrentQuestion();
+    _currentQuestion = selectedQuestion;
+    fetchAndSetSelectedAnswer();
+    setState(() => {});
+  }
+
   Future<void> _initialize() async {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
@@ -91,6 +101,7 @@ class _PostReadingPageState extends State<PostReadingPage> {
         MaterialPageRoute(
           builder: (context) => OpenEndedResultNotificationPopup(
             dialog: _currentQuestion?.dialog ?? '',
+            actionText: 'Finish',
             onTap: () async {
               final nextQuestion = _service.getCurrentQuestion();
               if (nextQuestion == null) {
@@ -116,7 +127,7 @@ class _PostReadingPageState extends State<PostReadingPage> {
     final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -142,7 +153,15 @@ class _PostReadingPageState extends State<PostReadingPage> {
                 ReadingStepWidget(
                   step: _step!,
                 ),
-                SizedBox(height: 26),
+                SizedBox(height: 8),
+                LinearProgressIndicator(
+                  minHeight: 4,
+                  borderRadius: BorderRadius.circular(19),
+                  backgroundColor: Color(0xff828282),
+                  color: brandLightBlue,
+                  value: currentQuestionIndex / questionsCount,
+                ),
+                SizedBox(height: 8),
               ],
             ),
             Expanded(
@@ -153,34 +172,51 @@ class _PostReadingPageState extends State<PostReadingPage> {
                       children: [
                         if (_currentQuestion?.type == 'openEnded')
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              if (_currentQuestion?.info != null)
-                                SizedBox(
-                                    width: 40,
-                                    child: FittedBox(
-                                        child: IconButton(
-                                            onPressed: () {
-                                              showInformationDialog(context, '',
-                                                  _currentQuestion?.info ?? '');
-                                            },
-                                            icon: Icon(
-                                              Icons.info_outline,
-                                              size: 24,
-                                            )))),
-                              if (_currentQuestion?.tips != null)
-                                SizedBox(
-                                    width: 40,
-                                    child: FittedBox(
-                                        child: IconButton(
-                                            onPressed: () {
-                                              showInformationDialog(context, '',
-                                                  _currentQuestion?.tips ?? '');
-                                            },
-                                            icon: Icon(
-                                              Icons.question_mark,
-                                              size: 24,
-                                            )))),
+                              if (_currentQuestion?.heading != null)
+                                Expanded(
+                                  child: Html(
+                                    data: _currentQuestion!.heading,
+                                    style: {
+                                      "*": Style(
+                                        color: Colors.black,
+                                      ),
+                                    },
+                                  ),
+                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  if (_currentQuestion?.info != null)
+                                    Container(
+                                      margin: EdgeInsets.only(right: 4),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          showInformationDialog(context, '',
+                                              _currentQuestion?.info ?? '');
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/svgs/info-icon.svg',
+                                          height: 24,
+                                          width: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  if (_currentQuestion?.tips != null)
+                                    GestureDetector(
+                                      onTap: () {
+                                        showInformationDialog(context, '',
+                                            _currentQuestion?.tips ?? '');
+                                      },
+                                      child: SvgPicture.asset(
+                                        'assets/svgs/tip-icon.svg',
+                                        height: 24,
+                                        width: 24,
+                                      ),
+                                    ),
+                                ],
+                              ),
                             ],
                           ),
                         Container(
@@ -188,7 +224,7 @@ class _PostReadingPageState extends State<PostReadingPage> {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Html(
-                              data: _currentQuestion!.question ?? '',
+                              data: _currentQuestion?.question ?? '',
                               style: {
                                 "*": Style(
                                   color: Color(0xff5A5A5A),
@@ -199,9 +235,6 @@ class _PostReadingPageState extends State<PostReadingPage> {
                               },
                             ),
                           ),
-                        ),
-                        Divider(
-                          color: Color(0xffE8E8E8).withOpacity(0.7),
                         ),
                         SizedBox(height: 8),
                         if (_currentQuestion?.type == 'openEnded')
@@ -234,12 +267,6 @@ class _PostReadingPageState extends State<PostReadingPage> {
                                     width: 142,
                                     child: BrandButton(
                                       onTap: () async {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //         const IdeasTaggerPage(),
-                                        //         fullscreenDialog: true));
                                         await handleOpenEndedAnswer(skip: true);
                                       },
                                       text: 'Skip',
@@ -273,44 +300,15 @@ class _PostReadingPageState extends State<PostReadingPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: ProgressWidget(
-                count: questionsCount,
-                currentIndex: currentQuestionIndex,
-              ),
+                  count: questionsCount,
+                  currentIndex: currentQuestionIndex,
+                  onTap: (int index) {
+                    goToQuestionByIndex(index);
+                  }),
             )
           ],
         ),
       ),
-    );
-  }
-}
-
-class ProgressWidget extends StatelessWidget {
-  const ProgressWidget(
-      {super.key, required this.count, required this.currentIndex});
-
-  final int count;
-  final int currentIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      spacing: 10,
-      children: [
-        ...List.generate(
-            count,
-            (index) => AnimatedContainer(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: index == currentIndex
-                        ? Colors.black
-                        : Color(0xffB8B8B8),
-                    shape: BoxShape.circle,
-                  ),
-                  duration: Duration(milliseconds: 250),
-                ))
-      ],
     );
   }
 }

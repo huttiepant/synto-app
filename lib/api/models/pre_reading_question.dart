@@ -12,6 +12,7 @@ class PreReadingQuestion {
   final String? info;
   final String? tips;
   final String? dialog;
+  final String? heading;
 
   PreReadingQuestion({
     required this.id,
@@ -21,6 +22,7 @@ class PreReadingQuestion {
     this.info,
     this.tips,
     this.dialog,
+    this.heading,
   });
 
   factory PreReadingQuestion.fromJson(Map<String, dynamic> json) =>
