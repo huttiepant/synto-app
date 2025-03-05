@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ensure_visible_when_focused/ensure_visible_when_focused.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synto_app/api/models/book.dart';
 import 'package:synto_app/api/models/while_reading_question.dart';
+import 'package:synto_app/mixins/ios_keyboard_inset_util.dart';
 import 'package:synto_app/popups/information_popup.dart';
 import 'package:synto_app/popups/open_ended_result_notification_popup.dart';
 import 'package:synto_app/screens/main/post_reading_page.dart';
@@ -21,7 +24,8 @@ class WhileReadingPage extends StatefulWidget {
   State<WhileReadingPage> createState() => _WhileReadingPageState();
 }
 
-class _WhileReadingPageState extends State<WhileReadingPage> {
+class _WhileReadingPageState extends State<WhileReadingPage>
+    with WidgetsBindingObserver, iOSKeyboardInsetUtil {
   final BooksService _service = BooksService();
 
   final _answerFieldController = TextEditingController();
@@ -36,6 +40,10 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
   void initState() {
     super.initState();
     _initialize();
+  }
+
+  bool get isIOSWeb {
+    return kIsWeb && TargetPlatform.iOS == defaultTargetPlatform;
   }
 
   void showInformationDialog(BuildContext context, String name, String info) {
@@ -74,6 +82,10 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
     fetchAndSetSelectedAnswer();
     setState(() {});
+  }
+
+  bool get isAndroidWeb {
+    return (kIsWeb && defaultTargetPlatform == TargetPlatform.android);
   }
 
   @override
@@ -133,6 +145,7 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: !isAndroidWeb,
       body: SafeArea(
         child: Column(
           children: [
@@ -285,30 +298,43 @@ class _WhileReadingPageState extends State<WhileReadingPage> {
                           ),
                         ),
                         SizedBox(height: 20),
-                        TextField(
-                          controller: _answerFieldController,
-                          focusNode: _answerFieldFocusNode,
-                          onTap: () async {
-                            await Future.delayed(
-                                Duration(milliseconds: 400));
-                            scrollController.animateTo(
-                                scrollController.position.maxScrollExtent,
-                                duration: Duration(milliseconds: 150),
-                                curve: Curves.ease);
-                          },
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          style: GoogleFonts.poppins().copyWith(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          maxLines: 15,
-                        ),
+                        isIOSWeb
+                            ? TextField(
+                                controller: _answerFieldController,
+                                focusNode: _answerFieldFocusNode,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                style: GoogleFonts.poppins().copyWith(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                maxLines: 15,
+                              )
+                            : EnsureVisibleWhenFocused(
+                                focusNode: _answerFieldFocusNode,
+                                child: TextField(
+                                  controller: _answerFieldController,
+                                  focusNode: _answerFieldFocusNode,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.black),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  style: GoogleFonts.poppins().copyWith(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  maxLines: 15,
+                                ),
+                              ),
                         SizedBox(
                           height: 10,
                         ),
