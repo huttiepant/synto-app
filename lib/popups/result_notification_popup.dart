@@ -14,7 +14,6 @@ class ResultNotificationPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCorrect = answer.id == correct?.id;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -30,25 +29,6 @@ class ResultNotificationPopup extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (isCorrect)
-                  Column(
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                          image: AssetImage(
-                            'assets/success.png',
-                          ),
-                          fit: BoxFit.contain,
-                        )),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                    ],
-                  ),
                 Html(
                   data: answer.dialogue,
                   style: {
@@ -56,6 +36,7 @@ class ResultNotificationPopup extends StatelessWidget {
                       textAlign: TextAlign.center,
                       color: Color(0xff5A5A5A),
                     ),
+                    "div.emoji": Style(fontSize: FontSize(65)),
                     "span": Style(
                       fontSize: FontSize(15),
                     ),

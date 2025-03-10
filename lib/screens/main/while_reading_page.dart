@@ -13,6 +13,7 @@ import 'package:synto_app/screens/main/post_reading_page.dart';
 import 'package:synto_app/services/books_service.dart';
 import 'package:synto_app/ui/brand_title_bar.dart';
 import 'package:synto_app/widgets/reading_step_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../ui/brand_colors.dart';
 
@@ -112,7 +113,7 @@ class _WhileReadingPageState extends State<WhileReadingPage>
           MaterialPageRoute(
             builder: (context) => OpenEndedResultNotificationPopup(
               dialog:
-                  'Congratulations! \n\n You’ve finished one of the most important books that has been written for humankind.\n We now have a set of challenges that have been designed to help you deepen your understanding of the book and apply the lessons in the book to life as it is today.',
+                  '<img src="http://synto-app.s3-website-us-west-1.amazonaws.com/static/Great%20work.jpg" alt="Great?" width="180" height="90"> <h1>Congratulations!</h1> \n <span>You’re now ready to dive into An Essay Concerning Human Understanding with some enhanced Active Reading skills.</span> <h1>Next up</h1> <span>Now you\'re primed to go and read the book! While you’re reading, the app provides a home base with:</span>',
               onTap: () async {
                 await _service.nextStep();
                 Navigator.push(
@@ -180,6 +181,27 @@ class _WhileReadingPageState extends State<WhileReadingPage>
                     padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
                     child: Column(
                       children: [
+                        Text(
+                          '“Home base while you read”',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins().copyWith(
+                            color: Color(0xff5A5A5A),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Tap the right arrow after each 10% to track progress—reach 100% to unlock post-reading activities.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins().copyWith(
+                            color: Color(0xff5A5A5A),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Text(
                           'Amount of Book Completed:',
                           textAlign: TextAlign.center,
@@ -338,13 +360,19 @@ class _WhileReadingPageState extends State<WhileReadingPage>
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          'Visit our community to discuss with others!',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins().copyWith(
-                            color: brandLightBlue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                        GestureDetector(
+                          onTap: () async {
+                            await launchUrl(
+                                Uri.parse('https://discord.gg/kJHA8eZm'));
+                          },
+                          child: Text(
+                            'Visit our community to discuss with others!',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins().copyWith(
+                              color: brandLightBlue,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ],

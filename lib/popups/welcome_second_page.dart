@@ -1,13 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:synto_app/popups/welcome_second_page.dart';
 import 'package:synto_app/ui/brand_button.dart';
 
 import '../ui/brand_colors.dart';
 
-class PopupPage extends StatelessWidget {
-  const PopupPage({super.key});
+class WelcomeSecondPage extends StatelessWidget {
+  const WelcomeSecondPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class PopupPage extends StatelessWidget {
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          'assets/astronaut.jpg',
+                          'assets/sophia.jpg',
                         ),
                         fit: BoxFit.contain)),
               ),
@@ -35,7 +35,7 @@ class PopupPage extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Great call! This might feel like a small step, but it’s a giant leap toward reading like a master.',
+                'Meet Sophia—Your \n Reading Guide',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins().copyWith(
                     fontSize: 24,
@@ -46,16 +46,14 @@ class PopupPage extends StatelessWidget {
                 margin: EdgeInsets.only(top: 16, bottom: 32),
                 child: Html(
                   data: '''
-            <p>Most people read books. Few truly understand them.</p>
-            <p>You’re about to change that.</p>
-            <p>We’ve built engaging challenges and activities to guide you before, during, and after reading. These aren’t just fun—they’re proven to help you get more from your book.</p>
-            <h2>📚 Active Readers:</h2>
+            <p>In Ancient Greece, Sophia means ‘wisdom’ so it was rather convenient that she accepted our invite to guide you through the app.</p>
+            <p>Sophia will break down key ideas, share insights you might miss, and help you when you get stuck. Think of her as your personal reading mentor.</p>
             
-                <div>✅ Remember more of what they read</div>
-                <div>✅ Apply ideas to everyday life</div>
-                <div>✅ Develop sharper critical thinking</div>
+                <div>Before you start reading, we’ll challenge you with carefully designed questions to:</div>
+                <div>🧠 Get inside the author’s mind – Understand their motivations for writing.</div>
+                <div>🤔 Get inside your own mind – Clarify what you want from the book.</div>
             
-            <p>Let’s make your reading count.</p>
+            <p>This is where deeper understanding begins. Let’s get started.</p>
           ''',
                   style: {
                     "*": Style(
@@ -69,16 +67,10 @@ class PopupPage extends StatelessWidget {
                 margin: EdgeInsets.only(bottom: 20),
                 child: BrandButton(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WelcomeSecondPage(),
-                          fullscreenDialog: true,
-                        ),
-                      );
+                      context.router.pushNamed('/');
                     },
                     border: Border.all(color: Colors.white, width: 1),
-                    text: 'Continue',
+                    text: 'Begin',
                     color: brandLightBlue,
                     textColor: Colors.white),
               )

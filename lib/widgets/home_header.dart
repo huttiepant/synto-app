@@ -36,23 +36,19 @@ class HomeHeader extends StatelessWidget {
               ),
               SizedBox(height: 4),
               Text(
-                'Choose the book you\'re about to read',
+                'Choose a book. \n We\'ll help you master it.',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins().copyWith(
-                    fontSize: 34,
+                    fontSize: 24,
                     fontWeight: FontWeight.w600,
                     color: Color(0xfff7f7f7)),
               ),
               SizedBox(height: 4),
               Text(
-                'We currently have a small list of books that you can choose'
-                'to read. That’s because each of the activities, questions and'
-                'challenges are designed by Philosophy professionals to'
-                'ensure the biggest boost to your reading skills. If you want a'
-                'new book added, scroll to the bottom and send a request.',
+                'We’ll take you beyond the pages with guided challenges, thought-provoking questions, and deep insights. \n \n We currently offer 15 books, but we’re always expanding. Want a book added? Let us know!',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins().copyWith(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: Color(0xffD0D0D0)),
               ),
