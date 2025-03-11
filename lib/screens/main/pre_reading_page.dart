@@ -155,7 +155,7 @@ class _PreReadingPageState extends State<PreReadingPage>
         MaterialPageRoute(
           builder: (context) => OpenEndedResultNotificationPopup(
             dialog: _currentQuestion?.dialog ?? '',
-            actionText: (currentQuestionIndex == questionsCount - 1) ? 'Finish' : null,
+            actionText: (currentQuestionIndex == questionsCount - 1) ? 'Next' : null,
             onTap: () {
               final nextQuestion = _service.getCurrentQuestion();
               if (nextQuestion == null) {
