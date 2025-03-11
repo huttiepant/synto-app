@@ -50,8 +50,8 @@ class WelcomeSecondPage extends StatelessWidget {
             <p>Sophia will break down key ideas, share insights you might miss, and help you when you get stuck. Think of her as your personal reading mentor.</p>
             
                 <div>Before you start reading, we’ll challenge you with carefully designed questions to:</div>
-                <div>🧠 Get inside the author’s mind – Understand their motivations for writing.</div>
-                <div>🤔 Get inside your own mind – Clarify what you want from the book.</div>
+                <div> <span class="emoji">🧠</span> Get inside the author’s mind – Understand their motivations for writing.</div>
+                <div><span class="emoji">🤔</span> Get inside your own mind – Clarify what you want from the book.</div>
             
             <p>This is where deeper understanding begins. Let’s get started.</p>
           ''',
@@ -60,6 +60,8 @@ class WelcomeSecondPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       color: Color(0xff5A5A5A),
                     ),
+                    "span.emoji": Style(
+                        fontFamily: GoogleFonts.notoColorEmoji().fontFamily)
                   },
                 ),
               ),

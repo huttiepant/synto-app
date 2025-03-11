@@ -51,9 +51,9 @@ class PopupPage extends StatelessWidget {
             <p>We’ve built engaging challenges and activities to guide you before, during, and after reading. These aren’t just fun—they’re proven to help you get more from your book.</p>
             <h2>📚 Active Readers:</h2>
             
-                <div>✅ Remember more of what they read</div>
-                <div>✅ Apply ideas to everyday life</div>
-                <div>✅ Develop sharper critical thinking</div>
+                <div><span class="emoji">✅</span> Remember more of what they read</div>
+                <div><span class="emoji">✅</span> Apply ideas to everyday life</div>
+                <div><span class="emoji">✅</span> Develop sharper critical thinking</div>
             
             <p>Let’s make your reading count.</p>
           ''',
@@ -62,6 +62,8 @@ class PopupPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       color: Color(0xff5A5A5A),
                     ),
+                    "span.emoji": Style(
+                        fontFamily: GoogleFonts.notoColorEmoji().fontFamily)
                   },
                 ),
               ),

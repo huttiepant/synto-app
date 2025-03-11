@@ -101,6 +101,9 @@ class _PostReadingPageState extends State<PostReadingPage>
           body: Center(child: CircularProgressIndicator()));
     }
 
+    final questionsCount = _service.getQuestionsCount();
+    final currentQuestionIndex = _service.getCurrentQuestionIndex();
+
     handleOpenEndedAnswer({bool skip = false}) async {
       final answer = _answerFieldController.text;
       await _service.answerQuestion(
@@ -114,7 +117,7 @@ class _PostReadingPageState extends State<PostReadingPage>
         MaterialPageRoute(
           builder: (context) => OpenEndedResultNotificationPopup(
             dialog: _currentQuestion?.dialog ?? '',
-            actionText: 'Finish',
+            actionText: currentQuestionIndex == questionsCount ? 'Finish' : null,
             onTap: () async {
               final nextQuestion = _service.getCurrentQuestion();
               if (nextQuestion == null) {
@@ -136,8 +139,6 @@ class _PostReadingPageState extends State<PostReadingPage>
       );
     }
 
-    final questionsCount = _service.getQuestionsCount();
-    final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
       backgroundColor: Colors.white,

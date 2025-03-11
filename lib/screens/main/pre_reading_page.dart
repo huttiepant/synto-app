@@ -103,7 +103,6 @@ class _PreReadingPageState extends State<PreReadingPage>
     }
 
     handleAnswer(Answer answer) async {
-      final correctAnswer = _service.getCorrectAnswer();
       await _service.answerQuestion(
         _currentQuestion!.id,
         answer.id,
@@ -112,7 +111,7 @@ class _PreReadingPageState extends State<PreReadingPage>
         context,
         MaterialPageRoute(
           builder: (context) =>
-              ResultNotificationPopup(answer: answer, correct: correctAnswer),
+              ResultNotificationPopup(answer: answer),
           fullscreenDialog: true,
         ),
       );

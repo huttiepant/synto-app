@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:synto_app/api/models/answer.dart';
@@ -7,13 +9,13 @@ import '../ui/brand_colors.dart';
 
 class ResultNotificationPopup extends StatelessWidget {
   const ResultNotificationPopup(
-      {super.key, required this.answer, this.correct});
+      {super.key, required this.answer});
 
   final Answer answer;
-  final Answer? correct;
 
   @override
   Widget build(BuildContext context) {
+    final isCorrect = answer.correct == true;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -29,6 +31,26 @@ class ResultNotificationPopup extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Column(
+                  children: [
+                    Container(
+                      width: 90,
+                      height: 90,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage(
+                          isCorrect
+                              ? 'assets/correct.jpg'
+                              : 'assets/wrong.jpg',
+                        ),
+                        fit: BoxFit.contain,
+                      )),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                  ],
+                ),
                 Html(
                   data: answer.dialogue,
                   style: {
@@ -36,7 +58,6 @@ class ResultNotificationPopup extends StatelessWidget {
                       textAlign: TextAlign.center,
                       color: Color(0xff5A5A5A),
                     ),
-                    "div.emoji": Style(fontSize: FontSize(65)),
                     "span": Style(
                       fontSize: FontSize(15),
                     ),
