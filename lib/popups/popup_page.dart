@@ -49,12 +49,10 @@ class PopupPage extends StatelessWidget {
             <p>Most people read books. Few truly understand them.</p>
             <p>You’re about to change that.</p>
             <p>We’ve built engaging challenges and activities to guide you before, during, and after reading. These aren’t just fun—they’re proven to help you get more from your book.</p>
-            <h2>📚 Active Readers:</h2>
-            
+            <h2><span class="emoji">📚</span> Active Readers:</h2>
                 <div><span class="emoji">✅</span> Remember more of what they read</div>
                 <div><span class="emoji">✅</span> Apply ideas to everyday life</div>
                 <div><span class="emoji">✅</span> Develop sharper critical thinking</div>
-            
             <p>Let’s make your reading count.</p>
           ''',
                   style: {
