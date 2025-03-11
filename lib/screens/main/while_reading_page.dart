@@ -43,6 +43,7 @@ class _WhileReadingPageState extends State<WhileReadingPage>
     _initialize();
   }
 
+  @override
   bool get isIOSWeb {
     return kIsWeb && TargetPlatform.iOS == defaultTargetPlatform;
   }

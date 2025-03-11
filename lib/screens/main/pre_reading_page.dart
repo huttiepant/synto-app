@@ -49,6 +49,7 @@ class _PreReadingPageState extends State<PreReadingPage>
     _initialize();
   }
 
+  @override
   bool get isIOSWeb {
     return kIsWeb && TargetPlatform.iOS == defaultTargetPlatform;
   }
