@@ -27,6 +27,9 @@ void main() async {
   await getIt<StorageService>().init();
   getIt.registerSingleton<AppRouter>(AppRouter());
   getIt.registerSingleton<AuthService>(AuthService());
+  GoogleFonts.pendingFonts([
+    GoogleFonts.notoColorEmoji(),
+  ]);
 
   runApp(QueryClientProvider(
       queryClient: queryClient,
