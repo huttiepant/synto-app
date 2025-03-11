@@ -115,6 +115,7 @@ class _WhileReadingPageState extends State<WhileReadingPage>
             builder: (context) => OpenEndedResultNotificationPopup(
               dialog:
                   '<img src="http://synto-app.s3-website-us-west-1.amazonaws.com/static/Great%20work.jpg" alt="Great?" width="180" height="90"> <h1>Congratulations!</h1> \n <span>You’re now ready to dive into An Essay Concerning Human Understanding with some enhanced Active Reading skills.</span> <h1>Next up</h1> <span>Now you\'re primed to go and read the book! While you’re reading, the app provides a home base with:</span>',
+             actionText: 'Finish',
               onTap: () async {
                 await _service.nextStep();
                 Navigator.push(

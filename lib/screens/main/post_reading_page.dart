@@ -118,7 +118,7 @@ class _PostReadingPageState extends State<PostReadingPage>
         MaterialPageRoute(
           builder: (context) => OpenEndedResultNotificationPopup(
             dialog: _currentQuestion?.dialog ?? '',
-            actionText: currentQuestionIndex == questionsCount ? 'Finish' : null,
+            actionText: (currentQuestionIndex == questionsCount - 1) ? 'Finish' : null,
             onTap: () async {
               final nextQuestion = _service.getCurrentQuestion();
               if (nextQuestion == null) {

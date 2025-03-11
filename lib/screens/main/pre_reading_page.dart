@@ -103,6 +103,10 @@ class _PreReadingPageState extends State<PreReadingPage>
           body: Center(child: CircularProgressIndicator()));
     }
 
+
+    final questionsCount = _service.getQuestionsCount();
+    final currentQuestionIndex = _service.getCurrentQuestionIndex();
+
     handleAnswer(Answer answer) async {
       await _service.answerQuestion(
         _currentQuestion!.id,
@@ -151,6 +155,7 @@ class _PreReadingPageState extends State<PreReadingPage>
         MaterialPageRoute(
           builder: (context) => OpenEndedResultNotificationPopup(
             dialog: _currentQuestion?.dialog ?? '',
+            actionText: (currentQuestionIndex == questionsCount - 1) ? 'Finish' : null,
             onTap: () {
               final nextQuestion = _service.getCurrentQuestion();
               if (nextQuestion == null) {
@@ -172,9 +177,6 @@ class _PreReadingPageState extends State<PreReadingPage>
         ),
       );
     }
-
-    final questionsCount = _service.getQuestionsCount();
-    final currentQuestionIndex = _service.getCurrentQuestionIndex();
 
     return Scaffold(
       backgroundColor: Colors.white,
