@@ -27,9 +27,7 @@ void main() async {
   await getIt<StorageService>().init();
   getIt.registerSingleton<AppRouter>(AppRouter());
   getIt.registerSingleton<AuthService>(AuthService());
-  GoogleFonts.pendingFonts([
-    GoogleFonts.notoColorEmoji(),
-  ]);
+  GoogleFonts.pendingFonts([GoogleFonts.notoColorEmoji(), GoogleFonts.inter()]);
 
   runApp(QueryClientProvider(
       queryClient: queryClient,
@@ -69,6 +67,16 @@ class MyApp extends StatelessWidget {
         routerDelegate: _appRouter.delegate(),
         theme: baseTheme.copyWith(
             textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme)),
+        builder: (context, child) {
+          return Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 768,
+              ),
+              child: child,
+            ),
+          );
+        },
       ),
     );
   }

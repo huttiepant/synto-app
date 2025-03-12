@@ -8,10 +8,12 @@ class Tag extends StatefulWidget {
     required this.tag,
     required this.onTap,
     required this.selected,
+    required this.isDefault,
   });
 
   final String tag;
   final bool selected;
+  final bool isDefault;
   final void Function(String tag) onTap;
 
   @override
@@ -23,11 +25,12 @@ class _TagState extends State<Tag> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if(widget.isDefault) return;
         widget.onTap(widget.tag);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
-          vertical: 6.5,
+          vertical: 6,
           horizontal: 19,
         ),
         decoration: BoxDecoration(
@@ -45,7 +48,7 @@ class _TagState extends State<Tag> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            if (widget.selected)
+            if (widget.selected && !widget.isDefault)
               GestureDetector(
                 onTap: () {
                   widget.onTap(widget.tag);

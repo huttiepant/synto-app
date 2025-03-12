@@ -22,20 +22,16 @@ class IdeasTaggerPage extends StatefulWidget {
 
 class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
   bool ownIdea = false;
-  final List<String> tags = [
+
+  final List<String> defaultTags = [
     'Knowledge',
     'Mind',
     'Experience',
     'Language',
     'Truth'
   ];
-  final List<String> selectedTags = [
-    'Knowledge',
-    'Mind',
-    'Experience',
-    'Language',
-    'Truth'
-  ];
+  final List<String> tags = [];
+  final List<String> selectedTags = [];
   final BooksService _service = BooksService();
   final BooksService booksService = BooksService();
   final scrollController = ScrollController();
@@ -86,6 +82,7 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
   }
 
   void onTagSelect(tag) {
+    if (defaultTags.contains(tag)) return;
     if (selectedTags.contains(tag)) {
       selectedTags.remove(tag);
     } else {
@@ -98,15 +95,13 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
-    final savedTags = _service.getTags();
-    if (savedTags != null) {
-      for (var tag in savedTags) {
-        if(!tags.contains(tag)){
-          tags.add(tag);
-        }
-        if(!selectedTags.contains(tag)){
-          selectedTags.add(tag);
-        }
+    final savedTags = _service.getTags() ?? defaultTags;
+    for (var tag in savedTags) {
+      if (!tags.contains(tag)) {
+        tags.add(tag);
+      }
+      if (!selectedTags.contains(tag)) {
+        selectedTags.add(tag);
       }
     }
     setState(() {});
@@ -190,6 +185,7 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
                             tag: tag,
                             onTap: onTagSelect,
                             selected: selectedTags.contains(tag),
+                            isDefault: defaultTags.contains(tag),
                           );
                         },
                       )
