@@ -95,8 +95,11 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
     if (_service.selectedBookId == null) return;
     _book = _service.getBook(_service.selectedBookId!);
     _step = _service.getCurrentBookStep(_service.selectedBookId!);
-    final savedTags = _service.getTags() ?? defaultTags;
-    for (var tag in savedTags) {
+    final savedTags =
+        _service.getTags() != null && _service.getTags()!.isNotEmpty
+            ? _service.getTags()
+            : defaultTags;
+    for (var tag in savedTags!) {
       if (!tags.contains(tag)) {
         tags.add(tag);
       }

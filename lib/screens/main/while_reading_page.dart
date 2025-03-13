@@ -114,8 +114,8 @@ class _WhileReadingPageState extends State<WhileReadingPage>
           MaterialPageRoute(
             builder: (context) => OpenEndedResultNotificationPopup(
               dialog:
-                  '<img src="http://synto-app.s3-website-us-west-1.amazonaws.com/static/Great%20work.jpg" alt="Great?" width="180" height="90"> <h1>Congratulations!</h1> \n <span>You’re now ready to dive into An Essay Concerning Human Understanding with some enhanced Active Reading skills.</span> <h1>Next up</h1> <span>Now you\'re primed to go and read the book! While you’re reading, the app provides a home base with:</span>',
-             actionText: 'Next',
+                  '<img src="http://synto-app.s3-website-us-west-1.amazonaws.com/static/Great%20work.jpg" alt="Great?" width="180" height="90"> <h1>Congratulations!</h1> \n <span>You’ve finished one of the most important books that has been written for humankind </span> <h1>Next up</h1> <span>We now have a fun set of activities designed to help you apply the lessons from the book to everyday life (and people in it).</span>',
+              actionText: 'Next',
               onTap: () async {
                 await _service.nextStep();
                 Navigator.push(
@@ -184,7 +184,7 @@ class _WhileReadingPageState extends State<WhileReadingPage>
                     child: Column(
                       children: [
                         Text(
-                          '“Home base while you read”',
+                          'Home base while you read',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins().copyWith(
                             color: Color(0xff5A5A5A),
@@ -284,33 +284,46 @@ class _WhileReadingPageState extends State<WhileReadingPage>
                         ),
                         SizedBox(height: 5),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 4),
-                              child: GestureDetector(
-                                onTap: () {
-                                  showInformationDialog(context, '',
-                                      _currentQuestion?.info ?? '');
-                                },
-                                child: SvgPicture.asset(
-                                  'assets/svgs/info-icon.svg',
-                                  height: 24,
-                                  width: 24,
+                            Text(
+                              'Insight Generator',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.poppins().copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xff171A1F)),
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 4),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      showInformationDialog(context, '',
+                                          _currentQuestion?.info ?? '');
+                                    },
+                                    child: SvgPicture.asset(
+                                      'assets/svgs/info-icon.svg',
+                                      height: 24,
+                                      width: 24,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                showInformationDialog(
-                                    context, '', _currentQuestion?.tips ?? '');
-                              },
-                              child: SvgPicture.asset(
-                                'assets/svgs/tip-icon.svg',
-                                height: 24,
-                                width: 24,
-                              ),
-                            ),
+                                GestureDetector(
+                                  onTap: () {
+                                    showInformationDialog(context, '',
+                                        _currentQuestion?.tips ?? '');
+                                  },
+                                  child: SvgPicture.asset(
+                                    'assets/svgs/tip-icon.svg',
+                                    height: 24,
+                                    width: 24,
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         Text(
