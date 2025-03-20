@@ -24,30 +24,35 @@ class ResultNotificationPopup extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
-              height: 60,
+              height: 40,
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Column(
-                  children: [
-                    Container(
-                      width: 90,
-                      height: 90,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: AssetImage(
-                          isCorrect
-                              ? 'assets/correct.jpg'
-                              : 'assets/wrong.jpg',
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            image: AssetImage(
+                              isCorrect
+                                  ? 'assets/correct.jpg'
+                                  : 'assets/wrong.jpg',
+                            ),
+                            fit: BoxFit.contain,
+                          )),
                         ),
-                        fit: BoxFit.contain,
-                      )),
+                        SizedBox(
+                          height: 40,
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                  ],
+                  ),
                 ),
                 Html(
                   data: answer.dialogue,

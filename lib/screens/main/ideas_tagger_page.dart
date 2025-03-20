@@ -49,12 +49,14 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
       context: context,
       useSafeArea: false,
       builder: (BuildContext context) {
+        final String bookName = _book != null ? _book!.name : 'book';
+        print(bookName);
         return InformationPopup(
           title: '',
           info: """
           <img src='http://synto-app.s3-website-us-west-1.amazonaws.com/static/Great%20work.jpg' alt='Great' width='180' height='90'/>
    <h1>Great work!</h1>
-    <p>You’re now ready to dive into <em>An Essay Concerning Human Understanding</em> with some enhanced Active Reading skills.</p>
+    <p>You’re now ready to dive into <em>$bookName</em> with some enhanced Active Reading skills.</p>
 
     <h2>Next steps</h2>
     <p>Now you're primed to go and read the book! While you’re reading, the app provides a home base with:</p>

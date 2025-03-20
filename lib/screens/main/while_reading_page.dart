@@ -214,7 +214,7 @@ class _WhileReadingPageState extends State<WhileReadingPage>
                           ),
                         ),
                         Text(
-                          '(${((currentQuestionIndex / questionsCount) * 100).toInt()}%)',
+                          '(${(((currentQuestionIndex + 1) / questionsCount) * 100).toInt()}%)',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins().copyWith(
                             color: Color(0xff5A5A5A),
