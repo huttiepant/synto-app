@@ -23,11 +23,9 @@ class ResultNotificationPopup extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 40,
-            ),
             Expanded(
               child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(vertical: 40),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -68,7 +66,7 @@ class ResultNotificationPopup extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: EdgeInsets.symmetric(vertical: 20),
               child: BrandButton(
                 onTap: () {
                   Navigator.of(context).pop();
