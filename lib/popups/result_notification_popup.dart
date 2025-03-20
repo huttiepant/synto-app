@@ -26,13 +26,12 @@ class ResultNotificationPopup extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Column(
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Column(
                       children: [
                         Container(
                           width: 90,
@@ -52,24 +51,22 @@ class ResultNotificationPopup extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                ),
-                Html(
-                  data: answer.dialogue,
-                  style: {
-                    "*": Style(
-                      textAlign: TextAlign.center,
-                      color: Color(0xff5A5A5A),
+                    Html(
+                      data: answer.dialogue,
+                      style: {
+                        "*": Style(
+                          textAlign: TextAlign.center,
+                          color: Color(0xff5A5A5A),
+                        ),
+                        "span": Style(
+                          fontSize: FontSize(15),
+                        ),
+                      },
                     ),
-                    "span": Style(
-                      fontSize: FontSize(15),
-                    ),
-                  },
+                  ],
                 ),
-                SizedBox(height: 32),
-              ],
+              ),
             ),
-            Spacer(),
             Container(
               margin: EdgeInsets.only(bottom: 20),
               child: BrandButton(
