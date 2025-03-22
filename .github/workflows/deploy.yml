@@ -46,7 +46,7 @@ jobs:
         run: |
           aws --v
           aws configure set default.region ${AWS_REGION}
-          aws s3 sync --delete ./build/web s3://${BUCKET}
+          aws s3 sync --delete ./build/web s3://${BUCKET} --exclude 'static/*'
           aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
         env:
           AWS_REGION: ${{ secrets[format('AWS_REGION_{0}', github.ref_name)] }}
