@@ -54,7 +54,7 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
         return InformationPopup(
           title: '',
           info: """
-          <img src='http://synto-app.s3-website-us-west-1.amazonaws.com/static/Great%20work.jpg' alt='Great' width='180' height='90'/>
+          <img src='https://book.synto-app.com/static/Great%20work.jpg' alt='Great' width='180' height='90'/>
    <h1>Great work!</h1>
     <p>You’re now ready to dive into <em>$bookName</em> with some enhanced Active Reading skills.</p>
 

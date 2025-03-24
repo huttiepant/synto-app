@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [prod]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.2.0
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4.3.0
+        with:
+          node-version: 16
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.2
+
+      - name: Deploy to ${{ github.ref_name }}
+        run: echo "Will deploy to ${{ github.ref_name }}"
+
+      - name: Initializing AWS
+        run: |
+          mkdir -p ~/.aws
+          touch ~/.aws/credentials
+          echo "[default]" >> ~/.aws/credentials
+          echo "aws_access_key_id=${AWS_ACCESS_KEY_ID}" >> ~/.aws/credentials
+          echo -n "aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets[format('AWS_ACCESS_KEY_ID_{0}', github.ref_name)] }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets[format('AWS_SECRET_ACCESS_KEY_{0}', github.ref_name)] }}
+
+
+      - run: |
+          flutter --version
+          flutter build web --wasm --release
+
+      - name: Deploy
+        run: |
+          aws --v
+          aws configure set default.region ${AWS_REGION}
+          aws s3 sync --delete ./build/web s3://${BUCKET} --exclude 'static/*'
+          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
+        env:
+          AWS_REGION: ${{ secrets[format('AWS_REGION_{0}', github.ref_name)] }}
+          BUCKET: ${{ secrets[format('BUCKET_{0}', github.ref_name)] }}
+          CLOUDFRONT_ID: ${{ secrets[format('CLOUDFRONT_ID_{0}', github.ref_name)] }}
+
+      - name: Cleanup
+        run: |
+          rm -f ~/.aws/credentials
