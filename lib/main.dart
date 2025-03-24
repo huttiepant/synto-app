@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:synto_app/routes/router.dart';
 import 'package:toastification/toastification.dart';
-
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'api/services/auth_service.dart';
 import 'firebase_options.dart';
 import 'services/storage_service.dart';
@@ -28,7 +28,8 @@ void main() async {
   getIt.registerSingleton<AppRouter>(AppRouter());
   getIt.registerSingleton<AuthService>(AuthService());
   GoogleFonts.pendingFonts([GoogleFonts.notoColorEmoji(), GoogleFonts.inter()]);
-
+  await Mixpanel.init("5aa0473d5e72148b127ef5fb522c758a",
+      trackAutomaticEvents: false);
   runApp(QueryClientProvider(
       queryClient: queryClient,
       child:
