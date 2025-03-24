@@ -40,7 +40,7 @@ jobs:
 
       - run: |
           flutter --version
-          flutter build web --wasm --release
+          flutter build web --release
 
       - name: Deploy
         run: |

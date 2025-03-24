@@ -254,7 +254,7 @@ class _WhileReadingPageState extends State<WhileReadingPage>
                                 borderRadius: BorderRadius.circular(19),
                                 backgroundColor: Color(0xffE8E8E8),
                                 color: brandLightBlue,
-                                value: currentQuestionIndex / questionsCount,
+                                value: (currentQuestionIndex + 1) / questionsCount,
                               ),
                             ),
                             SizedBox(
