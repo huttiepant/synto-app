@@ -114,7 +114,7 @@ class _WhileReadingPageState extends State<WhileReadingPage>
           MaterialPageRoute(
             builder: (context) => OpenEndedResultNotificationPopup(
               dialog:
-                  '<img src="https://book.synto-app.com/static/Great%20work.jpg" alt="Great?" width="180" height="90"> <h1>Congratulations!</h1> \n <span>You’ve finished one of the most important books that has been written for humankind </span> <h1>Next up</h1> <span>We now have a fun set of activities designed to help you apply the lessons from the book to everyday life (and people in it).</span>',
+                  '<img src="https://book.synto-app.com/static/Greatwork.jpg" alt="Great?" width="180" height="90"> <h1>Congratulations!</h1> \n <span>You’ve finished one of the most important books that has been written for humankind </span> <h1>Next up</h1> <span>We now have a fun set of activities designed to help you apply the lessons from the book to everyday life (and people in it).</span>',
               actionText: 'Next',
               onTap: () async {
                 await _service.nextStep();
