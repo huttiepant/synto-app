@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:synto_app/routes/router.dart';
 import 'package:toastification/toastification.dart';
-import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'api/services/auth_service.dart';
 import 'firebase_options.dart';
 import 'services/storage_service.dart';
@@ -28,8 +28,6 @@ void main() async {
   getIt.registerSingleton<AppRouter>(AppRouter());
   getIt.registerSingleton<AuthService>(AuthService());
   GoogleFonts.pendingFonts([GoogleFonts.notoColorEmoji(), GoogleFonts.inter()]);
-  await Mixpanel.init("5aa0473d5e72148b127ef5fb522c758a",
-      trackAutomaticEvents: false);
   runApp(QueryClientProvider(
       queryClient: queryClient,
       child:
@@ -40,8 +38,10 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _appRouter = getIt<AppRouter>();
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+  FirebaseAnalyticsObserver(analytics: analytics);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -65,7 +65,9 @@ class MyApp extends StatelessWidget {
       },
       child: MaterialApp.router(
         routeInformationParser: _appRouter.defaultRouteParser(),
-        routerDelegate: _appRouter.delegate(),
+        routerDelegate: _appRouter.delegate(
+          navigatorObservers: () => [MyApp.observer],
+        ),
         theme: baseTheme.copyWith(
             textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme)),
         builder: (context, child) {
