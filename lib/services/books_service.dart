@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
@@ -18,6 +19,8 @@ enum ReadingStep {
 
 class BooksService {
   static final BooksService _instance = BooksService._internal();
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  User? user = FirebaseAuth.instance.currentUser;
 
   factory BooksService() => _instance;
 
@@ -36,6 +39,21 @@ class BooksService {
   void selectBook(int bookId) {
     selectedBookId = bookId;
     if (_progress.progress[bookId] == null) {
+      Book? _book = getBook(selectedBookId!);
+      analytics.logEvent(
+        name: 'book_selected',
+        parameters: {
+          'book_id': _book?.id ?? '',
+          'book_name': _book?.name ?? '',
+          'book_author': _book?.author ?? '',
+          ...(user != null
+              ? {
+                  'email': user!.email ?? '',
+                  'displayName': user!.displayName ?? ''
+                }
+              : {}),
+        },
+      );
       _progress.progress[bookId] = QuestionProgress(
         preReading: ReadingProgress(
             currentQuestionIndices: 0, answeredQuestions: {}, tags: []),
@@ -201,10 +219,24 @@ class BooksService {
     await _saveProgress();
   }
 
+  Future<void> _sendAnalyticsEvent(String name, parameters) async {
+    await analytics.logEvent(
+      name: name,
+      parameters: {
+        'book_name': getBook(selectedBookId!)?.name ?? '',
+        'email': user!.email ?? '',
+        'displayName': user!.displayName ?? '',
+        ...parameters,
+      },
+    );
+  }
+
   Future<void> nextStep() async {
     final prevQuestionProgress =
         _progress.progress[selectedBookId]!.getCurrentReadingProgress();
     prevQuestionProgress.currentQuestionIndices = 0;
+    _sendAnalyticsEvent(
+        '${_progress.progress[selectedBookId]!.readingStep}_complete', {});
     _progress.progress[selectedBookId]!.setNextStep();
     final currentQuestionProgress =
         _progress.progress[selectedBookId]!.getCurrentReadingProgress();

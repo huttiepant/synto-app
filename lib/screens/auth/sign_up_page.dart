@@ -7,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:synto_app/screens/auth/auth_page.dart';
 import 'package:synto_app/ui/brand_button.dart';
+import 'package:synto_app/widgets/checkbox_widget.dart';
 import 'package:toastification/toastification.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../api/services/auth_service.dart';
 import '../../popups/popup_page.dart';
@@ -26,6 +28,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormBuilderState>();
   final authService = GetIt.instance<AuthService>();
   Map<String, String>? errors;
+
+  bool isTermsAgree = false;
 
   Future<void> _handleSignUp() async {
     final form = _formKey.currentState;
@@ -174,13 +178,69 @@ class _SignUpPageState extends State<SignUpPage> {
               Wrap(
                 runSpacing: 10,
                 children: [
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      children: [
+                        CheckboxWidget(
+                          setValue: (v) {
+                            isTermsAgree = v;
+                            setState(() {});
+                          },
+                        ),
+                        Text(
+                          'I Agree to the',
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 12,
+                            color: Color(0xff6C7278),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () async {
+                              await launchUrl(Uri.parse(
+                                  'https://www.synto-app.com/privacy'));
+                            },
+                            child: Text(' Privacy Policy ',
+                                style: GoogleFonts.poppins().copyWith(
+                                    color: Color(0xff4D81E7),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    decoration: TextDecoration.underline))),
+                        Text(
+                          ' and ',
+                          style: GoogleFonts.inter().copyWith(
+                            color: Color(0xff2A2A2A),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () async {
+                              await launchUrl(
+                                  Uri.parse('https://www.synto-app.com/terms'));
+                            },
+                            child: Text(
+                              'Terms & Conditions.',
+                              style: GoogleFonts.poppins().copyWith(
+                                  color: Color(0xff4D81E7),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  decoration: TextDecoration.underline),
+                            )),
+                      ],
+                    ),
+                  ),
                   BrandButton(
                       onTap: () {
-                        _handleSignUp();
+                        if (isTermsAgree) {
+                          _handleSignUp();
+                        }
                       },
                       border: Border.all(color: Colors.white, width: 1),
                       text: 'Register',
-                      color: brandLightBlue,
+                      color:
+                          isTermsAgree ? brandLightBlue : Colors.grey.shade500,
                       textColor: Colors.white)
                 ],
               ),

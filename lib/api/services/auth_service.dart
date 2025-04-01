@@ -1,6 +1,9 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   Future<void> loginWithCredentials(String email, String password) async {
     try {
       await FirebaseAuth.instance
@@ -38,6 +41,7 @@ class AuthService {
         password: password,
       );
       await credential.user?.updateDisplayName(name);
+      await _sendAnalyticsEvent('sign_up_complete', {name: name, email: email});
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         return Future.error('The password provided is too weak.');
@@ -47,6 +51,13 @@ class AuthService {
     } catch (e) {
       return Future.error(e.toString());
     }
+  }
+
+  Future<void> _sendAnalyticsEvent(String name, parameters) async {
+    await analytics.logEvent(
+      name: name,
+      parameters: parameters,
+    );
   }
 
   Future<void> signOut() async {

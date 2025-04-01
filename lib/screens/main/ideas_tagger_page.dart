@@ -50,7 +50,6 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
       useSafeArea: false,
       builder: (BuildContext context) {
         final String bookName = _book != null ? _book!.name : 'book';
-        print(bookName);
         return InformationPopup(
           title: '',
           info: """
