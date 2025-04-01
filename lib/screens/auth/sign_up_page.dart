@@ -29,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final authService = GetIt.instance<AuthService>();
   Map<String, String>? errors;
 
-  bool isTermsAgree = false;
+  bool isTermsAgree = true;
 
   Future<void> _handleSignUp() async {
     final form = _formKey.currentState;
@@ -183,6 +183,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Row(
                       children: [
                         CheckboxWidget(
+                          isChecked: isTermsAgree,
                           setValue: (v) {
                             isTermsAgree = v;
                             setState(() {});
