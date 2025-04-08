@@ -219,18 +219,19 @@ class _PreReadingPageState extends State<PreReadingPage>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              if (_currentQuestion?.heading != null)
-                                Expanded(
-                                  child: Html(
-                                    data: _currentQuestion!.heading,
-                                    style: {
-                                      "*": Style(
-                                        color: Colors.black,
-                                        // lineHeight: LineHeight(0.2)
-                                      ),
-                                    },
-                                  ),
-                                ),
+                              Expanded(
+                                child: _currentQuestion?.heading != null
+                                    ? Html(
+                                        data: _currentQuestion!.heading,
+                                        style: {
+                                          "*": Style(
+                                            color: Colors.black,
+                                            // lineHeight: LineHeight(0.2)
+                                          ),
+                                        },
+                                      )
+                                    : Container(),
+                              ),
                               Row(
                                 children: [
                                   if (_currentQuestion?.info != null)
