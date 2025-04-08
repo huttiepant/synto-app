@@ -17,5 +17,5 @@ PreReadingQuestion _$PreReadingQuestionFromJson(Map<String, dynamic> json) =>
       info: json['info'] as String?,
       tips: json['tips'] as String?,
       dialog: json['dialog'] as String?,
-          heading: json['heading'] as String?,
+      heading: json['heading'] as String?,
     );

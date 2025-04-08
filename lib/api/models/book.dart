@@ -17,6 +17,7 @@ class Book {
   final List<PreReadingQuestion> preReading;
   final List<WhileReadingQuestion> whileReading;
   final List<PostReadingQuestion> postReading;
+  final List<String> tags;
 
   Book({
     required this.name,
@@ -27,6 +28,7 @@ class Book {
     required this.preReading,
     required this.whileReading,
     required this.postReading,
+    required this.tags,
     this.themes,
   });
 
