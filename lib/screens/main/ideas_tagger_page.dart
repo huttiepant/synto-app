@@ -23,13 +23,6 @@ class IdeasTaggerPage extends StatefulWidget {
 class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
   bool ownIdea = false;
 
-  final List<String> defaultTags = [
-    'Knowledge',
-    'Mind',
-    'Experience',
-    'Language',
-    'Truth'
-  ];
   final List<String> tags = [];
   final List<String> selectedTags = [];
   final BooksService _service = BooksService();
@@ -83,7 +76,7 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
   }
 
   void onTagSelect(tag) {
-    if (defaultTags.contains(tag)) return;
+    if (_book!.tags.contains(tag)) return;
     if (selectedTags.contains(tag)) {
       selectedTags.remove(tag);
     } else {
@@ -99,7 +92,7 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
     final savedTags =
         _service.getTags() != null && _service.getTags()!.isNotEmpty
             ? _service.getTags()
-            : defaultTags;
+            : _book!.tags;
     for (var tag in savedTags!) {
       if (!tags.contains(tag)) {
         tags.add(tag);
@@ -189,7 +182,7 @@ class _IdeasTaggerPageState extends State<IdeasTaggerPage> {
                             tag: tag,
                             onTap: onTagSelect,
                             selected: selectedTags.contains(tag),
-                            isDefault: defaultTags.contains(tag),
+                            isDefault: _book!.tags.contains(tag),
                           );
                         },
                       )
